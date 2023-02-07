@@ -19,6 +19,7 @@
 | Student Name | Student Email | GitHub Username | Student's role |
 | :----------: | :-----------: | :-------------: | :------------: |
 |   Jacob Lawrence   | jlawrence2@sfsu.edu |      liftcodesleep       |  GitHub & Scrum master   |
+|   Nandikanti Vinay   | fnandhikantivinaykumar@sfsu.edu |      hackerdud3       |  front end D   |
 
 **NO code should be stored in the root of your repository. You may rename the
 `application/` folder to your team's application name if you'd like, but all the
