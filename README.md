@@ -22,7 +22,7 @@
 |   Nandhi Kanti Vinay Kumar   | fnandhikantivinaykumar@sfsu.edu |      hackerdud3       |  Front End D   |
 |   Ishika Shah   | ishah@sfsu.edu |      ishikashah2510       |  Backend Lead   |
 |   Alekhya   | email |      username       |  role   |
-|   Nic   | email |      username       |  role   |
+|   Nic   | nburns@mail.sfsu.edu |      nicburns       |  Product Owner   |
 
 **NO code should be stored in the root of your repository. You may rename the
 `application/` folder to your team's application name if you'd like, but all the
