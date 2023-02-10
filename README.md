@@ -21,7 +21,7 @@
 |   Jacob Lawrence   | jlawrence2@sfsu.edu |      liftcodesleep       |  GitHub & Scrum master   |
 |   Nandhi Kanti Vinay Kumar   | fnandhikantivinaykumar@sfsu.edu |      hackerdud3       |  Front End D   |
 |   Ishika Shah   | ishah@sfsu.edu |      ishikashah2510       |  Backend Lead   |
-|   Alekhya   | email |      username       |  role   |
+|   Alekya Bairaboina  | abairaboina@sfsu.edu |      Alekhya1311       |  Team Lead  |
 |   Nic   | nburns@mail.sfsu.edu |      nicburns       |  Product Owner   |
 
 **NO code should be stored in the root of your repository. You may rename the
