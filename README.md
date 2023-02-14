@@ -1,4 +1,4 @@
-# CSC648-spring23-SectionName-teamNN Repository
+# CSC648-spring23-01-team01 Repository
 
 **Application URL: <https://example.com>**
 
