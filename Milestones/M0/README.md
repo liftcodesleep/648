@@ -2,7 +2,8 @@ Milestone Docs
 
 GitHub Setup
 
-The GitHub setup is done by everyone and the team's repo is https://github.com/CSC-648-SFSU/csc648-spring23-01-team01
+The GitHub setup is done by everyone and the team's repo is https://github.com/CSC-648-SFSU/csc648-spring23-01-team01. 
+
 Each team member accepted the invite and cloned the branch to their local.
 
 Stack approval by TA
