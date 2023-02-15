@@ -1,4 +1,4 @@
-Milestone Docs
+# Milestone Docs
 
 GitHub Setup
 
