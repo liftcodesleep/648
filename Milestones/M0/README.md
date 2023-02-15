@@ -1,8 +1,12 @@
 Milestone Docs
+
 GitHub Setup
+
 The GitHub setup is done by everyone and the team's repo is https://github.com/CSC-648-SFSU/csc648-spring23-01-team01
 Each team member accepted the invite and cloned the branch to their local.
+
 Stack approval by TA
+
 The team had 2 meetings per week, one on Monday and one n Wednesday to discuss on the technologies and to decide on the role of each member.
 Based on the knowledge of each team member - 
 Below is the list of technologies used in team 01's software stack. 
