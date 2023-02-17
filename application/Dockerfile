@@ -3,15 +3,15 @@ WORKDIR /app
 #RUN rm -r -f .
 COPY ./ ./
 
-#RUN pip install --upgrade pip --no-cache-dir
+RUN pip install --upgrade pip --no-cache-dir
 
-#RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
 
 CMD ["sudo", "apt", "update"]
 
 CMD ["sudo", "apt", "install", "nodejs", "npm"]
 
-WORKDIR /application/frontend/
+WORKDIR /frontend/
 
 CMD ["npm", "install"]
 #CMD ["npm", "install", "react-scripts", "--save"]
@@ -19,19 +19,18 @@ CMD ["npm", "install"]
 
 WORKDIR /app
 
+RUN ls /app
 #RUN  ls application/frontend/build/static/css
 
-WORKDIR /app/application/backend
+#WORKDIR /backend
 
-RUN ls
+RUN ls /app/backend
 
-#CMD ["python3", "manage.py", "collectstatic"]
+CMD ["python3", "backend/manage.py", "collectstatic"]
 
-#RUN  ls application/frontend/build/static/css
-
-#CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["python3", "backend/manage.py", "runserver", "0.0.0.0:8000"]
 
 
-#CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
+CMD ["gunicorn", "backend.backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
 
 #WORKDIR /app
