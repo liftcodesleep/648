@@ -19,7 +19,7 @@ CMD ["npm", "install"]
 
 WORKDIR /app
 
-RUN ls application/backend
+RUN ls /app
 #RUN  ls application/frontend/build/static/css
 
 WORKDIR /application/backend
