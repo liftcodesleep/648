@@ -19,12 +19,12 @@ CMD ["npm", "install"]
 
 WORKDIR /app
 
-RUN  #ls application/frontend/build/static/css
+#RUN  ls application/frontend/build/static/css
 
 CMD ["python3", "manage.py", "collectstatic"]
 
-RUN  #ls application/frontend/build/static/css
+#RUN  ls application/frontend/build/static/css
 
 #CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
-CMD ["gunicorn", "csc648_team1.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
+CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
