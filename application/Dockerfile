@@ -1,6 +1,6 @@
 FROM python:3.8.13-slim-buster
 WORKDIR /app
-RUN rm -r -f .
+#RUN rm -r -f .
 COPY ./ ./
 
 #RUN pip install --upgrade pip --no-cache-dir
