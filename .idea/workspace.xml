@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated ec2 files">
+      <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/src/App.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="adding_django" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Lhy54utnC7UeXDQdXZWHozZZcU" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/codes/python_codes/csc648-spring23-01-team01/application/frontend/src/components",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\codes\python_codes\csc648-spring23-01-team01\application\frontend\src\components" />
+      <recent name="D:\codes\python_codes\csc648-spring23-01-team01\application" />
+      <recent name="D:\codes\python_codes\csc648-spring23-01-team01\application\backend\backend" />
+      <recent name="D:\codes\python_codes\csc648-spring23-01-team01\application\backend\about_us" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="" />
+      <created>1676337423012</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1676337423012</updated>
+      <workItem from="1676337430278" duration="1162000" />
+      <workItem from="1676589856229" duration="857000" />
+      <workItem from="1676590767992" duration="2470000" />
+      <workItem from="1676593283777" duration="776000" />
+      <workItem from="1676594086250" duration="203000" />
+      <workItem from="1676602600230" duration="13021000" />
+    </task>
+    <task id="LOCAL-00001" summary="Added basic django structure">
+      <created>1676591430878</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676591430878</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added about us app in backend">
+      <created>1676592655928</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1676592655928</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added files for hosting on ec2 instance">
+      <created>1676592982788</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1676592982788</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Updated docker files for deploying on ec2">
+      <created>1676603481837</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1676603481837</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added .env file">
+      <created>1676604675804</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676604675804</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Updated .env file">
+      <created>1676605107563</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1676605107563</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated .env file">
+      <created>1676605236525</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1676605236525</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Updated .env file">
+      <created>1676605416855</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1676605416855</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Updated .env file">
+      <created>1676605624514</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1676605624514</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated .env file">
+      <created>1676605782838</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1676605782838</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Updated .env file">
+      <created>1676607083156</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1676607083156</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Updated ec2 files">
+      <created>1676608140046</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1676608140046</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Updated ec2 files">
+      <created>1676608675603</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1676608675603</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated ec2 files">
+      <created>1676608768761</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1676608768761</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Updated ec2 files">
+      <created>1676608853392</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1676608853392</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Updated ec2 files">
+      <created>1676608938693</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1676608938693</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Updated ec2 files">
+      <created>1676609013437</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1676609013437</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Updated ec2 files">
+      <created>1676609114039</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1676609114039</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Updated ec2 files">
+      <created>1676609187583</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1676609187583</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Updated ec2 files">
+      <created>1676609243059</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1676609243059</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Updated ec2 files">
+      <created>1676609309774</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1676609309774</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Updated ec2 files">
+      <created>1676609382581</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1676609382581</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Updated ec2 files">
+      <created>1676609502269</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1676609502269</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Updated ec2 files">
+      <created>1676610044219</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1676610044219</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Updated ec2 files">
+      <created>1676610134977</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1676610134977</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Updated ec2 files">
+      <created>1676610281224</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1676610281224</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Updated ec2 files">
+      <created>1676610387849</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1676610387849</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added basic django structure" />
+    <MESSAGE value="Added about us app in backend" />
+    <MESSAGE value="Added files for hosting on ec2 instance" />
+    <MESSAGE value="Updated docker files for deploying on ec2" />
+    <MESSAGE value="Added .env file" />
+    <MESSAGE value="Updated .env file" />
+    <MESSAGE value="Updated ec2 files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated ec2 files" />
+  </component>
+</project>
