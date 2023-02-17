@@ -24,7 +24,7 @@ RUN ls /app
 
 WORKDIR /backend
 
-RUN pwd
+RUN ls /backend
 
 #CMD ["python3", "manage.py", "collectstatic"]
 
