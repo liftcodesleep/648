@@ -28,7 +28,7 @@ Web Server – Ngnix 1.20.1
 
 Server-Side Language: Python 3.8 
 
-IDE : Microsoft Visual studio Code
+IDE : Microsoft Visual studio Code, PyCharm
 
 The Team Lead emailed TA and Professor and got the MO stack approval.
 
