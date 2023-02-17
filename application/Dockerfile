@@ -3,9 +3,9 @@ WORKDIR /app
 #RUN rm -r -f .
 COPY ./ ./
 
-RUN pip install --upgrade pip --no-cache-dir
+#RUN pip install --upgrade pip --no-cache-dir
 
-RUN pip install -r requirements.txt --no-cache-dir
+#RUN pip install -r requirements.txt --no-cache-dir
 
 CMD ["sudo", "apt", "update"]
 
@@ -21,12 +21,17 @@ WORKDIR /app
 
 #RUN  ls application/frontend/build/static/css
 
-CMD ["python3", "manage.py", "collectstatic"]
+WORKDIR /app/application/backend
+
+RUN ls
+
+#CMD ["python3", "manage.py", "collectstatic"]
 
 #RUN  ls application/frontend/build/static/css
 
 #CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
-WORKDIR /app/application/backend
 
-CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
+#CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
+
+#WORKDIR /app
