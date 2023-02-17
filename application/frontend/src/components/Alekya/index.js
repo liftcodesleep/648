@@ -16,7 +16,7 @@ const Alekya = () => (
     </div>
 
     <p>
-      I completed my Undergrad in BE, Electronics and Instrumentation and have started working at the Tata consultancy Services Limited since 2017 as a Software Developer. I have Enhanced user experience and optimized performance of the Mosymphony application, a platform that enables seamless and streamlined supply chains across the Pharma ecosystem between business owners and manufacturers 
+      I completed my Undergrad in Electrical and Electronics Engineering and have started working at the Schrocken Inc. as a Software Developer. I have Enhanced user experience and optimized performance of the Mosymphony application, a platform that enables seamless and streamlined supply chains across the Pharma ecosystem between business owners and manufacturers 
     </p>
 
     <ul class="experience">
