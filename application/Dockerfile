@@ -19,11 +19,11 @@ CMD ["npm", "install"]
 
 WORKDIR /app
 
+RUN ls application/backend
 #RUN  ls application/frontend/build/static/css
 
 WORKDIR /application/backend
 
-RUN ls
 RUN pwd
 
 #CMD ["python3", "manage.py", "collectstatic"]
