@@ -11,7 +11,7 @@ CMD ["sudo", "apt", "update"]
 
 CMD ["sudo", "apt", "install", "nodejs", "npm"]
 
-WORKDIR /application/frontend/
+WORKDIR /frontend/
 
 CMD ["npm", "install"]
 #CMD ["npm", "install", "react-scripts", "--save"]
@@ -26,7 +26,7 @@ RUN ls /app
 
 RUN ls /app/backend
 
-#CMD ["python3", "manage.py", "collectstatic"]
+CMD ["python3", "manage.py", "collectstatic"]
 
 CMD ["python3", "backend/manage.py", "runserver", "0.0.0.0:8000"]
 
