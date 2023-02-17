@@ -3,13 +3,13 @@ WORKDIR /app
 #RUN rm -r -f .
 COPY ./ ./
 
-#RUN pip install --upgrade pip --no-cache-dir
+RUN pip install --upgrade pip --no-cache-dir
 
-#RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
 
-#CMD ["sudo", "apt", "update"]
+CMD ["sudo", "apt", "update"]
 
-#CMD ["sudo", "apt", "install", "nodejs", "npm"]
+CMD ["sudo", "apt", "install", "nodejs", "npm"]
 
 WORKDIR /application/frontend/
 
