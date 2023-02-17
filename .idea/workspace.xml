@@ -6,6 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated ec2 files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/application/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +68,6 @@
       <workItem from="1676590767992" duration="2470000" />
       <workItem from="1676593283777" duration="776000" />
       <workItem from="1676594086250" duration="203000" />
-      <workItem from="1676602600230" duration="15116000" />
     </task>
     <task id="LOCAL-00001" summary="Added basic django structure">
       <created>1676591430878</created>
@@ -263,6 +266,7 @@
       <updated>1676617080513</updated>
     </task>
     <option name="localTasksCounter" value="29" />
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
