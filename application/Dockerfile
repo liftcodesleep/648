@@ -11,7 +11,7 @@ CMD ["sudo", "apt", "update"]
 
 CMD ["sudo", "apt", "install", "nodejs", "npm"]
 
-WORKDIR /application/frontend/
+WORKDIR /frontend/
 
 CMD ["npm", "install"]
 #CMD ["npm", "install", "react-scripts", "--save"]
