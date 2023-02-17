@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated ec2 files">
+    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated build files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.js" afterDir="false" />
@@ -265,6 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676617080513</updated>
     </task>
+    <task id="LOCAL-00029" summary="Updated build files">
+      <created>1676619768327</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1676619768327</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <option name="localTasksCounter" value="29" />
     <option name="localTasksCounter" value="28" />
     <servers />
@@ -291,6 +299,7 @@
     <MESSAGE value="Added .env file" />
     <MESSAGE value="Updated .env file" />
     <MESSAGE value="Updated ec2 files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated ec2 files" />
+    <MESSAGE value="Updated build files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated build files" />
   </component>
 </project>
