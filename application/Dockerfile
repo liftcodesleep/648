@@ -26,7 +26,7 @@ RUN ls /app
 
 RUN ls /app/backend
 
-CMD ["python3", "manage.py", "collectstatic"]
+CMD ["python3", "backend/manage.py", "collectstatic"]
 
 #CMD ["python3", "backend/manage.py", "runserver", "0.0.0.0:8000"]
 
