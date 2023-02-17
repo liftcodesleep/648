@@ -38,8 +38,6 @@ The necessary software for the above stack was installed by each team member.
 ## Creating Webpage
 The About page was created using React.js with individual pages and each team member created their own about page and they are linked to main about page.
 
-## Hosting in Remote server
-
 ## Deploying the application
 To deploy this application, we have made the use of tools like Docker, Github, Docker Compose and nginx. We deployed on Amazon ECS using the SSH terminal. To deploy, we first prepared our project, added required enviornment files, docker and docker compose files and used the AWS RDS to generate the database and its credentials.
 
