@@ -21,15 +21,14 @@ WORKDIR /app
 
 #RUN  ls application/frontend/build/static/css
 
-WORKDIR /app/application/backend
+WORKDIR /application/backend
 
 RUN ls
+RUN pwd
 
 #CMD ["python3", "manage.py", "collectstatic"]
 
-#RUN  ls application/frontend/build/static/css
-
-#CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
 #CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
