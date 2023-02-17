@@ -3,9 +3,9 @@ WORKDIR /app
 #RUN rm -r -f .
 COPY ./ ./
 
-#RUN pip install --upgrade pip --no-cache-dir
+RUN pip install --upgrade pip --no-cache-dir
 
-#RUN pip install -r requirements.txt --no-cache-dir
+RUN pip install -r requirements.txt --no-cache-dir
 
 CMD ["sudo", "apt", "update"]
 
@@ -31,6 +31,6 @@ RUN ls /app/backend
 CMD ["python3", "backend/manage.py", "runserver", "0.0.0.0:8000"]
 
 
-#CMD ["gunicorn", "backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
+#CMD ["gunicorn", "backend/backend.wsgi:application", "--bind", "0.0.0.0:8000", "--timeout", "90"]
 
 #WORKDIR /app
