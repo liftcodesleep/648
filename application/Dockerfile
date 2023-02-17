@@ -22,7 +22,7 @@ WORKDIR /app
 RUN ls /app
 #RUN  ls application/frontend/build/static/css
 
-WORKDIR /application/backend
+WORKDIR /backend
 
 RUN pwd
 
