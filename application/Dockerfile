@@ -11,7 +11,7 @@ COPY ./ ./
 
 #CMD ["sudo", "apt", "install", "nodejs", "npm"]
 
-WORKDIR /csc648_team1/csc648_team1/my-app
+WORKDIR /application/frontend/
 
 CMD ["npm", "install"]
 #CMD ["npm", "install", "react-scripts", "--save"]
@@ -19,11 +19,11 @@ CMD ["npm", "install"]
 
 WORKDIR /app
 
-RUN  ls csc648_team1/my-app/build/static/css
+RUN  #ls application/frontend/build/static/css
 
 CMD ["python3", "manage.py", "collectstatic"]
 
-RUN  ls csc648_team1/my-app/build/static/css
+RUN  #ls application/frontend/build/static/css
 
 #CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
 
