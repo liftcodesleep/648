@@ -12,12 +12,12 @@ const About = () => {
       <p id='info'>Members in our team are:</p>
       <ul >
       <li><Link to={"/alekya"} className="nav-link">
-                      Alekya Bairaboina (Team Lead)
+                      Alekya Bairaboina (Team Lead and Front-End Developer)
                     </Link></li>
                     <li><Link to={"/vinay"} className="nav-link">
                     Vinay (Front-End Lead)
                     </Link></li>
-                    <li><Link to={"/alekya"} className="nav-link">
+                    <li><Link to={"/nick"} className="nav-link">
                     Nick (Product Owner)
                     </Link></li>
                     <li><Link to={"/jacob"} className="nav-link">
