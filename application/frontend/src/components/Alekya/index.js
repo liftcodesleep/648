@@ -3,7 +3,7 @@ import './index.css'
 const Alekya = () => (
   <div class="member">
     <img src={require('../../Images/Alekya.jpeg')} />
-    <h2>Alekya Bairaboina (Team Lead and Front End Developer)</h2>
+    <h2>Alekya Bairaboina (Team Lead and Front-End Developer)</h2>
     <p>Hey!! I am <strong>Alekya Bairaboina.</strong> I'm a graduate CS student and this is my first semester. I love solving real world challenging problems and love developing web applications. 
     I am happy to be a part of CSC 848 class and looking forward to learn and expand my skill set.</p>
 
