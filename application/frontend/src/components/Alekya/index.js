@@ -16,15 +16,15 @@ const Alekya = () => (
     </div>
 
     <p>
-      I completed my Undergrad in Electrical and Electronics Engineering and have started working at the Schrocken Inc. as a Software Developer. I have Enhanced user experience and optimized performance of the Mosymphony application, a platform that enables seamless and streamlined supply chains across the Pharma ecosystem between business owners and manufacturers 
+      I completed my Undergrad in Electrical and Electronics Engineering and have started working at the Schrocken Inc. as a Software Developer. I have Enhanced user experience and optimized performance of the Mosymphony application, a platform that enables seamless and streamlined supply chains across the Pharma ecosystem between business owners and manufacturers. 
     </p>
 
     <ul class="experience">
       <li>
-        Compiled and analyzed end-to-end processes and codes to troubleshoot production issues and identified areas to improve performance, robustness, and resilience of the application
+        Compiled and analyzed end-to-end processes and codes to troubleshoot production issues and identified areas to improve performance, robustness, and resilience of the application.
       </li>
       <li>
-        Designed and developed a complicated SFTP integration layer in our application for a business owner – created a separate SFTP server and built pull and push routines that are executed every hour using Node-cron to parse .csv format files and convert data to JSON and vice versa. Implemented REST APIs to display relevant information for business and manufactures
+        Designed and developed a complicated SFTP integration layer in our application for a business owner – created a separate SFTP server and built pull and push routines that are executed every hour using Node-cron to parse .csv format files and convert data to JSON and vice versa. Implemented REST APIs to display relevant information for business and manufactures.
       </li>
     </ul>
   </div>
