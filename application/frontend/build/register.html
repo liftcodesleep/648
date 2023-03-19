@@ -16,6 +16,13 @@
 
 <body><noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <input type="submit" name="Create User">
+  </form>
 </body>
 
 </html>
