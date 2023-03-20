@@ -1,6 +1,6 @@
 """backend URL Configuration
 
-The `urlpatterns` list routes of URLs to views. For more information please see:
+The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
 Examples:
 Function views
@@ -17,11 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from . import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r'about/', include('backend.about_us.urls')),
-    path('register/', views.render_register, name="register"),
+    path(r'about/', include('about_us.urls')),
+    path(r'register/', include('register.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
