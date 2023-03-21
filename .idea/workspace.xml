@@ -5,17 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated build files">
+      <change afterPath="$PROJECT_DIR$/application/backend/access/constants.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/backend/access/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/backend/backend/env_details.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/frontend/src/components/Ishika/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/about_us/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/about_us/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/backend/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/wsgi.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -33,20 +43,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/codes/python_codes/csc648-spring23-01-team01/application/frontend/src/components",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/codes/python_codes/csc648-spring23-01-team01/application/frontend/src/components&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\codes\python_codes\csc648-spring23-01-team01\application\frontend\src\components" />
@@ -68,6 +79,10 @@
       <workItem from="1676590767992" duration="2470000" />
       <workItem from="1676593283777" duration="776000" />
       <workItem from="1676594086250" duration="203000" />
+      <workItem from="1676958251017" duration="729000" />
+      <workItem from="1677705593759" duration="4000" />
+      <workItem from="1679027742607" duration="4133000" />
+      <workItem from="1679341861982" duration="2148000" />
     </task>
     <task id="LOCAL-00001" summary="Added basic django structure">
       <created>1676591430878</created>
@@ -272,8 +287,6 @@
       <option name="project" value="LOCAL" />
       <updated>1676619768327</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
-    <option name="localTasksCounter" value="29" />
     <option name="localTasksCounter" value="28" />
     <servers />
   </component>

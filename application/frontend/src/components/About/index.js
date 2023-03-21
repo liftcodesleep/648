@@ -8,11 +8,11 @@ const About = () => {
     <div className="about">
       <h1>About Us</h1>
       <p>Hello Everyone! We are <strong> CSC648/848-Spring23-01-Team 01 </strong> from Software Engineering Class SFSU - Spring 2023
-      <strong>  <h3> Section 01 - Team 02 </h3></strong></p>
+      <strong>  <h3> Section 01 - Team 01 </h3></strong></p>
       <p id='info'>Members in our team are:</p>
       <ul >
       <li><Link to={"/alekya"} className="nav-link">
-                      Alekya Bairaboina (Team Lead)
+                      Alekya Bairaboina (Team Lead and Front-End Developer)
                     </Link></li>
                     <li><Link to={"/vinay"} className="nav-link">
                     Vinay (Front-End Lead)
