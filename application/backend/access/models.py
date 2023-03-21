@@ -27,3 +27,30 @@ def check_login_info(username, password, user_type):
     data = cursor.fetchone()
     conn.close()
     return data
+
+def insert_register(collected_data):
+    cursor, conn = get_cursor()
+    sql_statement = f"""INSERT INTO `team1_database`.`User`
+(`Name`,
+`Email`,
+`Userid`,
+`Password`,
+`DOB`,
+`Date_joined`,
+`Username`,
+`Phone_number`,
+`User_pic`,
+`About`,
+`User_type`)
+VALUES
+('{collected_data.get("name")}',
+'{collected_data.get("email")}',
+'{collected_data.get("userid")}'
+'{collected_data.get("password")}',
+'{collected_data.get("dob")}',
+CURRENT_TIMESTAMP,
+'{collected_data.get("username")}',
+'{collected_data.get("phonenum")}',
+'{collected_data.get("userpic")}',
+'{collected_data.get("about")}',
+'{collected_data.get("usertype")}');"""

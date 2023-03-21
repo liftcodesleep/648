@@ -6,4 +6,6 @@ app_name = 'access'
 
 urlpatterns = [
     re_path(r'^user_login$', login, name='login'),
+    re_path(r'^register_user$', register, name='register'),
+
 ]
