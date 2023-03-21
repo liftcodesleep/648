@@ -1,8 +1,8 @@
 from django.db import models
 import pymysql
 
-# Create your models here.
 
+# Create your models here.
 
 def get_cursor():
     conn = pymysql.connect(
@@ -16,9 +16,14 @@ def get_cursor():
     return cursor, conn
 
 
-def get_about_details():
+def check_login_info(username, password, user_type):
     cursor, conn = get_cursor()
-    cursor.execute('SELECT * FROM about_developers')
-    details = cursor.fetchall()
+    sql_statement = f"""SELECT * FROM User
+                        WHERE username='{username}' 
+                        AND password='{password}' 
+                        AND user_type='{user_type}'
+                    """
+    cursor.execute(sql_statement)
+    data = cursor.fetchone()
     conn.close()
-    return details
+    return data
