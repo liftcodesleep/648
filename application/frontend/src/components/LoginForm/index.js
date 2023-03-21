@@ -21,15 +21,29 @@ class LoginForm extends Component {
     e.preventDefault()
     const { username, password } = this.state
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch('http://127.0.0.1:8000/user_login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ username, password, "user_type":"general"})
       })
-      const { token } = await response.json()
-      Cookies.set('token', token)
-      this.setState({ redirectToReferrer: true })
+      // const val = await response.json()
+      // console.log({val})
+      const { isLoggedin,status,message} = await response.json()
+      console.log({isLoggedin})
+      console.log({status})
+      console.log({message})
+      // Cookies.set('token', token)
+      if (status == "SUCCESS" && isLoggedin) {
+        console.log("inside success")
+          this.setState({ redirectToReferrer: true })
+
+      } else {
+        console.log("inside failure")
+        this.setState({ redirectToReferrer: false, error: message})
+      }
+      
     } catch (error) {
+      console.log(error)
       this.setState({ error: 'Invalid username or password' })
     }
   }
@@ -38,7 +52,7 @@ class LoginForm extends Component {
     const { username, password, error, redirectToReferrer } = this.state
 
     if (redirectToReferrer) {
-      return <Navigate to="/" replace={true} />
+      return <Navigate to="/about" replace={true} />
     }
 
     return (
