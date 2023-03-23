@@ -17,17 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .env_details import *
 
-if env == 'local':
-    urlpatterns = [
-        path('admin/', admin.site.urls),
-        path(r'about/', include('about_us.urls')),
-        path(r'', include('access.urls'))
-    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-else:
-    urlpatterns = [
-          path('admin/', admin.site.urls),
-          path(r'about/', include('backend.about_us.urls')),
-          path(r'', include('backend.access.urls'))
-      ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path(r'about/', include('about_us.urls')),
+    path(r'', include('access.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
