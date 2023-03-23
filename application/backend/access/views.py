@@ -93,4 +93,4 @@ def password_is_valid(password):
 
 def phonenum_is_valid(phonenum):
     reg = re.compile(r'^\d{10}$')
-    return bool(pattern.match(phonenum))
+    return bool(reg.match(phonenum))

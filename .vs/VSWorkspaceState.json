@@ -4,8 +4,12 @@
     "\\application",
     "\\application\\backend",
     "\\application\\backend\\about_us",
-    "\\application\\backend\\about_us\\migrations"
+    "\\application\\backend\\about_us\\migrations",
+    "\\application\\backend\\access",
+    "\\application\\backend\\backend",
+    "\\application\\backend\\register",
+    "\\application\\frontend"
   ],
-  "SelectedNode": "\\application\\backend\\about_us\\migrations\\__init__.py",
+  "SelectedNode": "\\application\\backend\\access\\views.py",
   "PreviewInSolutionExplorer": false
 }
