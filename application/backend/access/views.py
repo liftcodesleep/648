@@ -52,7 +52,7 @@ def register(request):
             userpic = collected_data.get("userpic")
             about = collected_data.get("about")
             usertype = collected_data.get("usertype")
-            userid = name[0] + random.randint(0,999999)
+            userid = name[0] + str(random.randint(0,999999))
             collected_data["userid"] = userid
             
             if email_is_valid(email):
