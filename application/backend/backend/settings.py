@@ -14,6 +14,9 @@ from pathlib import Path
 from decouple import config
 import os
 
+# env var being accessed
+from .env_details import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -59,8 +62,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'backend.urls'
-print(BASE_DIR)
+if env == 'local':
+    ROOT_URLCONF = 'backend.urls'
+else:
+    ROOT_URLCONF = 'backend.backend.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
