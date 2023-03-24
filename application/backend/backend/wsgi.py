@@ -16,5 +16,4 @@ if env == 'local':
 else:
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.backend.settings')
 
-
 application = get_wsgi_application()
