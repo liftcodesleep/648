@@ -99,7 +99,7 @@ def get_pw_message(password):
     return message
 
 def check_pw_len(password):
-    if password.len() < 6 or password.len() > 20:
+    if len(password) < 6 or len(password) > 20:
         return "Password must be 6 to 20 characters in length.\n"
     else:
         return ""
