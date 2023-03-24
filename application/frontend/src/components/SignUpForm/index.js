@@ -7,7 +7,10 @@ class SignupForm extends Component {
   state = {
     name: '',
     email: '',
+    username: '',
     password: '',
+    dob: '',
+    phone: '',
     error: '',
     redirectToReferrer: false,
   };
@@ -19,17 +22,32 @@ class SignupForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { name, email, password } = this.state;
+    const { name, email, username, password, dob, phone } = this.state;
     try {
-      const response = await fetch('/api/signup', {
+      const response = await fetch('http://127.0.0.1:8000/register_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, username, password, dob, "phonenum":phone,"about":"", "usertype": "general","userpic": "" }),
       });
-      const { token } = await response.json();
-      Cookies.set('token', token);
-      this.setState({ redirectToReferrer: true });
+      // const { token } = await response.json();
+      // Cookies.set('token', token);
+      // this.setState({ redirectToReferrer: true });
+      const { isRegistered,status,message} = await response.json()
+      console.log({isRegistered})
+      console.log({status})
+      console.log({message})
+      // Cookies.set('token', token)
+      if (status == "SUCCESS" && isRegistered) {
+        console.log("inside success")
+          this.setState({ redirectToReferrer: true })
+
+      } else {
+        console.log("inside failure")
+        this.setState({ redirectToReferrer: false, error: message})
+      }
+      
     } catch (error) {
+      console.log(error)
       this.setState({
         error: 'Unable to create account. Please try again later.',
       });
@@ -37,10 +55,10 @@ class SignupForm extends Component {
   };
 
   render() {
-    const { name, email, password, error, redirectToReferrer } = this.state;
+    const { name, email, username, password, dob, phone, error, redirectToReferrer } = this.state;
 
     if (redirectToReferrer === true) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/" />;
     }
 
     return (
@@ -68,12 +86,42 @@ class SignupForm extends Component {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            value={username}
+            onChange={this.handleInputChange}
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
             value={password}
+            onChange={this.handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="dob">Date of Birth</label>
+          <input
+            type="date"
+            id="dob"
+            name="dob"
+            value={dob}
+            onChange={this.handleInputChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="phone">Phone Number</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={phone}
             onChange={this.handleInputChange}
           />
         </div>
