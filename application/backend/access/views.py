@@ -61,7 +61,8 @@ def register(request):
                         insert_register(collected_data)
                         return register_response('SUCCESS', True, "Welcome to PicturePerfect " + name, True)
                     else:
-                        return register_response('SUCCESS', False, "Invalid password", False)
+                        message = get_pw_message(password)
+                        return register_response('SUCCESS', False, message, False)
                 else:
                     return register_response('SUCCESS', False, "Invalid phone number", False)
             else:
@@ -90,6 +91,54 @@ def password_is_valid(password):
     if mat: 
         return True
     return False
+
+def get_pw_message(password):
+    message = check_pw_len(password) + check_pw_lowercase(password) 
+    message += check_pw_uppercase(password) + check_pw_digit(password)
+    message += check_pw_special_char(password)
+    return message
+
+def check_pw_len(password):
+    if password.len() < 6 or password.len() > 20:
+        return "Password must be 6 to 20 characters in length.\n"
+    else:
+        return ""
+
+def check_pw_lowercase(password):
+    reg = "^(?=.*[a-z])$"
+    pat = re.compile(reg)
+    mat = re.search(pat, password)
+    if mat:
+        return ""
+    else:
+        return "Password must contain a lowercase letter.\n"
+
+def check_pw_uppercase(password):
+    reg = "^(?=.*[A-Z])$"
+    pat = re.compile(reg)
+    mat = re.search(pat, password)
+    if mat:
+        return ""
+    else:
+        return "Password must contain an uppercase letter.\n"
+
+def check_pw_digit(password):
+    reg = "^(?=.*\d)$"
+    pat = re.compile(reg)
+    mat = re.search(pat, password)
+    if mat:
+        return ""
+    else:
+        return "Password must contain a digit.\n"
+
+def check_pw_special_char(password):
+    reg = "^(?=.*[@$!%*#?&])$"
+    pat = re.compile(reg)
+    mat = re.search(pat, password)
+    if mat:
+        return ""
+    else:
+        return "Password must contain at least one of the following characters: @$!%*#?&\n"
 
 def phonenum_is_valid(phonenum):
     reg = re.compile(r'^\d{10}$')
