@@ -58,6 +58,7 @@ button[type="submit"] {
 .error {
   color: black;
   margin-bottom: 1rem;
+  margin-left: 20rem;
 }
 
 .already-member {
