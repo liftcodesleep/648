@@ -6,6 +6,7 @@ import Ishika from './components/Ishika'
 import Nick from './components/Nick'
 import SignupForm from './components/SignUpForm'
 import LoginForm from './components/LoginForm'
+import Search from './components/Search'
 
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/vinay" element={<Vinay />} />
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/" element={<Search />} />
       </Routes>
     </Router>
   )

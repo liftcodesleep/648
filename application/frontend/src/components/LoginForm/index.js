@@ -52,7 +52,7 @@ class LoginForm extends Component {
     const { username, password, error, redirectToReferrer } = this.state
 
     if (redirectToReferrer) {
-      return <Navigate to="/about" replace={true} />
+      return <Navigate to="/" replace={true} />
     }
 
     return (
