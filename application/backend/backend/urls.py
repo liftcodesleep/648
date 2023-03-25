@@ -23,11 +23,13 @@ if env == 'local':
     urlpatterns = [
         path('admin/', admin.site.urls),
         path(r'about/', include('about_us.urls')),
-        path(r'', include('access.urls'))
+        path(r'', include('access.urls')),
+        path(r'', include('posts.urls'))
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 else:
     urlpatterns = [
           path('admin/', admin.site.urls),
           path(r'about/', include('backend.about_us.urls')),
-          path(r'', include('backend.access.urls'))
+          path(r'', include('backend.access.urls')),
+          path(r'', include('backend.posts.urls'))
       ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

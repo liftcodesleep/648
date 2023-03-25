@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Made backend deployment friendly" />
+    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Made backend deployment friendly">
+      <change afterPath="$PROJECT_DIR$/application/backend/posts/constants.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/application/backend/posts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/urls.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -329,7 +334,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679699273791</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Made backend deployment friendly">
+      <created>1679699327920</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1679699327920</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
