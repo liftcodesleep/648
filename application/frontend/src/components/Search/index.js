@@ -21,7 +21,7 @@ class Search extends Component {
         event.preventDefault();
         const { limit, offset, searchText, sortby, sortType } = this.state;
         try {
-            const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
+            const response = await fetch('http://44.197.240.111/view_public_posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
