@@ -1,4 +1,3 @@
-from ast import match_case
 from .models import *
 from .constants import *
 from email_validator import validate_email, EmailNotValidError
