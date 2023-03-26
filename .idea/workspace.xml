@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Made backend deployment friendly">
-      <change afterPath="$PROJECT_DIR$/application/backend/posts/constants.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/backend/posts/urls.py" afterDir="false" />
+    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated urls.py">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,7 +338,42 @@
       <option name="project" value="LOCAL" />
       <updated>1679699327920</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="Added posts search API">
+      <created>1679702562144</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1679702562144</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Fixed env var">
+      <created>1679864307196</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1679864307196</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Fixed import">
+      <created>1679864484971</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1679864484972</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Updated build folder">
+      <created>1679866311826</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1679866311826</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Updated urls.py">
+      <created>1679866443300</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1679866443300</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -372,6 +404,11 @@
     <MESSAGE value="CSRF token error fixed" />
     <MESSAGE value="append str to int error fixed" />
     <MESSAGE value="Made backend deployment friendly" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made backend deployment friendly" />
+    <MESSAGE value="Added posts search API" />
+    <MESSAGE value="Fixed env var" />
+    <MESSAGE value="Fixed import" />
+    <MESSAGE value="Updated build folder" />
+    <MESSAGE value="Updated urls.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated urls.py" />
   </component>
 </project>

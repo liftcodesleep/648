@@ -1,4 +1,3 @@
-from ast import match_case
 from .models import *
 from .constants import *
 from email_validator import validate_email, EmailNotValidError
@@ -6,10 +5,17 @@ import re
 import random
 import traceback
 import json
-import os
-import logging
+from django.shortcuts import render
 
 # Create your views here.
+
+
+def render_login(request):
+    return render(request, 'index.html')
+
+
+def render_register(request):
+    return render(request, 'index.html')
 
 
 # This method is used to log in a given user by verifying their credentials
