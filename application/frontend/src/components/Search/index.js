@@ -36,6 +36,11 @@ class Search extends Component {
         }
     }
 
+    componentDidMount = async () => {
+        // Call API on page load
+        await this.handleSubmit(new Event('submit'));
+    }
+
     render() {
         const { searchText, results, error } = this.state;
         return (
@@ -78,4 +83,3 @@ class Search extends Component {
 }
 
 export default Search;
-
