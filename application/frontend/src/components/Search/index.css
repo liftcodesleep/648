@@ -1,31 +1,32 @@
-.container {
+@media screen and (max-width: 768px) {
+    .search-form {
+      margin-left: 0;
+    }
+  }
+  
+  .container {
+    height: 100vh;
     background-color: #684949;
-}
-.search-container {
+  }
+  
+  .search-container {
     display: flex;
-}
-.logo-container {
-  float: left;
-   
-}
-
-.logo {
+  }
+  
+  .logo-container {
+    float: left;
+  }
+  
+  .logo {
     height: 200px;
     margin-right: 20px;
     border-radius: 2%;
     margin-top: 2px;
     margin-left: 2px;
   }
-
+  
   .search-form {
-   
     margin-top: 10px;
-    
-  }
-  .search-form {
-    
-    margin-left: 300px;
-
     justify-content: flex-end;
     flex-grow: 1;
   }
@@ -55,30 +56,11 @@
   .search-form button:hover {
     background-color: #0d8bf2;
   }
-
-
-  .post{
+  
+  .post {
     margin-top: 30px;
   }
- 
-  /* .row-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
   
-  .card {
-    background-color: aliceblue;
-    width: 30%;
-    margin-bottom: 20px;
-    padding: 50px;
-  }
-
-  .row-cards img {
-    width: 200px;
-    height: 200px;
-  } */
-
   .row-cards {
     display: flex;
     flex-wrap: wrap;
@@ -119,6 +101,41 @@
     font-size: 14px;
     text-align: center;
     color: #999999;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .card {
+      width: 100%;
+      margin: 20px 0;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .search-form {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .search-form input[type="text"] {
+      max-width: 100%;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .search-form button {
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .logo {
+      height: 100px;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
   }
   
   
