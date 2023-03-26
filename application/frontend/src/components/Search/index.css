@@ -2,13 +2,7 @@
     background-color: #684949;
 }
 .search-container {
-    /* background-color: #684949;
-    background-size: 100% auto;
-    height: 100vh; */
     display: flex;
-   
-
-  
 }
 .logo-container {
   float: left;
