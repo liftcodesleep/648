@@ -1,8 +1,8 @@
 # Milestone Docs
 The details of the following are are included in the Milestone 2 Document:
 
-DATA DEFINITIONS V2	
-REVISION FROM M1	
+1. DATA DEFINITIONS V2	
+2. REVISION FROM M1	
 FUNCTIONAL REQUIREMENTS V2	
 UI MOCKUPS AND STORYBOARDS	
 MEETING MINUTES	
