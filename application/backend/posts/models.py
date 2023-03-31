@@ -22,7 +22,17 @@ def find_post_data(limit, offset, search_text, sort_col, sort_type):
     sql_statement = "SELECT * FROM Posts"
 
     if search_text:
-        sql_statement += f" WHERE UPPER(description) LIKE '%{search_text.upper()}%'"
+        if search_text[0] == '@':
+            sql_statement += f" WHERE UPPER(Made_by) LIKE '%{search_text[1:].upper()}%'"
+
+        elif search_text[0] == '#':
+            sql_statement += f""" WHERE Post_id in 
+                                    (SELECT Post_id FROM Post_tags JOIN Tags
+                                    on Post_tags.Tag_id = Tags.Tag_id
+                                    WHERE UPPER(Name) LIKE '%{search_text[1:].upper()}%') 
+                                    """
+        else:
+            sql_statement += f" WHERE UPPER(description) LIKE '%{search_text.upper()}%'"
 
     if sort_col:
         sql_statement += f" ORDER BY {sort_col} {sort_type}"
