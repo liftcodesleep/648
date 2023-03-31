@@ -2,8 +2,8 @@
 from django.urls import path, include, re_path
 from .views import *
 
-app_name = 'posts'
+app_name = 'users'
 
 urlpatterns = [
-    re_path(r'^view_public_posts$', view_posts, name='view_posts')
+    re_path(r'^update_user_profile$', edit_profile, name='edit_profile')
 ]
