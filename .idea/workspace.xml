@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated urls.py">
+    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Completed edit profile API">
+      <change afterPath="$PROJECT_DIR$/application/backend/posts/s3_details.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/backend/env_details.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/env_details.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/posts/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/posts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/application/backend/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,22 +49,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/codes/python_codes/csc648-spring23-01-team01/application/frontend/src/components&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/codes/python_codes/csc648-spring23-01-team01/application/frontend/src/components",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.group.tools",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\codes\python_codes\csc648-spring23-01-team01\application\frontend\src\components" />
@@ -92,6 +100,11 @@
       <workItem from="1679432666506" duration="4523000" />
       <workItem from="1679607093980" duration="608000" />
       <workItem from="1679614800731" duration="2501000" />
+      <workItem from="1679875880460" duration="687000" />
+      <workItem from="1679957832401" duration="621000" />
+      <workItem from="1680056988884" duration="2333000" />
+      <workItem from="1680278539866" duration="6863000" />
+      <workItem from="1680377551923" duration="8823000" />
     </task>
     <task id="LOCAL-00001" summary="Added basic django structure">
       <created>1676591430878</created>
@@ -373,7 +386,28 @@
       <option name="project" value="LOCAL" />
       <updated>1679866443300</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="Updated urls.py and views.py for render login/signup">
+      <created>1679866966417</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1679866966417</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Completed search API: integrated tag and user search">
+      <created>1680279875429</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1680279875429</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Completed edit profile API">
+      <created>1680281136245</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1680281136245</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,6 +443,12 @@
     <MESSAGE value="Fixed import" />
     <MESSAGE value="Updated build folder" />
     <MESSAGE value="Updated urls.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated urls.py" />
+    <MESSAGE value="Updated urls.py and views.py for render login/signup" />
+    <MESSAGE value="Completed search API: integrated tag and user search" />
+    <MESSAGE value="Completed edit profile API" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed edit profile API" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/csc648_spring23_01_team01$constants.coverage" NAME="constants Coverage Results" MODIFIED="1680378387875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/backend/users" />
   </component>
 </project>

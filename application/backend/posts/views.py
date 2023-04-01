@@ -1,8 +1,15 @@
+import boto3
+import matplotlib.pyplot as plt
 from django.shortcuts import render
+from django.core.files.storage import FileSystemStorage
 import json
+# import cv2
 from .constants import *
 from .models import *
 import traceback
+import os
+from . import s3_details
+
 
 # Create your views here.
 
@@ -36,7 +43,8 @@ def view_posts(request):
 def format_post_data(post_list):
     formatted_list = []
     cols = ['made_by', 'creation_date', 'no_likes', 'no_dislikes', 'points',
-            'isReshared', 'post_id',  'no_views', 'no_comments', 'image', 'desc']
+            'isReshared', 'post_id',  'no_views', 'no_comments', 'image', 'desc',
+            'category']
 
     for each_post in post_list:
         post_dict = {}
@@ -46,3 +54,57 @@ def format_post_data(post_list):
         formatted_list.append(post_dict)
 
     return formatted_list
+
+
+def create_post(request):
+    try:
+        if request.method == 'POST':
+            collected_data = request.POST
+            username = collected_data['username']
+            is_reshared = collected_data['is_reshared']
+            description = collected_data['description']
+            category = collected_data['category']
+            image = request.FILES['image']
+
+            s3_url = upload_image_to_s3(image)
+
+            tags = find_tags_from_description(description)
+
+            post_id = create_post_in_db(username, is_reshared, description, s3_url, category)
+            tags_added = add_tags_in_db(tags, post_id)
+
+            if post_id and tags_added:
+                return view_post_response('SUCCESS', 'Post succesfully created.', True, post_id)
+
+            else:
+                return view_post_response('SUCCESS', 'Something went wrong in post creation, please recheck.')
+
+        return view_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return view_post_response('FAILED', f'API failed with error: {e}')
+
+
+def upload_image_to_s3(image):
+    fs = FileSystemStorage()
+    filename = fs.save(image.name, image)
+
+    # s3 = boto3.client('s3', aws_access_key_id=s3_details.aws_access_key,
+    #                     aws_secret_access_key=s3_details.aws_secret_key)
+    # response = s3.upload_file(filename, s3_details.bucket_name, filename)
+    s3_url = s3_details.base_s3_url + filename
+
+    os.remove(filename)
+    return s3_url
+
+
+def find_tags_from_description(description):
+    tags = []
+    textList = description.split()
+    for i in textList:
+        if (i[0] == "#"):
+            x = i.replace("#", '')
+            tags.append(x)
+
+    return tags
