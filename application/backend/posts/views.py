@@ -108,3 +108,19 @@ def find_tags_from_description(description):
             tags.append(x)
 
     return tags
+
+
+def view_categories(request):
+    try:
+        if request.method == 'GET':
+            if categories:
+                return view_categories_response('SUCCESS', 'Categories succesfully sent.', categories)
+
+            else:
+                return view_categories_response('SUCCESS', 'Something went wrong in fetching categories')
+
+        return view_categories_response('SUCCESS', 'This API has been wrongly called. Needs to be GET method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return view_categories_response('FAILED', f'API failed with error: {e}')
