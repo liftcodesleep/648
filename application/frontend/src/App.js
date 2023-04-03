@@ -7,6 +7,7 @@ import Nick from './components/Nick'
 import SignupForm from './components/SignUpForm'
 import LoginForm from './components/LoginForm'
 import Search from './components/Search'
+import UserProfile from './components/UserProfile'
 
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -30,6 +31,7 @@ const App = () => {
          
           <Route path="/login" element={<LoginForm />} />
           <Route path="/" element={<Search />} />
+          <Route path="/user-profile" element={<UserProfile/>} />
       </Routes>
     </Router>
   )
