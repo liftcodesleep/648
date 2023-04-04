@@ -17,7 +17,7 @@ def get_cursor():
     return cursor, conn
 
 
-def find_post_data(limit, offset, search_text, sort_col, sort_type):
+def find_post_data(limit, offset, search_text, sort_col, sort_type, category):
     cursor, conn = get_cursor()
     sql_statement = "SELECT * FROM Posts"
 
@@ -36,6 +36,13 @@ def find_post_data(limit, offset, search_text, sort_col, sort_type):
                                     """
         else:
             sql_statement += f" WHERE UPPER(description) LIKE '%{search_text.upper()}%'"
+
+    if category:
+        if search_text:
+            sql_statement += " AND"
+        else:
+            sql_statement += " WHERE"
+        sql_statement += f" Upper(category) LIKE '{category.upper()}'"
 
     if sort_col:
         sql_statement += f" ORDER BY {sort_col} {sort_type}"
