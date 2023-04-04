@@ -28,6 +28,7 @@ def check_login_info(username, password, user_type):
     conn.close()
     return data
 
+
 def insert_register(collected_data):
     cursor, conn = get_cursor()
     sql_statement = f"""INSERT INTO `team1_database`.`User`
@@ -54,3 +55,7 @@ CURRENT_TIMESTAMP,
 '{collected_data.get("userpic")}',
 '{collected_data.get("about")}',
 '{collected_data.get("usertype")}');"""
+    cursor.execute(sql_statement)
+    data = cursor.fetchone()
+    conn.close()
+    return data
