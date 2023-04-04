@@ -57,5 +57,6 @@ CURRENT_TIMESTAMP,
 '{collected_data.get("usertype")}');"""
     cursor.execute(sql_statement)
     data = cursor.fetchone()
+    conn.commit()
     conn.close()
     return data
