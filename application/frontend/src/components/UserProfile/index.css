@@ -157,91 +157,90 @@
   
   
   @media screen and (max-width: 768px) {
-    .search-form {
-      margin-left: 0;
-      margin-top: 20px;
-    }
-    
-    .search-form input[type="text"] {
-      max-width: 100%;
-    }
-    
-    .search-form button {
-      margin-left: 0;
-      margin-top: 10px;
-    }
-    
-    .logo {
-      height: 100px;
-      margin-right: 10px;
-      margin-left: 10px;
-    }
-    
-    .card {
-      width: 100%;
-      margin: 20px 0;
-    }
+  .search-form {
+    margin-left: 0;
+    margin-top: 20px;
   }
   
-  @media screen and (min-width: 769px) and (max-width: 1024px) {
-    .container {
-      background-color: #8c8c8c;
-    }
-    
-    .search-form input[type="text"] {
-      margin-left: 150px;
-      max-width: 350px;
-    }
-    
-    .search-form button {
-      margin-left: -90px;
-    }
-    
-    .logo {
-      height: 150px;
-      margin-right: 30px;
-      margin-left: 30px;
-    }
-    
-    .card {
-      width: 45%;
-      margin: 20px;
-    }
-    
-    .profile-container {
-      margin-top: 100px;
-      margin-right: 100px;
-    }
+  .search-form input[type="text"] {
+    max-width: 100%;
   }
   
-  @media screen and (min-width: 1025px) {
-    .container {
-      background-color: #684949;
-    }
-    
-    .search-form input[type="text"] {
-      margin-left: 150px;
-      max-width: 400px;
-    }
-    
-    .search-form button {
-      margin-left: -90px;
-    }
-    
-    .logo {
-      height: 200px;
-      margin-right: 20px;
-      margin-left: 20px;
-    }
-    
-    .card {
-      width: 30%;
-      margin: 20px;
-    }
-    
-    .profile-container {
-      margin-top: 70px;
-      margin-right: 500px;
-    }
+  .search-form button {
+    margin-left: 0;
+    margin-top: 10px;
   }
   
+  .logo {
+    height: 100px;
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+  
+  .card {
+    width: 100%;
+    margin: 20px 0;
+  }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    background-color: #8c8c8c;
+  }
+  
+  .search-form input[type="text"] {
+    margin-left: 150px;
+    max-width: 350px;
+  }
+  
+  .search-form button {
+    margin-left: -90px;
+  }
+  
+  .logo {
+    height: 150px;
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+  
+  .card {
+    width: 45%;
+    margin: 20px;
+  }
+  
+  .profile-container {
+    margin-top: 100px;
+    margin-right: 100px;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  .container {
+    background-color: #684949;
+  }
+  
+  .search-form input[type="text"] {
+    margin-left: 150px;
+    max-width: 400px;
+  }
+  
+  .search-form button {
+    margin-left: -90px;
+  }
+  
+  .logo {
+    height: 200px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+  
+  .card {
+    width: 30%;
+    margin: 20px;
+  }
+  
+  .profile-container {
+    margin-top: 70px;
+    margin-right: 500px;
+  }
+}
