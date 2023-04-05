@@ -1,5 +1,6 @@
 from django.db import models
 import pymysql
+import logging
 
 
 # Create your models here.
@@ -30,6 +31,7 @@ def check_login_info(username, password, user_type):
 
 
 def insert_register(collected_data):
+    print("boojee")
     cursor, conn = get_cursor()
     sql_statement = f"""INSERT INTO `team1_database`.`User`
 (`Name`,
@@ -54,9 +56,14 @@ CURRENT_TIMESTAMP,
 '{collected_data.get("phonenum")}',
 '{collected_data.get("userpic")}',
 '{collected_data.get("about")}',
-'{collected_data.get("usertype")}');"""
-    cursor.execute(sql_statement)
-    data = cursor.fetchone()
-    conn.commit()
-    conn.close()
-    return data
+'{collected_data.get("usertype")}')"""
+    try:
+        affected_rows = cursor.execute(sql_statement)
+        conn.commit()
+        print(affected_rows)
+
+    except:
+        conn.rollback()
+    finally:
+        cursor.close()
+        conn.close()
