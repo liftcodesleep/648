@@ -1,9 +1,9 @@
 from django.db import models
 import pymysql
-import logging
-
+import uuid
 
 # Create your models here.
+
 
 def get_cursor():
     conn = pymysql.connect(
@@ -31,9 +31,11 @@ def check_login_info(username, password, user_type):
 
 
 def insert_register(collected_data):
-    print("boojee")
+    print(collected_data)
+    print("")
+
     cursor, conn = get_cursor()
-    sql_statement = f"""INSERT INTO `team1_database`.`User`
+    sql_statement = """INSERT INTO `team1_database`.`User`
 (`Name`,
 `Email`,
 `Userid`,
@@ -46,24 +48,25 @@ def insert_register(collected_data):
 `About`,
 `User_type`)
 VALUES
-('{collected_data.get("name")}',
-'{collected_data.get("email")}',
-'{collected_data.get("userid")}'
-'{collected_data.get("password")}',
-'{collected_data.get("dob")}',
-CURRENT_TIMESTAMP,
-'{collected_data.get("username")}',
-'{collected_data.get("phonenum")}',
-'{collected_data.get("userpic")}',
-'{collected_data.get("about")}',
-'{collected_data.get("usertype")}')"""
+("{name}",
+"{email}",
+"{userid}",
+"{password}",
+"{dob}",
+CURRENT_TIMESTAMP(),
+"{username}",
+"{phonenum}",
+"{userpic}",
+"{about}",
+"{usertype}");""".format(**collected_data)
+    print(sql_statement)
     try:
         affected_rows = cursor.execute(sql_statement)
         conn.commit()
-        print(affected_rows)
-
-    except:
+        print("rows: " + affected_rows)
+    except Exception as e:
         conn.rollback()
+        print(e)
     finally:
         cursor.close()
         conn.close()
