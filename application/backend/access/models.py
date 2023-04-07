@@ -32,8 +32,6 @@ def check_login_info(username, password, user_type):
 
 def insert_register(collected_data):
     print(collected_data)
-    print("")
-
     cursor, conn = get_cursor()
     sql_statement = """INSERT INTO `team1_database`.`User`
 (`Name`,
@@ -53,7 +51,7 @@ VALUES
 "{userid}",
 "{password}",
 "{dob}",
-CURRENT_TIMESTAMP(),
+GET_DATE()",
 "{username}",
 "{phonenum}",
 "{userpic}",

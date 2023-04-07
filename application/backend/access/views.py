@@ -54,12 +54,7 @@ def register(request):
             name = collected_data.get("name")
             email = collected_data.get("email")
             password = collected_data.get("password")
-            dob = collected_data.get("dob")
-            username = collected_data.get("username")
             phonenum = collected_data.get("phonenum")
-            userpic = collected_data.get("userpic")
-            about = collected_data.get("about")
-            usertype = collected_data.get("usertype")
             userid = name[0] + str(random.randint(0, 999999))
             collected_data["userid"] = userid
 
