@@ -72,7 +72,9 @@ class Search extends Component {
             </div>
                 <div className="search-container">
                     <div className="post">
-                        <button type="submit">+ New Post</button>
+                    <Link to="/uploadimage">
+                        <button type="submit" >+ New Post</button>
+                    </Link>
                     </div>
 
                     <form className="search-form" onSubmit={this.handleSubmit}>
