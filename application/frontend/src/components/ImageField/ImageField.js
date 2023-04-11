@@ -12,10 +12,8 @@ import axios from 'axios';
 
 const StyleBox = styled(Box)({
     background: '#ddd',
- 
     marginBottom:'1rem',
     borderRadius:'5px',
-    
     alignItems:'center',
     justifyContent:'center',
     cursor:'pointer',
@@ -162,6 +160,7 @@ function ImageField() {
                     <div className='Tabs'>
                 
                     </div>
+                    
                     </>): <img src={require('../../Images/upload.jpeg')} style={{cursor:'pointer' }} onClick={triggerFileSelect}></img>
     
                 } 
@@ -170,32 +169,36 @@ function ImageField() {
         <input type='file' accept='image/*' ref={inputRef} style={{display:'none'}} onChange = {onSelectFile}/>
 
         <div className='container-form'>
-            <form>
-               
-                <input type='text' name='description' placeholder='Description' value={formData.description} onChange={handleFormChange} />
-                <input type='text' name='category' placeholder='Category' value={formData.category} onChange={handleFormChange} />
-                {/* <label>
-                    <input type='checkbox' name='is_reshared' checked={formData.is_reshared} onChange={() => setFormData({ ...formData, is_reshared: !formData.is_reshared })} />
-                    Reshare
-                </label> */}
+            {image ? (<>
 
-                {/* <Tabs style={{backgroundColor:'white'}} value={category} onChange={handleChange} textColor='primary' indicatorColor='secondary'>
-                    <Tab value="category" label='Categories'/>
-                    
-                </Tabs> */}
-                {formData.image && (
-                    <div className='preview-container'>
-                        <img src={URL.createObjectURL(formData.image)} alt='Preview' className='preview-image' />
-                    </div>
-                )}
-                <div className='container-buttons'>
-                  
-                                
-                <Button variant='contained' style={{color:'white', margin: '10px'}} onClick={triggerFileSelect}>Uplaod Image</Button>
-                <Button variant='contained' style={{color:'white',margin: '10px'}} onClick={onDownload}> Downlaod </Button>
-                <Button variant='contained' onClick={handlePostButtonClick}>Post</Button>
-                </div>
-            </form>
+                <form>
+               
+               <input type='text' name='description' placeholder='Description' value={formData.description} onChange={handleFormChange} />
+               <input type='text' name='category' placeholder='Category' value={formData.category} onChange={handleFormChange} />
+               {/* <label>
+                   <input type='checkbox' name='is_reshared' checked={formData.is_reshared} onChange={() => setFormData({ ...formData, is_reshared: !formData.is_reshared })} />
+                   Reshare
+               </label> */}
+
+               {/* <Tabs style={{backgroundColor:'white'}} value={category} onChange={handleChange} textColor='primary' indicatorColor='secondary'>
+                   <Tab value="category" label='Categories'/>
+                   
+               </Tabs> */}
+               {formData.image && (
+                   <div className='preview-container'>
+                       <img src={URL.createObjectURL(formData.image)} alt='Preview' className='preview-image' />
+                   </div>
+               )}
+               <div className='container-buttons'>             
+              
+               <Button variant='contained' style={{color:'white',margin: '10px'}} onClick={onDownload}> Downlaod </Button>
+               <Button variant='contained' onClick={handlePostButtonClick}>Post</Button>
+               </div>
+           </form>
+            </>
+            
+                ):  <Button variant='contained' style={{color:'white', margin: '10px'}} onClick={triggerFileSelect}>Uplaod Image</Button>}
+           
         </div>
         
         
