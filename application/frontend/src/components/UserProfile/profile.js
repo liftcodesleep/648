@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { Link, Navigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import './index.css';
+import './profile.css';
 
 class UserProfile extends Component {
     state = {
@@ -41,18 +41,21 @@ class UserProfile extends Component {
 
     componentDidMount = async () => {
         try {
-            const response = await fetch('http://44.197.240.111/view_user_posts', {
-                method: 'GET',
+            const username = Cookies.get('username');
+            const response = await fetch('http://127.0.0.1:8000/view_user_profile', {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${Cookies.get('token')}`
-                }
+                },
+                body: JSON.stringify({ username })
             });
             const data = await response.json();
             this.setState({ posts: data.posts, error: null });
         } catch (error) {
             this.setState({ error: 'Failed to fetch user posts' });
         }
+        
     }
 
     render() {
@@ -63,36 +66,48 @@ class UserProfile extends Component {
         return (
         <div className="container">
         <div className="header">
-            <div className='logo-container'>
-                <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
-            </div>
-           
-        </div>
-        <div className="search-container">
-            <div className="post">
-                <button type="submit">+ New Post</button>
-            </div>
-
-            <form className="search-form" onSubmit={this.handleSubmit}>
-                <div className="input-wrapper">
-                    <input type="text" value={searchText} onChange={this.handleInputChange} placeholder="Images, #tags, @users" />
-                    <button type="submit">Search</button>
+                    <div className='logo-container'>
+                        <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
+                    </div>
+                    <div className="search-container">
+                       
+                            <button type="submit">+ New Post</button>
+                       
+    
+                        <form className="search-form" onSubmit={this.handleSubmit}>
+                            <div className="input-wrapper">
+                                <input type="text" value={searchText} onChange={this.handleInputChange} placeholder="Images, #tags, @users" />
+                                <button type="submit">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div className="profile-container">
+                       
+                            <div className="profile-initial">{firstInitial}</div>
+                            <div className="profile-username">{username}</div>
+                       
+                        <div className="profile-dropdown">
+                            <button className="profile-dropdown-button">⋮</button>
+                            <div className="profile-dropdown-content">
+                                <Link to="/user-profile">View Profile</Link>
+                                <button onClick={this.handleLogout}>Logout</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div class="profile-container">
-   {/* <div className="profile-initial">{firstInitial}</div>
-                <div className="profile-username">{username}</div> */}
-                <div className="profile-initial">A</div>
-                <div className="profile-username">Alekya</div>
+      
+        <div class="profile-edit-container">
+   
+                <div className="profile-edit-initial">{firstInitial}</div>
+                <div className="profile-edit-username">{username}</div>
                 <button className="edit-button" onClick={() => window.location.href='/edit-profile'}>
                     <FontAwesomeIcon icon={faEdit} />
-                    {/* <span className="edit-text">Edit</span> */}
+                  
                 </button>
 </div>
 
                
-        <h1>All Posts</h1>
+        <h1 className="category-heading">All Posts</h1>
         {error && <div>{error}</div>}
         <div className="row-cards">
             {posts.map((post, index) => (

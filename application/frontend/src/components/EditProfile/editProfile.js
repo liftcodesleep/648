@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
-import './index.css';
+import './editProfile.css';
 
 class EditProfile extends Component {
   state = {
@@ -10,24 +10,33 @@ class EditProfile extends Component {
     activityLog: []
   }
 
- 
-  componentDidMount = async () => {
+  async componentDidMount() {
     try {
       // Fetch user details and activity log from the server
-      const response = await fetch('http://44.197.240.111/user_details', {
+      const userDetailsResponse = await fetch('http://127.0.0.1:8000/view_user_profile', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${Cookies.get('token')}`
         }
       });
+      const userDetailsData = await userDetailsResponse.json();
 
-      const data = await response.json();
+      const activityLogResponse = await fetch('http://127.0.0.1:8000/activity_log', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${Cookies.get('token')}`
+        }
+      });
+      const activityLogData = await activityLogResponse.json();
 
       // Update the state with the fetched user details and activity log
       this.setState({
-        
-        activityLog: data.activityLog
+        name: userDetailsData.name,
+        username: userDetailsData.username,
+        email: userDetailsData.email,
+        activityLog: activityLogData.activityLog
       });
     } catch (error) {
       console.error(error);
@@ -46,7 +55,7 @@ class EditProfile extends Component {
 
     try {
       // Send updated user details to the server
-      const response = await fetch('http://44.197.240.111/update_user_details', {
+      const response = await fetch('http://127.0.0.1:8000/update_user_profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -72,9 +81,12 @@ class EditProfile extends Component {
   
     return (
       <div className="container">
-        <h1>Edit Profile</h1>
+        <div className='edit-container'>
+        <div className='logo-container'>
+                        <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
+                    </div>
         <div className="activity-log">
-          <h2>Activity Log:</h2>
+          <h2 className = "activity-heading">Activity Log:</h2>
           <ul>
             {activityLog.map(activity => (
               <li key={activity.id}>
@@ -84,8 +96,9 @@ class EditProfile extends Component {
             ))}
           </ul>
         </div>
+        </div>
+                   
 
-  
         <form onSubmit={this.handleFormSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name:</label>
@@ -101,9 +114,6 @@ class EditProfile extends Component {
             <label htmlFor="email">Email:</label>
             <input type="email" name="email" value={email} onChange={this.handleInputChange} required />
           </div>
-  
-         
-  
           <button type="submit">Save Changes</button>
         </form>
 

@@ -1,0 +1,41 @@
+
+.container {
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: #684949;
+}
+
+
+.logo-container {
+  float: left;
+}
+
+.logo {
+  height: 200px;
+  margin-right: 20px;
+  border-radius: 2%;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+
+
+.activity-heading {
+  color: #fff;
+  font-size: 35px;
+}
+
+.edit-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+.activity-log {
+  margin-top: 20px;
+}
+
+
+
