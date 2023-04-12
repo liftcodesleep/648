@@ -101,8 +101,9 @@ class Search extends Component {
                         <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
                     </div>
                     <div className="search-container">
-                       
-                            <button type="submit">+ New Post</button>
+                    <Link to="/uploadimage">
+                        <button type="submit" >+ New Post</button>
+                    </Link>
                        
     
                         <form className="search-form" onSubmit={this.handleSubmit}>
