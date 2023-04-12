@@ -23,8 +23,9 @@ def view_posts(request):
             searchText = collected_data.get("searchText")
             sortby = collected_data.get("sortby")
             sort_type = collected_data.get("sortType")
+            category = collected_data.get("category", "")
 
-            data = find_post_data(limit, offset, searchText, sortby, sort_type)
+            data = find_post_data(limit, offset, searchText, sortby, sort_type, category)
             formatted_data = format_post_data(data)
 
             if data and len(data) > 0:

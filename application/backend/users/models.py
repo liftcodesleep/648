@@ -36,3 +36,13 @@ def update_profile(username, updates):
 
     except:
         return False
+
+
+def view_profile_data(username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""SELECT * FROM User WHERE Username='{username}'"""
+
+    cursor.execute(sql_statement)
+    data = cursor.fetchone()
+    conn.close()
+    return data

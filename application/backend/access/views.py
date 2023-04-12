@@ -128,6 +128,7 @@ def check_pw_uppercase(password):
     else:
         return "Password must contain an uppercase letter.\n"
 
+
 def check_pw_digit(password):
     reg = "^(?=.*\d)$"
     pat = re.compile(reg)
@@ -137,6 +138,7 @@ def check_pw_digit(password):
     else:
         return "Password must contain a digit.\n"
 
+
 def check_pw_special_char(password):
     reg = "^(?=.*[@$!%*#?&])$"
     pat = re.compile(reg)
@@ -145,6 +147,7 @@ def check_pw_special_char(password):
         return ""
     else:
         return "Password must contain at least one of the following characters: @$!%*#?&\n"
+
 
 def phonenum_is_valid(phonenum):
     reg = re.compile(r'^\d{10}$')
