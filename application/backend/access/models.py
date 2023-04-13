@@ -51,7 +51,7 @@ VALUES
 "{userid}",
 "{password}",
 "{dob}",
-GET_DATE()",
+"CURRENT_TIMESTAMP",
 "{username}",
 "{phonenum}",
 "{userpic}",
