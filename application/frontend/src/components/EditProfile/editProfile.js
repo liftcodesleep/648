@@ -13,14 +13,17 @@ class EditProfile extends Component {
   async componentDidMount() {
     try {
       // Fetch user details and activity log from the server
+      const username = Cookies.get('username');
       const userDetailsResponse = await fetch('http://127.0.0.1:8000/view_user_profile', {
-        method: 'GET',
+        method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${Cookies.get('token')}`
-        }
-      });
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Cookies.get('token')}`
+        },
+        body: JSON.stringify({ username })
+    });
       const userDetailsData = await userDetailsResponse.json();
+      console.log({userDetailsData})
 
       const activityLogResponse = await fetch('http://127.0.0.1:8000/activity_log', {
         method: 'GET',
@@ -38,6 +41,7 @@ class EditProfile extends Component {
         email: userDetailsData.email,
         activityLog: activityLogData.activityLog
       });
+      
     } catch (error) {
       console.error(error);
     }
@@ -78,6 +82,7 @@ class EditProfile extends Component {
 
   render() {
     const { name, username, email, activityLog } = this.state;
+    console.log({name})
   
     return (
       <div className="container">

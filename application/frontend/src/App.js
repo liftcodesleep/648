@@ -10,6 +10,7 @@ import Search from './components/Search/search'
 import UserProfile from './components/UserProfile/profile'
 import EditProfile from './components/EditProfile/editProfile'
 import Post from './components/Post/post'
+import SinglePost from './components/SinglePost/singlepost'
 
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
@@ -36,6 +37,8 @@ const App = () => {
           <Route path="/user-profile" element={<UserProfile/>} />
           <Route path="/edit-profile" element={<EditProfile/>} />
           <Route path='/uploadimage' element={<Post/>}/>
+          <Route path="/post/:postId" element={<SinglePost/>}/>
+
       </Routes>
     </Router>
   )

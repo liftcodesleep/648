@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
-import { Link, Navigate } from 'react-router-dom'
-import './search.css'
+import { Link, Navigate } from 'react-router-dom';
+import './search.css';
 
 
 class Search extends Component {
@@ -132,32 +132,33 @@ class Search extends Component {
                     <div className="loading">Loading...</div>
                 ) : (
                     <>
-                        {searchResults.length > 0 && (
-                            <div className="row-cards">
-                                {searchResults.map((result, index) => (
-  !result.isHeading && (
-    <div key={result.post_id} className="card">
-      <img src={result.image} alt={result.desc} />
-      <h2>{result.desc}</h2>
-      <p>Made by: {result.made_by}</p>
-      <p>No. of views: {result.no_views}</p>
-      <p>No. of likes: {result.no_likes}</p>
-      <p>No. of dislikes: {result.no_dislikes}</p>
-      <p>Posted on: {result.creation_date}</p>
-      <p>Category: {result.category}</p>
-    </div>
-  )
-))}
-
-                            </div>
-                        )}
+                       {searchResults.length > 0 && (
+  <div className="row-cards">
+    {searchResults.map((result, index) => (
+      !result.isHeading && (
+        <Link key={result.post_id} to={`/post/${result.post_id}`}>
+          <div className="publiccard">
+            <img src={result.image} alt={result.desc} />
+            <h2>{result.desc}</h2>
+            <p>Made by: {result.made_by}</p>
+            <p>No. of views: {result.no_views}</p>
+            <p>No. of likes: {result.no_likes}</p>
+            <p>No. of dislikes: {result.no_dislikes}</p>
+            <p>Posted on: {result.creation_date}</p>
+            <p>Category: {result.category}</p>
+          </div>
+        </Link>
+      )
+    ))}
+  </div>
+)}
                         {searchResults.length === 0 && categories.length > 0 && (
                             <>
                                 <h2 className="category-heading">Categories</h2>
                                 <div className="row-cards">
                                     {categories.map((category, index) => (
                                         <div key={index} className="card" onClick={() => this.handleCategoryClick(category)}>
-                                            <h2>{category}</h2>
+                                            <h2 className="category">{category}</h2>
                                         </div>
                                     ))}
                                 </div>

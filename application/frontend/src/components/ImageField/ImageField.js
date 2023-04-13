@@ -100,7 +100,7 @@ function ImageField() {
 
     const handlePostButtonClick = async () => {
         try {
-            const response = await axios.post('http://44.197.240.111/create_post', formData);
+            const response = await axios.post('http://127.0.0.1:8000/create_post', formData);
             console.log(response.data);
         } catch (error) {
             console.error(error);

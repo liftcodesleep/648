@@ -13,6 +13,7 @@ class UserProfile extends Component {
         sortby: '',
         sortType: 'ASC',
         posts: [],
+        userData : [],
         error: null
     }
 
@@ -24,7 +25,7 @@ class UserProfile extends Component {
         event.preventDefault();
         const { limit, offset, searchText, sortby, sortType } = this.state;
         try {
-            const response = await fetch('http://44.197.240.111/view_public_posts', {
+            const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,8 +51,8 @@ class UserProfile extends Component {
                 },
                 body: JSON.stringify({ username })
             });
-            const data = await response.json();
-            this.setState({ posts: data.posts, error: null });
+            const {status,message,...data} = await response.json();
+            this.setState({ userData: data, error: null });
         } catch (error) {
             this.setState({ error: 'Failed to fetch user posts' });
         }
