@@ -24,28 +24,28 @@ class SignupForm extends Component {
     e.preventDefault();
     const { name, email, username, password, dob, phone } = this.state;
     try {
-      const response = await fetch('http://44.197.240.111/register_user', {
+      const response = await fetch('127.0.0.1:8000/register_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, username, password, dob, "phonenum":phone,"about":"", "usertype": "general","userpic": "" }),
+        body: JSON.stringify({ name, email, username, password, dob, "phonenum": phone, "about": "", "usertype": "general", "userpic": "" }),
       });
       // const { token } = await response.json();
       // Cookies.set('token', token);
       // this.setState({ redirectToReferrer: true });
-      const { isRegistered,status,message} = await response.json()
-      console.log({isRegistered})
-      console.log({status})
-      console.log({message})
+      const { isRegistered, status, message } = await response.json()
+      console.log({ isRegistered })
+      console.log({ status })
+      console.log({ message })
       // Cookies.set('token', token)
       if (status == "SUCCESS" && isRegistered) {
         console.log("inside success")
-          this.setState({ redirectToReferrer: true })
+        this.setState({ redirectToReferrer: true })
 
       } else {
         console.log("inside failure")
-        this.setState({ redirectToReferrer: false, error: message})
+        this.setState({ redirectToReferrer: false, error: message })
       }
-      
+
     } catch (error) {
       console.log(error)
       this.setState({
