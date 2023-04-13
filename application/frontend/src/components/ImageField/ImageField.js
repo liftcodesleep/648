@@ -11,6 +11,7 @@ import html2canvas from 'html2canvas';
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ImageComponent from '../ImageComponent/ImageComponent'
+import Cookies from 'js-cookie';
 
 
 
@@ -77,7 +78,8 @@ function ImageField() {
     };
     
     const onDownload = () => {   
-        generateDownload(image, croppedArea, filterClass, customFilter);
+        const download = generateDownload(image, croppedArea, filterClass, customFilter);
+        console.log({download});
 
     };
 
@@ -112,28 +114,32 @@ function ImageField() {
       
       const handleCreatePost = async () => {
         try {
-          const croppedImage = await getCroppedImg(image, croppedArea);
+          const croppedImage = await generateDownload(image, croppedArea, filterClass, customFilter);
+          
+          console.log({croppedImage});
           const data = {
-            username: formData.username,
+            username: Cookies.get('username'),
             is_reshared: formData.is_reshared,
             image: croppedImage,
             description: formData.description,
             category: formData.category,
           };
-          const response = await axios.post("/create_post", data);
+          const response = await axios.post("http://127.0.0.1:8000/create_post", data);
           console.log(response.data);
-          if (response.data.status === 'SUCCESS' && response.data.isPostCreated) {
-            console.log("inside success")
+          setFormData({
+            username: Cookies.get('username'),
+            is_reshared: false,
+            image: null,
+            description: '',
+            category: '',
+            redirectToReferrer: true,
+            });
+            } catch (err) {
+            console.log(err);
+            }
+            };
             
-          } 
-          else {
-            console.error(response.data.message);
-        this.setState({ redirectToReferrer: false})
-          }
-        } catch (error) {
-          console.error(error);
-        }
-      };
+      
     const handleChange = (e, newValue) => {
         setCategory(newValue);
     };
@@ -141,7 +147,7 @@ function ImageField() {
 
     const fetchCategories = async () => {
         try {
-          const response = await axios.get('http://44.197.240.111/fetch_categories');
+          const response = await axios.get('http://127.0.0.1:8000/fetch_categories');
           console.log(response.data);
           if (response.data.status === 'SUCCESS') {
             setCategories(response.data.categories);
@@ -229,7 +235,7 @@ function ImageField() {
             <div className='container-form' >
             {image? (<>
             <form style={{alignItems:'center', justifyContent:'center',marginRight:'80px'}} >
-           
+            <input type="text" id="username" name="username" value={formData.username} onChange={handleFormChange}></input>
            <textarea  style={{height:"10vh", width:'45vw', borderRadius:'10px', verticalAlign:'text-top', padding:'10px', marginBottom:'10px'}} type='text' name='description' placeholder='Description' value={formData.description} onChange={handleFormChange}></textarea> 
            {/* <input type='text' name='category' placeholder='Category' value={formData.category} onChange={handleFormChange} /> */}
            <div style={{display:'flex'}}>
