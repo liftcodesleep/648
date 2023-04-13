@@ -10,8 +10,8 @@ function FilterEffect() {
     const handleChange = (e) =>  setFilterClass(e.target.value);
   return (
     <Box>
-        <FormControl fullWidth style={{color:"white"}}>
-            <InputLabel>Filter</InputLabel>
+        <FormControl  fullWidth style={{color:"white"}}>
+            <InputLabel>Filters</InputLabel>
             <Select className='options' style={{backgroundColor:'white'} }
             onChange={handleChange}
             value={filterClass}

@@ -27,8 +27,8 @@ function Edit() {
 // }
 
   return (
-    <Box sx={{marginTop:'2rem'}}> 
-        {slider.map(slide => <SliderField slide={slide} key={slide.field } /> )}
+    <Box sx={{marginTop:'0.1rem', backgroundColor:'white', borderRadius:'5px', padding:'20px'}} > 
+        {slider.map(slide => <SliderField slide={slide} key={slide.field }  /> )}
     
     </Box>
     
