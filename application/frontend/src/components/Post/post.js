@@ -9,6 +9,8 @@ import Filters from '../Filters/Filters';
 import FilterEffect from '../FilterEffects/FilterEffect';
 import Edit from '../EditPhoto/Edit';
 import ImageField from '../ImageField/ImageField';
+import ImageComponent from '../ImageComponent/ImageComponent';
+
 
 export const FilterContext = createContext();
 export default function Post() {
@@ -73,7 +75,10 @@ export default function Post() {
         
 
         <FilterContext.Provider value = {value}>
-            <Container sx={{marginTop:'4rem', marginBottom:'4rem'}}>
+              <div>
+            <img src={require('../../Images/picturePerfect.jpg')} style={{height:'120px', padding:"2px"}}></img>
+        </div>
+            <Container sx={{marginTop:'2rem', marginBottom:'4rem'}}>
         <Grid container spacing={10}  >
         <Grid item xs={12} md={8}> <ImageField/>  </Grid>
             <Grid item xs={12} md={3} marginTop="1rem">

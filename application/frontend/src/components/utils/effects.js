@@ -71,13 +71,14 @@ export const filterValues = [
       "name": "Inkwell",
       "class": "filter-inkwell"
     },
+   
+    {
+      "name": "Juno",
+      "class": "filter-juno"
+    },
     {
       "name": "Kelvin",
       "class": "filter-kelvin"
-    },
-    {
-      "name": "Kuno",
-      "class": "filter-juno"
     },
     {
       "name": "Lark",
