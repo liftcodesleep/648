@@ -35,3 +35,13 @@ def view_categories_response(status="SUCCESS", message="", categories=[]):
     }
 
     return JsonResponse(view_categories_response_obj)
+
+
+def view_single_post_response(status="SUCCESS", message="", posts={}):
+    view_single_post_response_obj = {
+        'status': status,
+        'message': message,
+        "post": posts
+    }
+
+    return JsonResponse(view_single_post_response_obj)

@@ -57,6 +57,45 @@ def find_post_data(limit, offset, search_text, sort_col, sort_type, category):
     return data
 
 
+def find_user_post_data(limit, offset, search_text, sort_col, sort_type, username):
+    cursor, conn = get_cursor()
+    sql_statement = "SELECT * FROM Posts"
+
+    if search_text:
+        if search_text[0] == '@':
+            sql_statement += f""" WHERE Made_by in 
+                                        (SELECT Userid FROM User
+                                        WHERE UPPER(Username) LIKE '%{search_text[1:].upper()}%')
+                                        """
+
+        elif search_text[0] == '#':
+            sql_statement += f""" WHERE Post_id in 
+                                        (SELECT Post_id FROM Post_tags JOIN Tags
+                                        on Post_tags.Tag_id = Tags.Tag_id
+                                        WHERE UPPER(Name) LIKE '%{search_text[1:].upper()}%') 
+                                        """
+        else:
+            sql_statement += f" WHERE UPPER(description) LIKE '%{search_text.upper()}%'"
+
+    if username:
+        if search_text:
+            sql_statement += " AND"
+        else:
+            sql_statement += " WHERE"
+        sql_statement += f" Upper(Made_by) LIKE '{username.upper()}'"
+
+    if sort_col:
+        sql_statement += f" ORDER BY {sort_col} {sort_type}"
+
+    if limit > 0 and offset > 0:
+        sql_statement += f" LIMIT {limit} OFFSET {offset}"
+
+    print(sql_statement)
+    cursor.execute(sql_statement)
+    data = cursor.fetchall()
+    conn.close()
+    return data
+
 def create_post_in_db(username, is_reshared, description, s3_url, category):
     cursor, conn = get_cursor()
     post_id = ''
@@ -84,6 +123,16 @@ def create_post_in_db(username, is_reshared, description, s3_url, category):
     conn.commit()
     conn.close()
     return post_id
+
+
+def find_post_details(postid):
+    cursor, conn = get_cursor()
+    sql_statement = f"SELECT * FROM Posts WHERE post_id='{postid}'"
+    print(sql_statement)
+    cursor.execute(sql_statement)
+    data = cursor.fetchone()
+    conn.close()
+    return data
 
 
 def add_tags_in_db(tags, post_id):
