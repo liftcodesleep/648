@@ -57,117 +57,123 @@ class SinglePostClass extends Component {
           });
         }
       
-        handleInputChange = event => {
+        handleInputChangeComment = event => {
           this.setState({ comment: event.target.value });
         };
-      
         handleCommentSubmit = event => {
-          event.preventDefault();
-          const { postId } = this.props.match.params;
-          const { comment } = this.state;
-      
-          fetch('/api/comments', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${Cookies.get('token')}`
-            },
-            body: JSON.stringify({
-              postId: postId,
-              comment: comment
+            event.preventDefault();
+            const { postId } = this.props;
+            const { comment } = this.state;
+            const username = Cookies.get('username');
+          
+            fetch('http://127.0.0.1:8000/add_comment', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${Cookies.get('token')}`
+              },
+              body: JSON.stringify({
+                postid: postId,
+                comment: comment,
+                username: username
+              })
             })
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Failed to submit comment');
-            }
-            return response.json();
-          })
-          .then(data => {
-            if (data.status === 'SUCCESS') {
-              const { post } = this.state;
-              const newPost = { ...post };
-              newPost.num_comments += 1;
-              this.setState({ post: newPost, comment: '' });
-            } else {
-              throw new Error(data.message);
-            }
-          })
-          .catch(error => {
-            this.setState({ error: error.message });
-          });
-        };
-      
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Failed to submit comment');
+              }
+              return response.json();
+            })
+            .then(data => {
+              if (data.status === 'SUCCESS') {
+                const { post } = this.state;
+                const newPost = { ...post };
+                newPost.num_comments += 1;
+                this.setState({ post: newPost, comment: '' });
+              } else {
+                throw new Error(data.message);
+              }
+            })
+            .catch(error => {
+              this.setState({ error: error.message });
+            });
+          };
+          
         handleLike = () => {
-          const { postId } = this.props.match.params;
-        
-          fetch('/api/like', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${Cookies.get('token')}`
-            },
-            body: JSON.stringify({
-              postId: postId
+            const { postId } = this.props;
+          
+            fetch('http://127.0.0.1:8000/like_dislike_post', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${Cookies.get('token')}`
+              },
+              body: JSON.stringify({
+                postid: postId,
+                liked: true
+              })
             })
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Failed to like post');
-            }
-            return response.json();
-          })
-          .then(data => {
-            if (data.status === 'SUCCESS') {
-              const { post } = this.state;
-              const newPost = { ...post };
-              newPost.is_liked = true;
-              newPost.is_disliked = false;
-              newPost.num_likes = data.num_likes;
-              newPost.num_dislikes = data.num_dislikes;
-              this.setState({ post: newPost, isLiked: true, isDisliked: false, numLikes: data.num_likes, numDislikes: data.num_dislikes });
-            } else {
-              throw new Error(data.message);
-            }
-          })
-          .catch(error => {
-            this.setState({ error: error.message });
-          });
-        }
-        handleDislike = () => {
-          const { postId } = this.props.match.params;
-        
-          fetch('/api/dislike', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${Cookies.get('token')}`
-            },
-            body: JSON.stringify({
-              postId: postId
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Failed to like post');
+              }
+              return response.json();
             })
-          })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error('Failed to dislike post');
-            }
-            return response.json();
-          })
-          .then(data => {
-            if (data.status === 'SUCCESS') {
-              const { post } = this.state;
-              const newPost = { ...post };
-              newPost.is_liked = false;
-              newPost.is_disliked = true;
-              newPost.num_likes = data.num_likes;
-              newPost.num_dislikes = data.num_dislikes;
-              this.setState({ post: newPost, isLiked: false, isDisliked: true, numLikes: data.num_likes, numDislikes: data.num_dislikes });
-            }
-          })
-          .catch(error => {
-            this.setState({ error: error.message });
-          });
-        };
+            .then(data => {
+              if (data.status === 'SUCCESS') {
+                const { post } = this.state;
+                const newPost = { ...post };
+                newPost.is_liked = true;
+                newPost.is_disliked = false;
+                newPost.num_likes = data.isUpdated ? data.num_likes : post.num_likes;
+                newPost.num_dislikes = data.isUpdated ? data.num_dislikes : post.num_dislikes;
+                this.setState({ post: newPost, isLiked: true, isDisliked: false, numLikes: newPost.num_likes, numDislikes: newPost.num_dislikes });
+              } else {
+                throw new Error(data.message);
+              }
+            })
+            .catch(error => {
+              this.setState({ error: error.message });
+            });
+          }
+       handleDislike = () => {
+  const { postId } = this.props.match.params;
+
+  fetch('http://127.0.0.1:8000/like_dislike_post', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${Cookies.get('token')}`
+    },
+    body: JSON.stringify({
+      postid: postId,
+      liked: false
+    })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to dislike post');
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data.status === 'SUCCESS') {
+      const { post } = this.state;
+      const newPost = { ...post };
+      newPost.is_liked = false;
+      newPost.is_disliked = true;
+      newPost.num_likes = data.num_likes;
+      newPost.num_dislikes = data.num_dislikes;
+      this.setState({ post: newPost, isLiked: false, isDisliked: true, numLikes: data.num_likes, numDislikes: data.num_dislikes });
+    } else {
+      throw new Error(data.message);
+    }
+  })
+  .catch(error => {
+    this.setState({ error: error.message });
+  });
+};
+
       
         handleInputChange = (event) => {
           this.setState({ searchText: event.target.value });
@@ -243,36 +249,37 @@ class SinglePostClass extends Component {
                 </div>
               </div>
               <div className="single-post">
-                <div className="post-header">
-                  <img src={post.image} alt={post.desc} />
-                  <div className="post-info">
-                    <div className="post-user">
-                      <Link to={`/user/${post.made_by}`}>{post.made_by}</Link>
-                    </div>
-                    <div className="post-stats">
-                      <span className="post-views">{post.no_views} views</span>
-                      <span className="post-likes">
-                        <i className={`fa fa-thumbs-up ${isLiked ? 'active' : ''}`} aria-hidden="true" onClick={this.handleLike}></i>
-                        <span>{numLikes}</span>
-                      </span>
-                      <span className="post-dislikes">
-                        <i className={`fa fa-thumbs-down ${isDisliked ? 'active' : ''}`} aria-hidden="true" onClick={this.handleDislike}></i>
-                        <span>{numDislikes}</span>
-                      </span>
-                      <span className="post-comments">{post.no_comments} comments</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="post-body">
-                  <p>{post.desc}</p>
-                </div>
-                <div className="post-footer">
-                  <div className="post-comment">
-                    <input type="text" placeholder="Add a comment" value={comment} onChange={this.handleInputChange} />
-                    <button onClick={this.handleComment}>Comment</button>
-                  </div>
-                </div>
-              </div>
+  <div className="post-header">
+    <img src={post.image} alt={post.desc} />
+    <div className="post-info">
+      <div className="post-user">
+        <span>{post.made_by}</span>
+      </div>
+      <div className="post-stats">
+        <span className="post-views">{post.no_views} views</span>
+        <span className="post-likes">
+          <i className={`fa fa-thumbs-up ${isLiked ? 'active' : ''}`} aria-hidden="true" onClick={this.handleLike}></i>
+          <span>{numLikes}</span>
+        </span>
+        <span className="post-dislikes">
+          <i className={`fa fa-thumbs-down ${isDisliked ? 'active' : ''}`} aria-hidden="true" onClick={this.handleDislike}></i>
+          <span>{numDislikes}</span>
+        </span>
+        <span className="post-comments">{post.no_comments} comments</span>
+      </div>
+    </div>
+  </div>
+  <div className="post-body">
+    <p>{post.desc}</p>
+  </div>
+  <div className="post-footer">
+    <div className="post-comment">
+      <input type="text" placeholder="Add a comment" value={comment} onChange={this. handleInputChangeComment} />
+      <button onClick={this.handleCommentSubmit}>Comment</button>
+    </div>
+  </div>
+</div>
+
             </div>
           );
         }

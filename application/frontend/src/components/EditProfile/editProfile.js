@@ -25,24 +25,25 @@ class EditProfile extends Component {
       const userDetailsData = await userDetailsResponse.json();
       console.log({userDetailsData})
 
-      const activityLogResponse = await fetch('http://127.0.0.1:8000/activity_log', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${Cookies.get('token')}`
-        }
-      });
-      const activityLogData = await activityLogResponse.json();
+      // const activityLogResponse = await fetch('http://127.0.0.1:8000/activity_log', {
+      //   method: 'GET',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     'Authorization': `Bearer ${Cookies.get('token')}`
+      //   }
+      // });
+      // const activityLogData = await activityLogResponse.json();
 
       // Update the state with the fetched user details and activity log
       this.setState({
         name: userDetailsData.name,
         username: userDetailsData.username,
         email: userDetailsData.email,
-        activityLog: activityLogData.activityLog
+        // activityLog: activityLogData.activityLog
       });
       
-    } catch (error) {
+    } 
+    catch (error) {
       console.error(error);
     }
   }
@@ -51,26 +52,31 @@ class EditProfile extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   }
-
   handleFormSubmit = async (event) => {
     event.preventDefault();
-
+  
     const { name, username, email } = this.state;
-
+  
     try {
       // Send updated user details to the server
       const response = await fetch('http://127.0.0.1:8000/update_user_profile', {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${Cookies.get('token')}`
         },
-        body: JSON.stringify({ name, username, email })
+        body: JSON.stringify({
+          username: username,
+          updates: [
+            { updatedColumn: "name", updatedValue: name },
+            { updatedColumn: "email", updatedValue: email }
+          ]
+        })
       });
-
+  
       const data = await response.json();
-
-      if (data.status === 'success') {
+  
+      if (data.status === 'SUCCESS') {
         alert('User details updated successfully');
       } else {
         alert('Failed to update user details');
@@ -79,6 +85,7 @@ class EditProfile extends Component {
       console.error(error);
     }
   }
+  
 
   render() {
     const { name, username, email, activityLog } = this.state;

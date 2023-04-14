@@ -13,7 +13,6 @@ class UserProfile extends Component {
         sortby: '',
         sortType: 'ASC',
         posts: [],
-        userData : [],
         error: null
     }
 
@@ -43,7 +42,7 @@ class UserProfile extends Component {
     componentDidMount = async () => {
         try {
             const username = Cookies.get('username');
-            const response = await fetch('http://127.0.0.1:8000/view_user_profile', {
+            const response = await fetch('http://127.0.0.1:8000/list_user_posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,13 +50,17 @@ class UserProfile extends Component {
                 },
                 body: JSON.stringify({ username })
             });
-            const {status,message,...data} = await response.json();
-            this.setState({ userData: data, error: null });
+            const {status:message,posts,...rest} = await response.json();
+            if(message === 'success'){
+              this.setState({ posts, error: null });
+            } else{
+              this.setState({ error: 'Failed to fetch user posts' });
+            }
         } catch (error) {
             this.setState({ error: 'Failed to fetch user posts' });
         }
-        
     }
+    
 
     render() {
         const { searchText, posts, error } = this.state;

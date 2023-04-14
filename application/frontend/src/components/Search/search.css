@@ -89,15 +89,13 @@ button[type="submit"] {
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .publiccard {
-  width: 150px;
-  height: 150px;
+  width: 370px;
+  height: auto;
   margin: 20px;
   background-color: #ffffff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
-  overflow: hidden;
 }
 
 
@@ -112,13 +110,13 @@ button[type="submit"] {
   font-size: 20px;
   font-weight: bold;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 .publiccard p {
   margin: 5px 0;
   font-size: 16px;
-  color: #fff;
+  color: black;
   text-align: center;
 }
 
@@ -127,7 +125,7 @@ button[type="submit"] {
   margin-top: 10px;
   font-size: 14px;
   text-align: center;
-  color: #999999;
+  color:black;
 }
 .profile-container {
   display: flex;
