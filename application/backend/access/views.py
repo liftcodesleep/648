@@ -152,3 +152,21 @@ def check_pw_special_char(password):
 def phonenum_is_valid(phonenum):
     reg = re.compile(r'^\d{10}$')
     return bool(reg.match(phonenum))
+
+
+def logout(request):
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            username = collected_data.get("username")
+
+            logged_out = insert_activity(username)
+
+            if logged_out:
+                return logout_response("SUCCESS", "Logout successful", True)
+            else:
+                return logout_response("SUCCESS", "Something went wrong", True)
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return logout_response('FAILED', f'API failed with error: {e}')

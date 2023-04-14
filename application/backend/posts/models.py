@@ -174,3 +174,113 @@ def add_tags_in_db(tags, post_id):
     conn.commit()
     conn.close()
     return True
+
+
+def like_dislike_post_db(postid, liked):
+    try:
+        cursor, conn = get_cursor()
+        to_update_col = "No_of_likes" if liked else "No_of_dislikes"
+
+        sql_statement = f"""
+                            UPDATE Posts
+                            SET
+                            {to_update_col} = {to_update_col} + 1
+                            WHERE
+                            post_id='{postid}'    
+                        """
+        print(sql_statement)
+        cursor.execute(sql_statement)
+
+        sql_statement = f"""SELECT No_of_likes, No_of_dislikes FROM Posts WHERE post_id='{postid}'"""
+        cursor.execute(sql_statement)
+        data = cursor.fetchone()
+
+        conn.commit()
+        conn.close()
+        return True, data
+    except:
+        raise Exception("Something went wrong with db operation")
+
+
+def add_comment_to_db(postid, comment, username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""
+                        INSERT INTO comments 
+                        (`post_id`,
+                        `comment_made_by`, `comment_datetime`,
+                        `comment_desc`, `comment_likes`)
+                        VALUES
+                        ('{postid}', '{username}', CURRENT_TIMESTAMP,
+                        '{comment}', 0)
+                    """
+    print(sql_statement)
+    cursor.execute(sql_statement)
+
+    sql_statement = f"""
+                        UPDATE Posts
+                        SET
+                        no_of_comments = no_of_comments + 1
+                        WHERE
+                        post_id='{postid}'
+                    """
+    cursor.execute(sql_statement)
+
+    no_of_comments, comments = fetch_comments(postid)
+
+    conn.commit()
+    conn.close()
+    return True, no_of_comments, comments
+
+
+def fetch_comments(postid):
+    cursor, conn = get_cursor()
+
+    sql_statement = f"""SELECT no_of_comments FROM Posts WHERE post_id='{postid}'"""
+    cursor.execute(sql_statement)
+    no_of_comments = cursor.fetchone()[0]
+
+    sql_statement = f"""
+                        SELECT comment_id, comment_made_by,
+                        comment_datetime, comment_desc, comment_likes
+                        FROM comments
+                        WHERE post_id='{postid}'
+                    """
+    cursor.execute(sql_statement)
+    comments = cursor.fetchall()
+
+    conn.commit()
+    conn.close()
+    return no_of_comments, comments
+
+
+def delete_comment_from_db(postid, commentid, username):
+    cursor, conn = get_cursor()
+
+    sql_statement = f"""SELECT COUNT(*) FROM Posts WHERE post_id='{postid}' and Made_by='{username}'"""
+    cursor.execute(sql_statement)
+    can_be_deleted = cursor.fetchone()[0]
+
+    if can_be_deleted == 1:
+        sql_statement = f"""
+                                    DELETE FROM comments
+                                    WHERE comment_id='{commentid}' and post_id='{postid}'
+                                """
+        cursor.execute(sql_statement)
+
+        sql_statement = f"""
+                            UPDATE Posts
+                            SET
+                            no_of_comments = no_of_comments - 1
+                            WHERE
+                            post_id='{postid}'
+                        """
+        cursor.execute(sql_statement)
+
+    else:
+        return False
+
+    cursor.execute(sql_statement)
+
+    conn.commit()
+    conn.close()
+    return True

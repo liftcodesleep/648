@@ -45,3 +45,37 @@ def view_single_post_response(status="SUCCESS", message="", posts={}):
     }
 
     return JsonResponse(view_single_post_response_obj)
+
+
+def liked_disliked_response(status="SUCCESS", message="", isupdated=False, no_likes=0, no_dislikes=0):
+    liked_disliked_response_obj = {
+        'status': status,
+        'message': message,
+        "isUpdated": isupdated,
+        "no_likes": no_likes,
+        "no_dislikes": no_dislikes
+    }
+
+    return JsonResponse(liked_disliked_response_obj)
+
+
+def add_comment_response(status="SUCCESS", message="", iscommentadded=False, no_comments=0, comments=[]):
+    add_comment_response_obj = {
+        'status': status,
+        'message': message,
+        "isCommentAdded": iscommentadded,
+        "no_comments": no_comments,
+        "comments": comments
+    }
+
+    return JsonResponse(add_comment_response_obj)
+
+
+def delete_comment_response(status="SUCCESS", message="", isdeleted=False):
+    delete_comment_response_obj = {
+        'status': status,
+        'message': message,
+        "isCommentDeleted": isdeleted,
+    }
+
+    return JsonResponse(delete_comment_response_obj)

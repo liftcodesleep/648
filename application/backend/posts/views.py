@@ -168,6 +168,10 @@ def get_post_details(request):
             for ind, each_col in enumerate(cols):
                 post_dict[each_col] = data[ind]
 
+            no_of_comments, comments = fetch_comments(postid)
+            comments = format_comment_data(comments)
+            post_dict['comments'] = comments
+
             if data and len(data) > 0:
                 return view_single_post_response('SUCCESS', 'Post succesfully fetched.', post_dict)
 
@@ -179,3 +183,86 @@ def get_post_details(request):
     except Exception as e:
         print(traceback.print_exc())
         return view_single_post_response('FAILED', f'API failed with error: {e}', {})
+
+
+def like_dislike_post(request):
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            postid = collected_data.get("postid")
+            liked = collected_data.get("liked")
+
+            is_updated, data = like_dislike_post_db(postid, liked)
+
+            if is_updated and data and len(data) > 0:
+                return liked_disliked_response('SUCCESS', 'Post succesfully fetched.', True, data[0], data[1])
+
+            else:
+                return liked_disliked_response('SUCCESS', 'No posts found with corresponding search text.')
+
+        return liked_disliked_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return liked_disliked_response('FAILED', f'API failed with error: {e}')
+
+
+def add_comment(request):
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            postid = collected_data.get("postid")
+            comment = collected_data.get("comment")
+            username = collected_data.get("username")
+
+            is_updated, no_of_comments, comments = add_comment_to_db(postid, comment, username)
+            comments = format_comment_data(comments)
+
+            if is_updated and comments and len(comments) > 0:
+                return add_comment_response('SUCCESS', 'Post succesfully fetched.', True, no_of_comments, comments)
+
+            else:
+                return add_comment_response('SUCCESS', 'No posts found with corresponding search text.')
+
+        return add_comment_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return add_comment_response('FAILED', f'API failed with error: {e}')
+
+
+def format_comment_data(data):
+    formatted_list = []
+    cols = ["comment_id", "username", "comment_time", "comment", "no_of_likes"]
+
+    for each_post in data:
+        post_dict = {}
+        for ind, each_col in enumerate(cols):
+            post_dict[each_col] = each_post[ind]
+
+        formatted_list.append(post_dict)
+
+    return formatted_list
+
+
+def delete_comment(request):
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            postid = collected_data.get("postid")
+            commentid = collected_data.get("commentid")
+            username = collected_data.get("username")
+
+            isdeleted = delete_comment_from_db(postid, commentid, username)
+
+            if isdeleted:
+                return delete_comment_response('SUCCESS', 'Comment deleted.', True)
+
+            else:
+                return delete_comment_response('SUCCESS', 'Something went wrong')
+
+        return delete_comment_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return delete_comment_response('FAILED', f'API failed with error: {e}')

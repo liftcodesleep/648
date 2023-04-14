@@ -10,4 +10,7 @@ urlpatterns = [
     re_path(r'^fetch_categories$', view_categories, name='fetch_categories'),
     re_path(r'^list_user_posts$', view_user_posts, name='view_user_posts'),
     re_path(r'^get_post_details$', get_post_details, name='get_post_details'),
+    re_path(r'^like_dislike_post$', like_dislike_post, name='like_dislike_post'),
+    re_path(r'^add_comment$', add_comment, name='add_comment'),
+    re_path(r'^delete_comment$', delete_comment, name='delete_comment'),
 ]

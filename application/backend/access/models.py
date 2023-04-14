@@ -17,6 +17,18 @@ def get_cursor():
     return cursor, conn
 
 
+def insert_activity(username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""INSERT INTO activity_log
+                        VALUES
+                        ('{username}', 'User logged out', CURRENT_TIMESTAMP)
+                        """
+    cursor.execute(sql_statement)
+    conn.commit()
+    conn.close()
+    return True
+
+
 def check_login_info(username, password, user_type):
     cursor, conn = get_cursor()
     sql_statement = f"""SELECT * FROM User

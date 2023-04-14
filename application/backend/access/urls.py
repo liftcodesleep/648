@@ -9,4 +9,5 @@ urlpatterns = [
     re_path(r'^register_user$', register, name='register'),
     re_path(r'^login$', render_login, name='render_login'),
     re_path(r'^signup$', render_register, name='render_register'),
+    re_path(r'^logout$', logout, name='logout'),
 ]
