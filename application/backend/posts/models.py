@@ -258,13 +258,17 @@ def delete_comment_from_db(postid, commentid, username):
 
     sql_statement = f"""SELECT COUNT(*) FROM Posts WHERE post_id='{postid}' and Made_by='{username}'"""
     cursor.execute(sql_statement)
-    can_be_deleted = cursor.fetchone()[0]
+    post_owner = cursor.fetchone()[0]
 
-    if can_be_deleted == 1:
+    sql_statement = f"""SELECT COUNT(*) FROM comments WHERE comment_made_by='{username}' and comment_id='{commentid}'"""
+    cursor.execute(sql_statement)
+    comment_owner = cursor.fetchone()[0]
+
+    if post_owner == 1 or comment_owner == 1:
         sql_statement = f"""
-                                    DELETE FROM comments
-                                    WHERE comment_id='{commentid}' and post_id='{postid}'
-                                """
+                            DELETE FROM comments
+                            WHERE comment_id='{commentid}' and post_id='{postid}'
+                        """
         cursor.execute(sql_statement)
 
         sql_statement = f"""
@@ -278,8 +282,6 @@ def delete_comment_from_db(postid, commentid, username):
 
     else:
         return False
-
-    cursor.execute(sql_statement)
 
     conn.commit()
     conn.close()
