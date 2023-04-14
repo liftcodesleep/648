@@ -224,10 +224,10 @@ def add_comment_to_db(postid, comment, username):
                         post_id='{postid}'
                     """
     cursor.execute(sql_statement)
+    conn.commit()
 
     no_of_comments, comments = fetch_comments(postid)
 
-    conn.commit()
     conn.close()
     return True, no_of_comments, comments
 
