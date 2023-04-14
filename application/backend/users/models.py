@@ -46,3 +46,23 @@ def view_profile_data(username):
     data = cursor.fetchone()
     conn.close()
     return data
+
+
+def fetch_activity_log(username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""SELECT activity, activity_time FROM activity_log WHERE username='{username}'"""
+
+    cursor.execute(sql_statement)
+    data = cursor.fetchall()
+    conn.close()
+    return data
+
+
+def get_no_of_posts(username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""SELECT COUNT(*) FROM Posts WHERE Made_by='{username}'"""
+
+    cursor.execute(sql_statement)
+    data = cursor.fetchone()
+    conn.close()
+    return data

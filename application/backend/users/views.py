@@ -62,3 +62,40 @@ def process_data(data):
         processed_data[columns[i]] = data[i]
 
     return processed_data
+
+
+def get_activity_log(request):
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            username = collected_data.get("username")
+
+            data = fetch_activity_log(username)
+            no_of_posts = get_no_of_posts(username)[0]
+            data = process_log_data(data)
+
+            if data:
+                return view_activity_log_response('SUCCESS', 'Profile found succesfully', data, no_of_posts)
+
+            else:
+                return view_activity_log_response('SUCCESS', 'Username not found.')
+
+        return view_activity_log_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return view_activity_log_response('FAILED', f'API failed with error: {e}')
+
+
+def process_log_data(data):
+    formatted_list = []
+    cols = ['activity', 'activity_time']
+
+    for activity in data:
+        activity_dict = {}
+        for ind, each_col in enumerate(cols):
+            activity_dict[each_col] = activity[ind]
+
+        formatted_list.append(activity_dict)
+
+    return formatted_list
