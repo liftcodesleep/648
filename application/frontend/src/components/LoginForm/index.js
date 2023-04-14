@@ -21,27 +21,18 @@ class LoginForm extends Component {
     e.preventDefault()
     const { username, password } = this.state
     try {
-      const response = await fetch('127.0.0.1:8000/user_login', {
+      const response = await fetch('http://127.0.0.1:8000/user_login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, "user_type": "general" })
+        body: JSON.stringify({ username, password, "user_type":"general"})
       })
-      // const val = await response.json()
-      // console.log({val})
       const { isLoggedin, status, message } = await response.json()
-      console.log({ isLoggedin })
-      console.log({ status })
-      console.log({ message })
-      // Cookies.set('token', token)
-      if (status == "SUCCESS" && isLoggedin) {
-        console.log("inside success")
+      if (status === "SUCCESS" && isLoggedin) {
+        Cookies.set('username', username);
         this.setState({ redirectToReferrer: true })
-
       } else {
-        console.log("inside failure")
-        this.setState({ redirectToReferrer: false, error: message })
+        this.setState({ redirectToReferrer: false, error: message})
       }
-
     } catch (error) {
       console.log(error)
       this.setState({ error: 'Invalid username or password' })
@@ -59,17 +50,17 @@ class LoginForm extends Component {
       <form className="login-form" onSubmit={this.handleSubmit}>
         <h2>Login Form</h2>
         {error && <div className="error">{error}</div>}
-        <div className="form-group">
+        <div className="login-form-group">
           <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" value={username} onChange={this.handleInputChange} />
         </div>
-        <div className="form-group">
+        <div className="login-form-group">
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" value={password} onChange={this.handleInputChange} />
         </div>
         <button type="submit">Login</button>
         <div>
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          Don't have an account? <Link to="/signup">Sign up</Link> 
         </div>
       </form>
     )

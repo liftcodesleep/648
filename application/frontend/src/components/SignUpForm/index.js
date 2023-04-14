@@ -24,35 +24,26 @@ class SignupForm extends Component {
     e.preventDefault();
     const { name, email, username, password, dob, phone } = this.state;
     try {
-      const response = await fetch('127.0.0.1:8000/register_user', {
+      const response = await fetch('http://127.0.0.1:8000/register_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, username, password, dob, "phonenum": phone, "about": "", "usertype": "general", "userpic": "" }),
+        body: JSON.stringify({ name, email, username, password, dob, "phonenum":phone,"about":"", "usertype": "general","userpic": "" }),
       });
-      // const { token } = await response.json();
-      // Cookies.set('token', token);
-      // this.setState({ redirectToReferrer: true });
-      const { isRegistered, status, message } = await response.json()
-      console.log({ isRegistered })
-      console.log({ status })
-      console.log({ message })
-      // Cookies.set('token', token)
-      if (status == "SUCCESS" && isRegistered) {
-        console.log("inside success")
-        this.setState({ redirectToReferrer: true })
-
+      const { isRegistered, status, message } = await response.json();
+      if (status === 'SUCCESS' && isRegistered) {
+        Cookies.set('username', username);
+        this.setState({ redirectToReferrer: true });
       } else {
-        console.log("inside failure")
-        this.setState({ redirectToReferrer: false, error: message })
+        this.setState({ redirectToReferrer: false, error: message });
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
       this.setState({
         error: 'Unable to create account. Please try again later.',
       });
     }
   };
+  
 
   render() {
     const { name, email, username, password, dob, phone, error, redirectToReferrer } = this.state;
@@ -65,7 +56,7 @@ class SignupForm extends Component {
       <form className="signup-form" onSubmit={this.handleSubmit}>
         <h2>Signup Form</h2>
         {error && <div className="error">{error}</div>}
-        <div className="form-group">
+        <div className="signup-form-group">
           <label htmlFor="name">Full Name</label>
           <input
             type="text"
@@ -75,7 +66,7 @@ class SignupForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <div className="form-group">
+        <div className="signup-form-group">
           <label htmlFor="email">Email Address</label>
           <input
             type="email"
@@ -85,7 +76,7 @@ class SignupForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <div className="form-group">
+        <div className="signup-form-group">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -95,7 +86,7 @@ class SignupForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <div className="form-group">
+        <div className="signup-form-group">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -105,7 +96,7 @@ class SignupForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <div className="form-group">
+        <div className="signup-form-group">
           <label htmlFor="dob">Date of Birth</label>
           <input
             type="date"
@@ -115,7 +106,7 @@ class SignupForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <div className="form-group">
+        <div className="signup-form-group">
           <label htmlFor="phone">Phone Number</label>
           <input
             type="text"

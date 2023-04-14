@@ -20,7 +20,7 @@ background-position: left top;
 
 }
 
-.form-group {
+.login-form-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -33,8 +33,8 @@ label {
   margin-bottom: 0.5rem;
 }
 
-input[type="text"],
-input[type="password"] {
+.login-form-group input[type="text"],
+.login-form-group input[type="password"] {
   padding: 0.5rem;
   font-size: 1rem;
   border: none;
@@ -43,7 +43,7 @@ input[type="password"] {
   margin-bottom: 1rem;
 }
 
-button[type="submit"] {
+.login-form-group button[type="submit"] {
   background-color: blue;
   color: white;
   font-size: 1rem;
@@ -52,7 +52,7 @@ button[type="submit"] {
   border-radius: 4px;
   cursor: pointer;
   width: 100%;
-  margin-top: 1rem;
+  margin-top: 3rem;
   margin-bottom: 4rem;
 }
 
@@ -66,16 +66,16 @@ button[type="submit"] {
     align-items: center;
     justify-content: flex-start;
   }
-  .form-group {
+  .login-form-group {
     margin-right: 1rem;
     width: auto;
   }
-  input[type="text"],
-  input[type="password"] {
+  .login-form-group input[type="text"],
+  .login-form-group input[type="password"] {
     width: 250px;
     margin-bottom: 0;
   }
-  button[type="submit"] {
+  .login-form-group button[type="submit"] {
     width: auto;
     margin-top: 0;
   }
@@ -86,34 +86,34 @@ button[type="submit"] {
     align-items: center;
     justify-content: flex-start;
   }
-  .form-group {
+  .login-form-group {
     margin-right: 1rem;
     width: auto;
   }
-  input[type="text"],
-  input[type="password"] {
+  .login-form-group input[type="text"],
+  .login-form-group input[type="password"] {
     width: 100%;
     margin-bottom: 0.5rem;
   }
-  button[type="submit"] {
+  .login-form-group button[type="submit"] {
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .login-form {
+  .login-form-group {
     align-items: center;
     justify-content: flex-start;
     padding: 1rem;
   }
-  input[type="text"],
-  input[type="password"] {
+  .login-form-group input[type="text"],
+  .login-form-group input[type="password"] {
     width: 100%;
     margin-bottom: 0.5rem;
   }
-  button[type="submit"] {
+  .login-form-group button[type="submit"] {
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
   }
 }
