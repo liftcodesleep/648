@@ -75,16 +75,16 @@ def create_post(request):
             tags_added = add_tags_in_db(tags, post_id)
 
             if post_id and tags_added:
-                return view_post_response('SUCCESS', 'Post succesfully created.', True, post_id)
+                return create_post_response('SUCCESS', 'Post succesfully created.', True, post_id)
 
             else:
-                return view_post_response('SUCCESS', 'Something went wrong in post creation, please recheck.')
+                return create_post_response('SUCCESS', 'Something went wrong in post creation, please recheck.')
 
-        return view_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return create_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())
-        return view_post_response('FAILED', f'API failed with error: {e}')
+        return create_post_response('FAILED', f'API failed with error: {e}')
 
 
 def upload_image_to_s3(image):
