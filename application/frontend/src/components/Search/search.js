@@ -9,11 +9,13 @@ class Search extends Component {
         limit: 5,
         offset: 0,
         searchText: '',
+        category: '',
         sortby: '',
         sortType: 'ASC',
         categories: [],
         searchResults: [],
-        error: null
+        error: null,
+        isLoggedout: false
     }
 
     handleInputChange = (event) => {
@@ -22,16 +24,16 @@ class Search extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
-        const { limit, offset, searchText, sortby, sortType } = this.state;
+        const { limit, offset, searchText, sortby, sortType, category } = this.state;
         try {
-            const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Cookies.get('token')}`
-                },
-                body: JSON.stringify({ limit, offset, searchText, sortby, sortType })
-            });
+          const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${Cookies.get('token')}`
+            },
+            body: JSON.stringify({ limit, offset, searchText, sortby, sortType, category })
+          });
             const data = await response.json();
             if (data.status === "SUCCESS") {
                 if (data.posts.length > 0) {
@@ -49,30 +51,47 @@ class Search extends Component {
     }
     
     handleCategoryClick = (category) => {
-        this.setState({ searchText: category }, () => {
+        this.setState({  category: category }, () => {
             const fakeEvent = { preventDefault: () => {} };
             this.handleSubmit(fakeEvent);
         });
     }
     handleLogout = async () => {
+        const username = Cookies.get('username');
+        const payload = {
+          username: username
+        };
         try {
-            const response = await fetch('http://127.0.0.1:8000/logout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Cookies.get('token')}`
-                }
-            });
-            if (response.ok) {
-                Cookies.remove('token');
-                Cookies.remove('username');
-                // Redirect to login page
-                return <Navigate to="/login" />
+          const response = await fetch('http://127.0.0.1:8000/logout', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${Cookies.get('token')}`
+            },
+            body: JSON.stringify(payload)
+          });
+          if (response.ok) {
+            const data = await response.json();
+            console.log({data})
+            console.log(data.status)
+            console.log(data.isLoggedout)
+            console.log(data.status === 'SUCCESS' && data.isLoggedout)
+            if (data.status === 'SUCCESS' && data.isLoggedout) {
+              Cookies.remove('token');
+              Cookies.remove('username');
+            this.setState({isLoggedout:data.isLoggedout })
+            } else {
+              console.log(data.message);
             }
+          } else {
+            console.log('Something went wrong. Please try again later.');
+          }
         } catch (error) {
-            console.log(error);
+          console.log(error);
         }
-    }
+      };
+      
+      
     componentDidMount = async () => {
         console.log("inside component did")
         try {
@@ -91,9 +110,12 @@ class Search extends Component {
         }
     }
     render() {
-        const { searchText, categories, searchResults, error, isLoading } = this.state;
+        const { searchText, categories, searchResults, error, isLoading,isLoggedout } = this.state;
         const username = Cookies.get('username');
         const firstInitial = username ? username.charAt(0) : '';
+        if (isLoggedout) {
+            return <Navigate to="/login" />;
+          }
         return (
             <div className="container">
                 <div className="header">
@@ -157,7 +179,7 @@ class Search extends Component {
                                 <h2 className="category-heading">Categories</h2>
                                 <div className="row-cards">
                                     {categories.map((category, index) => (
-                                        <div key={index} className="card" onClick={() => this.handleCategoryClick(category)}>
+                                        <div key={index} className="search-card" onClick={() => this.handleCategoryClick(category)}>
                                             <h2 className="category">{category}</h2>
                                         </div>
                                     ))}

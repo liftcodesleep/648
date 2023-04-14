@@ -25,22 +25,29 @@ class EditProfile extends Component {
       const userDetailsData = await userDetailsResponse.json();
       console.log({userDetailsData})
 
-      // const activityLogResponse = await fetch('http://127.0.0.1:8000/activity_log', {
-      //   method: 'GET',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     'Authorization': `Bearer ${Cookies.get('token')}`
-      //   }
-      // });
-      // const activityLogData = await activityLogResponse.json();
-
-      // Update the state with the fetched user details and activity log
+      const activityLogResponse = await fetch('http://127.0.0.1:8000/activity_log', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${Cookies.get('token')}`
+        },
+        body: JSON.stringify({ username })
+    });
+    const activityLogData = await activityLogResponse.json();
+    
+    // Update the state with the fetched user details and activity log
+    if (activityLogData.status === 'SUCCESS') {
       this.setState({
         name: userDetailsData.name,
         username: userDetailsData.username,
         email: userDetailsData.email,
-        // activityLog: activityLogData.activityLog
+        activityLog: activityLogData.log,
+        noOfPosts: activityLogData.no_of_posts
       });
+    } else {
+      console.log(activityLogData.message);
+    }
+    
       
     } 
     catch (error) {
@@ -88,7 +95,7 @@ class EditProfile extends Component {
   
 
   render() {
-    const { name, username, email, activityLog } = this.state;
+    const { name, username, email, activityLog , noOfPosts} = this.state;
     console.log({name})
   
     return (
@@ -98,15 +105,17 @@ class EditProfile extends Component {
                         <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
                     </div>
         <div className="activity-log">
-          <h2 className = "activity-heading">Activity Log:</h2>
-          <ul>
-            {activityLog.map(activity => (
-              <li key={activity.id}>
-                <p>{activity.description}</p>
-                <p>{activity.timestamp}</p>
-              </li>
-            ))}
-          </ul>
+        <h2 className="activity-heading">Activity Log:</h2>
+<p>Number of Posts: {noOfPosts}</p>
+<ul>
+  {activityLog.map(activity => (
+    <li key={activity.activity_time}>
+      <p>{activity.activity}</p>
+      <p>{activity.activity_time}</p>
+    </li>
+  ))}
+</ul>
+
         </div>
         </div>
                    

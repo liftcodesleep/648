@@ -21,7 +21,7 @@
 
 .activity-heading {
   color: #fff;
-  font-size: 35px;
+  font-size: 27px;
 }
 
 .edit-container {
@@ -29,12 +29,28 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin: 20px;
 }
 
 
 
 .activity-log {
   margin-top: 20px;
+  margin-left: 20px;
+}
+.activity-log ul {
+  list-style-type: none;
+  padding-left: 0;
+  color: white;
+}
+
+.activity-log li {
+  margin-bottom: 10px;
+  color: white;
+}
+.activity-log p {
+  margin-bottom: 10px;
+  color: white;
 }
 
 .form-group {

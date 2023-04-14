@@ -21,6 +21,63 @@ const createImage = (url) =>
 function getRadianAngle(degreeValue) {
 	return (degreeValue * Math.PI) / 180;
 }
+export const generateImage = async (imageSrc, croppedAreaPixels, filterClass, customFilter) => {
+
+    return new Promise((resolve, reject) => {
+
+        const canvas = document.createElement('canvas');
+        const img = new Image();
+        img.src = imageSrc;
+        img.onload = () => {
+            const scaleFactor = img.naturalWidth / img.width;
+            canvas.width = croppedAreaPixels.width * scaleFactor;
+            canvas.height = croppedAreaPixels.height * scaleFactor;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(
+                img,
+                croppedAreaPixels.x * scaleFactor,
+                croppedAreaPixels.y * scaleFactor,
+                croppedAreaPixels.width * scaleFactor,
+                croppedAreaPixels.height * scaleFactor,
+                0,
+                0,
+                croppedAreaPixels.width * scaleFactor,
+                croppedAreaPixels.height * scaleFactor
+            );
+
+            if (filterClass) {
+                const filter = document.createElement('div');
+                filter.classList.add(filterClass);
+                filter.style.width = `${canvas.width}px`;
+                filter.style.height = `${canvas.height}px`;
+                filter.style.position = 'absolute';
+                filter.style.top = '0';
+                filter.style.left = '0';
+                const imgResultRef = document.createElement('img');
+                imgResultRef.src = canvas.toDataURL('image/png');
+                imgResultRef.style.width = `${canvas.width}px`;
+                imgResultRef.style.height = `${canvas.height}px`;
+                filter.appendChild(imgResultRef);
+                document.body.appendChild(filter);
+                html2canvas(filter).then((canvas) => {
+                    filter.remove();
+                    resolve(canvas);
+                }).catch((error) => {
+                    reject(error);
+                });
+            } else {
+                resolve(canvas);
+            }
+        };
+
+        img.onerror = (error) => {
+            reject(error);
+        };
+
+    });
+
+};
+
 
 export default async function getCroppedImg(imageSrc, pixelCrop, rotation = 0) {
 	const image = await createImage(imageSrc);

@@ -42,23 +42,29 @@ class UserProfile extends Component {
     componentDidMount = async () => {
         try {
             const username = Cookies.get('username');
+            const { limit, offset, searchText, sortby, sortType } = this.state;
             const response = await fetch('http://127.0.0.1:8000/list_user_posts', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${Cookies.get('token')}`
-                },
-                body: JSON.stringify({ username })
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${Cookies.get('token')}`,
+              },
+              body: JSON.stringify({ limit, offset, searchText, sortby, sortType, username }),
             });
-            const {status:message,posts,...rest} = await response.json();
-            if(message === 'success'){
-              this.setState({ posts, error: null });
-            } else{
+            const { status: message, posts, noOfPosts } = await response.json();
+            if (message === 'SUCCESS') {
+              if (noOfPosts === 0) {
+                this.setState({ error: 'No posts found for the corresponding user', posts: [] });
+              } else {
+                this.setState({ posts, error: null });
+              }
+            } else {
               this.setState({ error: 'Failed to fetch user posts' });
             }
-        } catch (error) {
+          } catch (error) {
             this.setState({ error: 'Failed to fetch user posts' });
-        }
+          }
+          
     }
     
 
@@ -74,17 +80,16 @@ class UserProfile extends Component {
                         <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
                     </div>
                     <div className="search-container">
-                       
-                            <button type="submit">+ New Post</button>
-                       
-    
-                        <form className="search-form" onSubmit={this.handleSubmit}>
-                            <div className="input-wrapper">
-                                <input type="text" value={searchText} onChange={this.handleInputChange} placeholder="Images, #tags, @users" />
-                                <button type="submit">Search</button>
-                            </div>
-                        </form>
-                    </div>
+                <Link to="/uploadimage">
+                  <button type="submit" >+ New Post</button>
+                </Link>
+                <form className="search-form" onSubmit={this.handleSubmit}>
+                  <div className="input-wrapper">
+                    <input type="text" value={searchText} onChange={this.handleInputChange} placeholder="Images, #tags, @users" />
+                    <button type="submit">Search</button>
+                  </div>
+                </form>
+              </div>
                     <div className="profile-container">
                        
                             <div className="profile-initial">{firstInitial}</div>
@@ -115,7 +120,7 @@ class UserProfile extends Component {
         {error && <div>{error}</div>}
         <div className="row-cards">
             {posts.map((post, index) => (
-                <div key={post.post_id} className="card">
+                <div key={post.post_id} className="publiccard">
                     <img src={require("../../Images/photo1.jpeg")} alt={post.desc} />
                     <h2>{post.desc}</h2>
                     <p>Made by: {post.made_by}</p>

@@ -3,7 +3,7 @@ import { Box, Button, Container, Grid, Hidden, Tab, Tabs,TextField, MenuItem,Sel
 import "./ImageField.css";
 import Cropper from 'react-easy-crop';
 import Slider from '@mui/material/Slider';
-import getCroppedImg, { generateDownload } from '../utils/cropImage';
+import  { generateDownload, generateImage } from '../utils/cropImage';
 import { FilterContext } from '../Post/post';
 import { styled } from '@mui/system';
 import "../utils/effects.css";
@@ -12,6 +12,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ImageComponent from '../ImageComponent/ImageComponent'
 import Cookies from 'js-cookie';
+
 
 
 
@@ -35,6 +36,7 @@ function ImageField() {
     const triggerFileSelect = ()=> inputRef.current && inputRef.current.click();
     const [image,setImage] = React.useState(null);
     const [croppedArea, setCroppedArea] = React.useState(null);
+    const [croppedImageUrl, setCroppedImageUrl] = useState('');
     const [crop, setCrop] = React.useState({x:0,y:0})
     const [zoom,setZoom] = React.useState(1);
     const [categories, setCategories] = useState([]);
@@ -42,12 +44,12 @@ function ImageField() {
     const { filterClass, customFilter} = useContext(FilterContext);
     const {category, setCategory} = React.useContext(FilterContext); 
     const [formData, setFormData] = React.useState({
-        username: '',
+        username: Cookies.get('username'),
         is_reshared: false,
         image: null,
         description: '',
         category: '',
-        redirectToReferrer: false,
+        
     });
     
 
@@ -112,32 +114,83 @@ function ImageField() {
     //     }
     //   };
       
-      const handleCreatePost = async () => {
+      // const handleCreatePost = async () => {
+      //   try {
+      //     const croppedImage = await generateImage(image, croppedArea, filterClass, customFilter);
+      //     const name = Cookies.get('username');
+      //     const data = {
+      //       username: formData.username,
+      //       is_reshared: formData.is_reshared,
+      //       image: croppedImage,
+      //       description: formData.description,
+      //       category: formData.category,
+      //     };
+      //     const response = await axios.post("http://127.0.0.1:8000/create_post", data);
+      //     console.log(response.data);
+      //     if (response.data.status === 'SUCCESS') {
+      //       // show success message and redirect to a new component
+      //       console.log('Post created successfully');
+      //     } else {
+      //       // show error message
+      //       console.error(response.data.message);
+      //     }
+         
+      //     setFormData({
+      //       username: '',
+      //       is_reshared: false,
+      //       image: null,
+      //       description: '',
+      //       category: '',
+            
+      //       });
+      //       } catch (err) {
+      //       console.log(err);
+      //       }
+      //       };
+            
+      const onPost = async () => {
+        const croppedImage = await generateImage(image, croppedArea, filterClass, customFilter);
+        const canvasDataUrl = croppedImage.toDataURL('image/jpeg');
+        const imageData = new FormData();
+        imageData.append('username', "ishah_sfsu");
+        imageData.append('is_reshared', false);
+        imageData.append('image', dataURLtoFile(canvasDataUrl, 'croppedImage.jpeg'));
+        imageData.append('description', formData.description);
+        imageData.append('category', formData.category);
+        
         try {
-          const croppedImage = await generateDownload(image, croppedArea, filterClass, customFilter);
-          
-          console.log({croppedImage});
-          const data = {
-            username: Cookies.get('username'),
-            is_reshared: formData.is_reshared,
-            image: croppedImage,
-            description: formData.description,
-            category: formData.category,
-          };
-          const response = await axios.post("http://127.0.0.1:8000/create_post", data);
-          console.log(response.data);
+          const response = await axios.post('http://127.0.0.1:8000/create_post', imageData);
+          if (response.data.status === 'SUCCESS') {
+            // show success message and redirect to a new component
+            console.log('Post created successfully');
+            <Link to = '/'/>
+          } else {
+            // show error message
+            console.error(response.data.message);
+          }
           setFormData({
-            username: Cookies.get('username'),
+            username: '',
             is_reshared: false,
             image: null,
             description: '',
-            category: '',
-            redirectToReferrer: true,
-            });
-            } catch (err) {
-            console.log(err);
-            }
-            };
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
+      function dataURLtoFile(dataUrl, filename) {
+        const arr = dataUrl.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+      }
+      
             
       
     const handleChange = (e, newValue) => {
@@ -235,7 +288,7 @@ function ImageField() {
             <div className='container-form' >
             {image? (<>
             <form style={{alignItems:'center', justifyContent:'center',marginRight:'80px'}} >
-            <input type="text" id="username" name="username" value={formData.username} onChange={handleFormChange}></input>
+            {/* <input type="text" id="username" name="username" value={formData.username} onChange={handleFormChange}></input> */}
            <textarea  style={{height:"10vh", width:'45vw', borderRadius:'10px', verticalAlign:'text-top', padding:'10px', marginBottom:'10px'}} type='text' name='description' placeholder='Description' value={formData.description} onChange={handleFormChange}></textarea> 
            {/* <input type='text' name='category' placeholder='Category' value={formData.category} onChange={handleFormChange} /> */}
            <div style={{display:'flex'}}>
@@ -259,7 +312,8 @@ function ImageField() {
            <div className='container-buttons' style={{alignItems:'center', justifyContent:'center'}}>             
           
            <Button variant='contained' style={{color:'white',margin: '10px'}} onClick={onDownload}> Downlaod </Button>
-           <Button variant='contained' onClick={handleCreatePost}>Post</Button>
+           <Button variant='contained' onClick={onPost}>Post</Button>
+           {/* <Button variant='contained' onClick={handleCreatePost}>Post1</Button> */}
            </div>
        </form>
        </>):<Button variant='contained' style={{color:'white', margin: '10px'}} onClick={triggerFileSelect}>Uplaod Image</Button>
