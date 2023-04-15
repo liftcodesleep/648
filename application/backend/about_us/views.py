@@ -1,7 +1,4 @@
 from django.shortcuts import render
-from .models import *
-import os
-import logging
 
 # Create your views here.
 

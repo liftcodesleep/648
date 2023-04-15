@@ -5,5 +5,5 @@ from .views import *
 app_name = 'about_us'
 
 urlpatterns = [
-    re_path('^$', render_about, name='about_home'),
+    re_path('^$', render_about, name='about_home')
 ]
