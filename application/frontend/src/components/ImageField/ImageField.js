@@ -32,6 +32,7 @@ const StyleBox = styled(Box)({
 function ImageField() { 
 
     const inputRef = React.useRef();
+   
     const imgResultRef = React.useRef(null)
     const triggerFileSelect = ()=> inputRef.current && inputRef.current.click();
     const [image,setImage] = React.useState(null);
@@ -41,6 +42,7 @@ function ImageField() {
     const [zoom,setZoom] = React.useState(1);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
+    const [error, setError] = useState(null);
     const { filterClass, customFilter} = useContext(FilterContext);
     const {category, setCategory} = React.useContext(FilterContext); 
     const [formData, setFormData] = React.useState({
@@ -161,12 +163,10 @@ function ImageField() {
         try {
           const response = await axios.post('http://127.0.0.1:8000/create_post', imageData);
           if (response.data.status === 'SUCCESS') {
-            // show success message and redirect to a new component
-            console.log('Post created successfully');
-            <Link to = '/'/>
+            window.location.href = "/user-profile";
           } else {
             // show error message
-            console.error(response.data.message);
+            setError(response.data.message);
           }
           setFormData({
             username: '',
@@ -323,7 +323,7 @@ function ImageField() {
        
     </div>
             
-       
+    {error && <div>{error}</div>}
         
         
     </div>
