@@ -24,7 +24,7 @@ class UserProfile extends Component {
         event.preventDefault();
         const { limit, offset, searchText, sortby, sortType } = this.state;
         try {
-            const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
+            const response = await fetch('http://44.197.240.111/view_public_posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ class UserProfile extends Component {
         try {
             const username = Cookies.get('username');
             const { limit, offset, searchText, sortby, sortType } = this.state;
-            const response = await fetch('http://127.0.0.1:8000/list_user_posts', {
+            const response = await fetch('http://44.197.240.111/list_user_posts', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
