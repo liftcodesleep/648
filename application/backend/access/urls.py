@@ -11,3 +11,5 @@ urlpatterns = [
     re_path(r'^signup$', render_register, name='render_register'),
     re_path(r'^logout$', logout, name='logout'),
 ]
+
+handler404 = "access.views.handle_404_view"
