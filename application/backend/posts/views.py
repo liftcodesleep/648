@@ -90,11 +90,12 @@ def create_post(request):
 def upload_image_to_s3(image):
     fs = FileSystemStorage()
     filename = fs.save(image.name, image)
+    random_filename = "image_" + random.randint(1, 1000000)
 
     s3 = boto3.client('s3', aws_access_key_id=s3_details.aws_access_key,
                         aws_secret_access_key=s3_details.aws_secret_key)
-    response = s3.upload_file(filename, s3_details.bucket_name, filename)
-    s3_url = s3_details.base_s3_url + filename
+    response = s3.upload_file(filename, s3_details.bucket_name, random_filename)
+    s3_url = s3_details.base_s3_url + random_filename
 
     os.remove(filename)
     return s3_url
