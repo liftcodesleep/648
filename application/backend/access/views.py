@@ -10,11 +10,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 
 
-def render_login(request):
-    return render(request, 'index.html')
-
-
-def render_register(request):
+def render_index_page(request):
     return render(request, 'index.html')
 
 
