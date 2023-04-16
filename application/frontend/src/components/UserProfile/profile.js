@@ -121,7 +121,7 @@ class UserProfile extends Component {
         <div className="row-cards">
             {posts.map((post, index) => (
                 <div key={post.post_id} className="publiccard">
-                    <img src={require("../../Images/photo1.jpeg")} alt={post.desc} />
+                     <img src={post.image} alt={post.desc} />
                     <h2>{post.desc}</h2>
                     <p>Made by: {post.made_by}</p>
                     <p>No. of views: {post.no_views}</p>
