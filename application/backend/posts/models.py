@@ -142,9 +142,8 @@ def add_tags_in_db(tags, post_id):
         select_statement = f"""SELECT * FROM Tags where UPPER(Name) = '{tag.upper()}'"""
         cursor.execute(select_statement)
         resp = cursor.fetchone()
-        tag_id = resp[0]
         if resp and len(resp) > 0:
-            pass
+            tag_id = resp[0]
         else:
             tag_id = ''
             while True:

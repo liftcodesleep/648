@@ -5,16 +5,12 @@ import re
 import random
 import traceback
 import json
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
 
-def render_login(request):
-    return render(request, 'index.html')
-
-
-def render_register(request):
+def render_index_page(request):
     return render(request, 'index.html')
 
 
@@ -170,3 +166,7 @@ def logout(request):
     except Exception as e:
         print(traceback.print_exc())
         return logout_response('FAILED', f'API failed with error: {e}')
+
+
+def handle_404_view(request, exception):
+    return redirect("http://44.197.240.111/login")
