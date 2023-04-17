@@ -154,7 +154,7 @@ function ImageField() {
         const croppedImage = await generateImage(image, croppedArea, filterClass, customFilter);
         const canvasDataUrl = croppedImage.toDataURL('image/jpeg');
         const imageData = new FormData();
-        imageData.append('username', "ishah_sfsu");
+        imageData.append('username', Cookies.get('username'));
         imageData.append('is_reshared', false);
         imageData.append('image', dataURLtoFile(canvasDataUrl, 'croppedImage.jpeg'));
         imageData.append('description', formData.description);
