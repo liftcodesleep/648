@@ -136,6 +136,9 @@ def view_user_posts(request):
             offset = collected_data.get("offset")
             searchText = collected_data.get("searchText")
             sortby = collected_data.get("sortby")
+            if not sortby or sortby == "":
+                sortby = 'Creation_date'
+
             sort_type = collected_data.get("sortType")
             username = collected_data.get("username", "")
 
