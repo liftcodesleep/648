@@ -24,7 +24,7 @@ class SignupForm extends Component {
     e.preventDefault();
     const { name, email, username, password, dob, phone } = this.state;
     try {
-      const response = await fetch('http://44.197.240.111/register_user', {
+      const response = await fetch('http://127.0.0.1:8000/register_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, username, password, dob, "phonenum":phone,"about":"", "usertype": "general","userpic": "" }),
