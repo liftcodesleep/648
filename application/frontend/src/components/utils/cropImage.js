@@ -21,6 +21,7 @@ const createImage = (url) =>
 function getRadianAngle(degreeValue) {
 	return (degreeValue * Math.PI) / 180;
 }
+
 export const generateImage = async (imageSrc, croppedAreaPixels, filterClass, customFilter) => {
 
     return new Promise((resolve, reject) => {

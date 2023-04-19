@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import './editProfile.css';
-
+import Footer from '../Footer/Footer';
 class EditProfile extends Component {
   state = {
     name: '',
@@ -99,7 +99,7 @@ class EditProfile extends Component {
     console.log({name})
   
     return (
-      <div className="container">
+      <div>
         <div className='edit-container'>
         <div className='logo-container'>
                         <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
@@ -137,7 +137,7 @@ class EditProfile extends Component {
           </div>
           <button type="submit">Save Changes</button>
         </form>
-
+      <Footer/>
       </div>
     );
   }

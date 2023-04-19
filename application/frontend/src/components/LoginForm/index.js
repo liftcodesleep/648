@@ -1,9 +1,11 @@
 import { Component } from 'react'
 import Cookies from 'js-cookie'
 import { Link, Navigate } from 'react-router-dom'
+import Footer from '../Footer/Footer'
 
-import './index.css'
-
+import './login.css'
+import logo from '../../Images/picturePerfect.jpg'
+import { Button } from '@mui/material'
 class LoginForm extends Component {
   state = {
     username: '',
@@ -15,6 +17,9 @@ class LoginForm extends Component {
   handleInputChange = (event) => {
     const { name, value } = event.target
     this.setState({ [name]: value })
+  }
+  handleSignup = () => {
+    window.location.href = "/signup";
   }
 
   handleSubmit = async e => {
@@ -47,9 +52,17 @@ class LoginForm extends Component {
     }
 
     return (
+      <div>
+        <div className='logo-container'>
+         <img src={logo} alt="Logo" className="logo" />
+         <p>Your creativity has found a home</p>
+        </div>
+      <div className="login-container">
+         
       <form className="login-form" onSubmit={this.handleSubmit}>
-        <h2>Login Form</h2>
-        {error && <div className="error">{error}</div>}
+
+        <h2>Login</h2>
+        
         <div className="login-form-group">
           <label htmlFor="username">Username</label>
           <input type="text" id="username" name="username" value={username} onChange={this.handleInputChange} />
@@ -58,11 +71,21 @@ class LoginForm extends Component {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" value={password} onChange={this.handleInputChange} />
         </div>
-        <button type="submit">Login</button>
-        <div>
-          Don't have an account? <Link to="/signup">Sign up</Link> 
+        <div className='button-container'>
+        <button onClick={this.handleSubmit}>Login</button>
         </div>
+        <div className='singup-account'>
+          <div className='account'><h4 >Don't have an account?</h4></div>
+         
+           <button style={{fontSize: "14px", width: "80px"}} className="sign-button" onClick={this.handleSignup} >Signup</button> 
+        </div>
+        {error && <div className="error">{error}</div>}
       </form>
+      
+      </div>
+      <Footer/>
+      </div>
+      
     )
   }
 }

@@ -1,8 +1,10 @@
 import { Component } from 'react';
 import { Navigate, Link } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import './index.css';
-
+import './signup.css';
+import logo from '../../Images/picturePerfect.jpg'
+import { Button } from '@mui/material'
+import Footer from '../Footer/Footer';
 class SignupForm extends Component {
   state = {
     name: '',
@@ -19,6 +21,10 @@ class SignupForm extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+
+  handleLignup = () => {
+    window.location.href = "/login";
+  }
 
   handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,9 +59,17 @@ class SignupForm extends Component {
     }
 
     return (
+      <div>
+        <div className='logo-container'>
+         <img src={logo} alt="Logo" className="logo" />
+         <p>Your creativity has found a home</p>
+        </div>
+      <div className='signup-container'>
+        
+      
       <form className="signup-form" onSubmit={this.handleSubmit}>
-        <h2>Signup Form</h2>
-        {error && <div className="error">{error}</div>}
+        <h2>Signup</h2>
+        
         <div className="signup-form-group">
           <label htmlFor="name">Full Name</label>
           <input
@@ -98,7 +112,7 @@ class SignupForm extends Component {
         </div>
         <div className="signup-form-group">
           <label htmlFor="dob">Date of Birth</label>
-          <input
+          <input className='dob'
             type="date"
             id="dob"
             name="dob"
@@ -116,13 +130,21 @@ class SignupForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <button type="submit">Create Account</button>
-        <div className="already-member">
-          <p>
-            Already a member? <Link to="/login">Login</Link>
-          </p>
+        <div className='button-container'>
+        <button onClick={this.handleSubmit}>Create Account</button>
         </div>
+        <div className="already-member">
+         
+          <div className='account'><h4 >Already a member?</h4></div>  
+           <button style={{fontSize: "14px", width: "80px"}} className="login-button" onClick={this.handleLogin} >Signup</button> 
+           <div>
+        </div>
+        </div>
+        {error && <div className="error">{error}</div>}
       </form>
+      </div>
+      <Footer/>
+      </div>
     );
   }
 }

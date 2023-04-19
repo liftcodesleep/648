@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import './profile.css';
 
+import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import Footer from '../Footer/Footer';
+
 class UserProfile extends Component {
     state = {
         limit: 5,
@@ -74,21 +77,39 @@ class UserProfile extends Component {
         console.log(username)
         const firstInitial = username ? username.charAt(0) : '';
         return (
-        <div className="container">
-        <div className="header">
-                    <div className='logo-container'>
-                        <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
-                    </div>
+        <div>
+        
+        <header className='header'>
+      <h1>Picture Perfect</h1>
+      
+        <div>
+        
+        <Link to="/uploadimage">
+          <button  className="new-post-button">
+            <FontAwesomeIcon icon={faPlus} className="icon" />
+            New Post
+          </button>
+          </Link>
+        </div>
+    
+        <div className="header-right">
+          <input type="text" placeholder="Images, #tags, @users" className="search-bar" onClick={this.handleInputChange}  />
+          <button className="search-button" onClick={this.handleSubmit}>
+            <FontAwesomeIcon icon={faSearch} className="icon" />
+          </button>
+        </div>
+    
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
                     <div className="search-container">
-                <Link to="/uploadimage">
-                  <button type="submit" >+ New Post</button>
-                </Link>
-                <form className="search-form" onSubmit={this.handleSubmit}>
-                  <div className="input-wrapper">
-                    <input type="text" value={searchText} onChange={this.handleInputChange} placeholder="Images, #tags, @users" />
-                    <button type="submit">Search</button>
-                  </div>
-                </form>
+                
+                
               </div>
                     <div className="profile-container">
                        
@@ -103,7 +124,7 @@ class UserProfile extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                
       
         <div class="profile-edit-container">
    
@@ -113,10 +134,12 @@ class UserProfile extends Component {
                     <FontAwesomeIcon icon={faEdit} />
                   
                 </button>
+                  
 </div>
 
-               
-        <h1 className="category-heading">All Posts</h1>
+        <div className='categories'>
+        <h2 className="category-head">All Posts</h2>
+        </div>  
         {error && <div>{error}</div>}
         <div className="row-cards">
             {posts.map((post, index) => (
@@ -125,12 +148,14 @@ class UserProfile extends Component {
                     <h2>{post.desc}</h2>
                     <p>Made by: {post.made_by}</p>
                     <p>No. of views: {post.no_views}</p>
-                            <p>No. of likes: {post.no_likes}</p>
-                            <p>No. of dislikes: {post.no_dislikes}</p>
-                                <span>{post.posted_on}</span>
+                    <p>No. of likes: {post.no_likes}</p>
+                    <p>No. of dislikes: {post.no_dislikes}</p>
+                    <span>{post.posted_on}</span>
                             </div>
-                        ))}
+                      ))}
+                        
                     </div>
+                <Footer/>
                 
             </div>
         );

@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import { Link, Navigate } from 'react-router-dom';
 import './search.css';
+import Footer from '../Footer/Footer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+
+import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import pic from '../../Images/photo2.jpeg'
+import { catImages } from '../utils/CategoryImg';
 
 
 class Search extends Component {
@@ -117,24 +124,40 @@ class Search extends Component {
             return <Navigate to="/login" />;
           }
         return (
-            <div className="container">
-                <div className="header">
-                    <div className='logo-container'>
-                        <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
-                    </div>
-                    <div className="search-container">
-                    <Link to="/uploadimage">
-                        <button type="submit" >+ New Post</button>
-                    </Link>
-                       
+            <div >
+
+        <header className='header'>
+      <h1>Picture Perfect</h1>
+      
+        <div>
+        
+        <Link to="/uploadimage">
+          <button  className="new-post-button">
+            <FontAwesomeIcon icon={faPlus} className="icon" />
+            New Post
+          </button>
+          </Link>
+        </div>
     
-                        <form className="search-form" onSubmit={this.handleSubmit}>
-                            <div className="input-wrapper">
-                                <input type="text" value={searchText} onChange={this.handleInputChange} placeholder="Images, #tags, @users" />
-                                <button type="submit">Search</button>
-                            </div>
-                        </form>
-                    </div>
+        <div className="header-right">
+          <input type="text" placeholder="Images, #tags, @users" className="search-bar" onClick={this.handleInputChange}  />
+          <button className="search-button" onClick={this.handleSubmit}>
+            <FontAwesomeIcon icon={faSearch} className="icon" />
+          </button>
+        </div>
+    
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+               
+                    
+                        {/* <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" /> */}
+                   
                     <div className="profile-container">
                        
                             <div className="profile-initial">{firstInitial}</div>
@@ -148,8 +171,8 @@ class Search extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
-                {error && <div>{error}</div>}
+                
+                
                 {isLoading ? (
                     <div className="loading">Loading...</div>
                 ) : (
@@ -176,10 +199,13 @@ class Search extends Component {
 )}
                         {searchResults.length === 0 && categories.length > 0 && (
                             <>
-                                <h2 className="category-heading">Categories</h2>
-                                <div className="row-cards">
+                                <div className='categories'>
+                                <h2 className="category-head">Categories</h2>
+                                </div>
+                                <div className="row">
                                     {categories.map((category, index) => (
                                         <div key={index} className="search-card" onClick={() => this.handleCategoryClick(category)}>
+                                          <img src={catImages.src}/>
                                             <h2 className="category">{category}</h2>
                                         </div>
                                     ))}
@@ -188,7 +214,10 @@ class Search extends Component {
                         )}
                     </>
                 )}
+                {error && <div>{error}</div>}
+                 <Footer />
             </div>
+            
         );
     }
     
