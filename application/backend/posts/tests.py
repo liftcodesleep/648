@@ -1,5 +1,6 @@
 import random
 from django.test import TestCase
+from django.core.files.uploadedfile import SimpleUploadedFile
 
 # Create your tests here.
 
@@ -80,3 +81,25 @@ class AccessTestCases(TestCase):
 
         # checking if new comment exists in set of comments (shouldn't exist)
         self.assertEqual(any(input_payload_delete_comment['commentid'] in comment.values() for comment in updated_views_response.json()['post']['comments']), False)
+
+    def test_successful_create_post(self):
+        file = SimpleUploadedFile("nature_dummy.jpg", b"file_content", content_type='image/jpeg')
+        create_post_payload = {
+            "username": "ishah_sfsu",
+            "is_reshared": True,
+            "image": file,
+            "description": "This is a post made for testing using django tests",
+            "category": "Nature"
+        }
+
+        create_post_response = self.client.post('/create_post', create_post_payload,)
+        self.assertEqual(create_post_response.json()['status'], 'SUCCESS')
+        self.assertEqual(create_post_response.json()['isPostCreated'], True)
+
+        # checking if post is created by using post id
+        # if post is created, we will successfully get post details
+        post_details_input_payload = {"postid": create_post_response.json()['postid']}
+        updated_views_response = self.client.post('/get_post_details', post_details_input_payload,
+                                                  content_type='application/json')
+        self.assertEqual(updated_views_response.json()['status'], 'SUCCESS')
+        self.assertEqual(updated_views_response.json()['post']['post_id'], create_post_response.json()['postid'])
