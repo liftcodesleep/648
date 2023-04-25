@@ -34,7 +34,7 @@ def login(request):
                 return login_response('SUCCESS', False, 'User credentials are incorrect',
                                       "")
 
-        return login_response('SUCCESS', False, 'This API has been wrongly called. Needs to be POST method',
+        return login_response('SUCCESS', False, 'This API has been called incorrectly. Needs to be POST method',
                               "")
 
     except Exception as e:
