@@ -122,12 +122,11 @@ class AccessTestCases(TestCase):
         self.assertEqual(updated_views_response.json()[
                          'post']['post_id'], create_post_response.json()['postid'])
 
-    def test_successful_view_post(self):
+    def test_successful_empty_view_post(self):
         view_posts_payload = {
-            "limit": "1",
-            "offset": "0",
+            "limit": 1,
+            "offset": 0,
             "searchText": "animpossiblesearch",
-            "sortby": "post",
             "sortType": "ASC",
             "category": "nature"
         }
@@ -138,3 +137,19 @@ class AccessTestCases(TestCase):
                          'message'], 'No posts found with corresponding search text.')
         self.assertEqual(view_post_response.json()['posts'], [])
         self.assertEqual(view_post_response.json()['noOfPosts'], 0)
+
+    def test_successful_nonempty_view_post(self):
+        view_posts_payload = {
+            "limit": 1,
+            "offset": 0,
+            "searchText": "post",
+            "sortType": "ASC",
+            "category": "nature"
+        }
+        view_post_response = self.client.post(
+            '/view_public_posts', view_posts_payload, content_type='application/json')
+        self.assertEqual(view_post_response.json()['status'], 'SUCCESS')
+        self.assertEqual(view_post_response.json()[
+                         'message'], 'Posts succesfully fetched.')
+        # self.assertEqual(view_post_response.json()['posts'], [])
+        # self.assertEqual(view_post_response.json()['noOfPosts'], 0)

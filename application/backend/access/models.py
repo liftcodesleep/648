@@ -71,9 +71,8 @@ CURRENT_TIMESTAMP,
 "{usertype}");""".format(**collected_data)
     print(sql_statement)
     try:
-        affected_rows = cursor.execute(sql_statement)
+        cursor.execute(sql_statement)
         conn.commit()
-        print("rows: " + affected_rows)
     except Exception as e:
         conn.rollback()
         print(e)
