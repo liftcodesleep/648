@@ -2,7 +2,7 @@ from .models import *
 from .constants import *
 from email_validator import validate_email, EmailNotValidError
 import re
-import random
+import uuid
 import traceback
 import json
 from django.shortcuts import render, redirect
@@ -52,7 +52,7 @@ def register(request):
             email = collected_data.get("email")
             password = collected_data.get("password")
             phonenum = collected_data.get("phonenum")
-            userid = name[0] + str(random.randint(0, 999999))
+            userid = uuid.uuid1()
             collected_data["userid"] = userid
 
             if email_is_valid(email):

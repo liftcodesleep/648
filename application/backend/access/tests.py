@@ -1,5 +1,6 @@
 from django.test import TestCase
 import random
+import uuid
 
 # Create your tests here.
 
@@ -31,14 +32,18 @@ class AccessTestCases(TestCase):
 
     def test_valid_signup(self):
         input_payload = {
+            "username": "Bob",
             "name": "Bob",
             "password": "Validpassword1!",
-            "email": "validemail@gmail.com",
+            "email": "capothekapo9@gmail.com",
             "phonenum": "0123456789",
-            "userid": "Bob" + str(random.randint(0, 999999))
+            "dob": "01-01-0001",
+            "userpic": "fakepic",
+            "about": "mindyobidniss",
+            "usertype": "random",
 
         }
         response = self.client.post(
-            'user_signup', input_payload, content_type='application/json')
+            '/register_user', input_payload, content_type='application/json')
         self.assertEqual(response.json()['status'], 'SUCCESS')
         self.assertEqual(response.json()['isRegistered'], True)
