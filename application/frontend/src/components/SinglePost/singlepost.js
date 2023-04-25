@@ -28,6 +28,8 @@ class SinglePostClass extends Component {
     searchText: "",
     showComments: false,
     isLoggedout: false,
+    isReposted: false,
+    isPostCreated: false,
   };
 
   componentDidMount() {
@@ -313,6 +315,11 @@ class SinglePostClass extends Component {
     document.body.removeChild(input);
     alert("Post URL copied to clipboard!");
   };
+  handleRepost = () => {
+    this.setState((prevState) => ({
+      isReposted: !prevState.isReposted,
+    }));
+  };
 
   handleLogout = async () => {
     const username = Cookies.get("username");
@@ -344,6 +351,54 @@ class SinglePostClass extends Component {
       console.log(error);
     }
   };
+  handleRepostButton = async () => {
+    const { post } = this.state;
+    console.log("inside handle repost");
+    console.log(post);
+
+    // Construct the payload
+    const payload = {
+      username: Cookies.get("username"),
+      is_reshared: true,
+      image: post.image,
+      description: post.description,
+      category: post.category,
+    };
+
+    console.log({ payload });
+
+    try {
+      // Make the POST request to the /create_post endpoint
+      const response = await fetch("http://127.0.0.1:8000/create_post", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      // Handle the response based on the status
+      if (data.status === "SUCCESS" && data.isPostCreated) {
+        this.setState({ isPostCreated: true });
+      } else {
+        console.error(`Failed to create post: ${data.message}`);
+      }
+    } catch (error) {
+      console.error(`Failed to create post: ${error}`);
+    }
+  };
+
+  handleFormChange = (event) => {
+    const { name, value } = event.target;
+    this.setState((prevState) => ({
+      post: {
+        ...prevState.post,
+        [name]: value,
+      },
+    }));
+  };
 
   render() {
     const {
@@ -353,17 +408,21 @@ class SinglePostClass extends Component {
       numLikes,
       numDislikes,
       error,
-      searchText,
       showComments,
       isLoggedout,
+      isReposted,
+      isPostCreated,
     } = this.state;
     console.log("initial render");
-    console.log({ isLiked });
+    console.log("checking what is coming in post");
     console.log({ post });
     const username = Cookies.get("username");
     const firstInitial = username ? username.charAt(0) : "";
     if (isLoggedout) {
       return <Navigate to="/login" />;
+    }
+    if (isPostCreated) {
+      return <Navigate to="/user-profile" />;
     }
 
     if (!post) {
@@ -412,80 +471,113 @@ class SinglePostClass extends Component {
             </div>
           </div>
         </div>
-        <div className="single-post">
-          <div className="post-header">
-            <img src={post.image} alt={post.desc} />
-            <div className="post-info">
-              <div className="post-user">
-                <span>Username : {post.madeBy}</span>
-              </div>
-              <div className="post-stats">
-                <span className="post-views">{post.noViews} views</span>
-                <span className="post-likes">
-                  <FontAwesomeIcon
-                    icon={faThumbsUp}
-                    className={`${isLiked ? "active" : ""}`}
-                    onClick={this.handleLike}
-                  />
-                  <span>{numLikes}</span>
-                </span>
-                <span className="post-dislikes">
-                  <FontAwesomeIcon
-                    icon={faThumbsDown}
-                    className={`${isDisliked ? "active" : ""}`}
-                    onClick={this.handleDislike}
-                  />
-                  <span>{numDislikes}</span>
-                </span>
-                {post.noComments > 0 && (
-                  <span
-                    className="post-comments"
-                    onClick={this.handleCommentsClick}
-                  >
-                    {post.noComments} comments
-                  </span>
-                )}
-                <span className="post-repost">
-                  <FontAwesomeIcon
-                    icon={faRetweet}
-                    onClick={this.handleRepost}
-                  />
-                </span>
-                <span className="post-share">
-                  <FontAwesomeIcon icon={faShare} onClick={this.handleShare} />
-                </span>
-              </div>
+        {isReposted ? (
+          <div className="container-cropper">
+            <div className="reposted-image">
+              <img src={post.image} alt={post.desc} />
             </div>
-          </div>
-          {showComments && post.noComments > 0 && (
-            <div className="post-comments-section">
-              {post.comments.map((comment, index) => (
-                <div className="post-comment" key={index}>
-                  <span className="comment-username">{comment.username}: </span>
-                  <span className="comment-text">{comment.comment}</span>
-                  <button onClick={() => this.handleCommentDelete(index)}>
-                    <FontAwesomeIcon icon={faTrash} />
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="post-body">
-            <p>{post.desc}</p>
-          </div>
-          <div className="post-footer">
-            <div className="post-comment">
-              <input
+            <div className="reposted-description">
+              <textarea
+                style={{
+                  height: "10vh",
+                  width: "45vw",
+                  borderRadius: "10px",
+                  verticalAlign: "text-top",
+                  padding: "10px",
+                  marginBottom: "10px",
+                }}
                 type="text"
-                placeholder="Add a comment"
-                value={this.state.comment}
-                onChange={this.handleInputChangeComment}
-              />
-              <button onClick={this.handleCommentSubmit}>Comment</button>
+                name="description"
+                placeholder="Description"
+                value={post.description}
+                onChange={this.handleFormChange}
+              ></textarea>
+            </div>
+            <div className="repost-button">
+              <button onClick={this.handleRepostButton}>Repost</button>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="single-post">
+            <div className="post-header">
+              <img src={post.image} alt={post.desc} />
+              <div className="post-info">
+                <div className="post-user">
+                  <span>Username : {post.madeBy}</span>
+                </div>
+                <div className="post-stats">
+                  <span className="post-views">{post.noViews} views</span>
+                  <span className="post-likes">
+                    <FontAwesomeIcon
+                      icon={faThumbsUp}
+                      className={`${isLiked ? "active" : ""}`}
+                      onClick={this.handleLike}
+                    />
+                    <span>{numLikes}</span>
+                  </span>
+                  <span className="post-dislikes">
+                    <FontAwesomeIcon
+                      icon={faThumbsDown}
+                      className={`${isDisliked ? "active" : ""}`}
+                      onClick={this.handleDislike}
+                    />
+                    <span>{numDislikes}</span>
+                  </span>
+                  {post.noComments > 0 && (
+                    <span
+                      className="post-comments"
+                      onClick={this.handleCommentsClick}
+                    >
+                      {post.noComments} comments
+                    </span>
+                  )}
+                  <span className="post-repost">
+                    <FontAwesomeIcon
+                      icon={faRetweet}
+                      onClick={this.handleRepost}
+                    />
+                  </span>
+                  <span className="post-share">
+                    <FontAwesomeIcon
+                      icon={faShare}
+                      onClick={this.handleShare}
+                    />
+                  </span>
+                </div>
+              </div>
+            </div>
+            {showComments && post.noComments > 0 && (
+              <div className="post-comments-section">
+                {post.comments.map((comment, index) => (
+                  <div className="post-comment" key={index}>
+                    <span className="comment-username">
+                      {comment.username}:{" "}
+                    </span>
+                    <span className="comment-text">{comment.comment}</span>
+                    <button onClick={() => this.handleCommentDelete(index)}>
+                      <FontAwesomeIcon icon={faTrash} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="post-body">
+              <p>{post.desc}</p>
+            </div>
+            <div className="post-footer">
+              <div className="post-comment">
+                <input
+                  type="text"
+                  placeholder=""
+                  value={this.state.comment}
+                  onChange={this.handleInputChangeComment}
+                />
+                <button onClick={this.handleCommentSubmit}>Comment</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
