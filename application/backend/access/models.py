@@ -63,7 +63,7 @@ VALUES
 "{userid}",
 "{password}",
 "{dob}",
-"NOW()",
+CURRENT_TIMESTAMP,
 "{username}",
 "{phonenum}",
 "{userpic}",

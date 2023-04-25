@@ -35,7 +35,7 @@ class AccessTestCases(TestCase):
             "username": "Bob",
             "name": "Bob",
             "password": "Validpassword1!",
-            "email": "capothekapo9@gmail.com",
+            "email": "totallyvalid@gmail.com",
             "phonenum": "0123456789",
             "dob": "01-01-0001",
             "userpic": "fakepic",
