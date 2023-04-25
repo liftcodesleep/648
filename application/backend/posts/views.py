@@ -1,9 +1,6 @@
 import boto3
-import matplotlib.pyplot as plt
-from django.shortcuts import render
 from django.core.files.storage import FileSystemStorage
 import json
-# import cv2
 from .constants import *
 from .models import *
 import traceback
@@ -75,6 +72,7 @@ def create_post(request):
             tags_added = add_tags_in_db(tags, post_id)
 
             if post_id and tags_added:
+                create_post_ = insert_activity(username, f"User created post {post_id}")
                 return create_post_response('SUCCESS', 'Post succesfully created.', True, post_id)
 
             else:
@@ -270,3 +268,58 @@ def delete_comment(request):
     except Exception as e:
         print(traceback.print_exc())
         return delete_comment_response('FAILED', f'API failed with error: {e}')
+
+
+def add_view(request):
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            postid = collected_data.get("postid")
+
+            is_updated, no_of_views = update_views(postid)
+
+            if is_updated:
+                return add_view_response('SUCCESS', 'Post succesfully fetched.', True, no_of_views, postid)
+
+            else:
+                return add_view_response('SUCCESS', 'No posts found with corresponding post id.')
+
+        return add_view_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return add_view_response('FAILED', f'API failed with error: {e}')
+
+
+def delete_post(request):
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            postid = collected_data.get("postid")
+            username = collected_data.get("username")
+
+            isdeleted, image_path = delete_post_from_db(postid, username)
+
+            is_deleted_from_s3 = False
+            if image_path:
+                is_deleted_from_s3 = delete_image_from_s3(image_path)
+
+            if isdeleted and is_deleted_from_s3:
+                return delete_post_response('SUCCESS', 'Post deleted.', True)
+
+            else:
+                return delete_post_response('SUCCESS', 'Something went wrong')
+
+        return delete_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return delete_post_response('FAILED', f'API failed with error: {e}')
+
+
+def delete_image_from_s3(image_path):
+    s3 = boto3.client('s3', aws_access_key_id=s3_details.aws_access_key,
+                      aws_secret_access_key=s3_details.aws_secret_key)
+    response = s3.delete_object(Bucket=s3_details.bucket_name,
+                                Key=image_path[38:])
+    return True

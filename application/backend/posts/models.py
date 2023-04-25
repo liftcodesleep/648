@@ -24,7 +24,7 @@ def find_post_data(limit, offset, search_text, sort_col, sort_type, category):
     if search_text:
         if search_text[0] == '@':
             sql_statement += f""" WHERE Made_by in 
-                                    (SELECT Userid FROM User
+                                    (SELECT Username FROM User
                                     WHERE UPPER(Username) LIKE '%{search_text[1:].upper()}%')
                                     """
 
@@ -285,3 +285,77 @@ def delete_comment_from_db(postid, commentid, username):
     conn.commit()
     conn.close()
     return True
+
+
+def insert_activity(username, text):
+    cursor, conn = get_cursor()
+    sql_statement = f"""INSERT INTO activity_log
+                        VALUES
+                        ('{username}', '{text}', CURRENT_TIMESTAMP)
+                        """
+    cursor.execute(sql_statement)
+    conn.commit()
+    conn.close()
+    return True
+
+
+def update_views(postid):
+    cursor, conn = get_cursor()
+    sql_statement = f"""UPDATE Posts
+                            SET
+                            no_of_views = no_of_views + 1
+                            WHERE
+                            post_id='{postid}'
+                    """
+    cursor.execute(sql_statement)
+    conn.commit()
+
+    sql_statement = f"""SELECT no_of_views FROM Posts WHERE post_id='{postid}'"""
+    cursor.execute(sql_statement)
+    no_of_views = cursor.fetchone()[0]
+
+    conn.close()
+    return True, no_of_views
+
+
+def delete_post_from_db(postid, username):
+    cursor, conn = get_cursor()
+
+    sql_statement = f"""SELECT COUNT(*) FROM Posts WHERE post_id='{postid}' and Made_by='{username}'"""
+    cursor.execute(sql_statement)
+    post_owner = cursor.fetchone()[0]
+
+    sql_statement = f"""SELECT User_type FROM User WHERE username='{username}'"""
+    cursor.execute(sql_statement)
+    user_type = cursor.fetchone()[0]
+
+    if post_owner == 1 or user_type == 'admin':
+        sql_statement = f"""SELECT image_path FROM Posts WHERE post_id='{postid}'"""
+        cursor.execute(sql_statement)
+        image_path = cursor.fetchone()[0]
+
+        sql_statement = f"""
+                            DELETE FROM comments
+                            WHERE post_id='{postid}'
+                        """
+        cursor.execute(sql_statement)
+        conn.commit()
+
+        sql_statement = f"""
+                            DELETE FROM Post_tags
+                            WHERE Post_id='{postid}'
+                        """
+        cursor.execute(sql_statement)
+        conn.commit()
+
+        sql_statement = f"""
+                            DELETE FROM Posts
+                            WHERE post_id='{postid}'
+                        """
+        cursor.execute(sql_statement)
+    else:
+        return False, ""
+
+    conn.commit()
+    conn.close()
+    return True, image_path
