@@ -123,4 +123,18 @@ class AccessTestCases(TestCase):
                          'post']['post_id'], create_post_response.json()['postid'])
 
     def test_successful_view_post(self):
-        view_public_posts_response = self.client.post('/view_public_posts')
+        view_posts_payload = {
+            "limit": "1",
+            "offset": "0",
+            "searchText": "animpossiblesearch",
+            "sortby": "post",
+            "sortType": "ASC",
+            "category": "nature"
+        }
+        view_post_response = self.client.post(
+            '/view_public_posts', view_posts_payload, content_type='application/json')
+        self.assertEqual(view_post_response.json()['status'], 'SUCCESS')
+        self.assertEqual(view_post_response.json()[
+                         'message'], 'No posts found with corresponding search text.')
+        self.assertEqual(view_post_response.json()['posts'], [])
+        self.assertEqual(view_post_response.json()['noOfPosts'], 0)
