@@ -155,12 +155,44 @@ class AccessTestCases(TestCase):
         # self.assertEqual(view_post_response.json()['posts'], [])
         # self.assertEqual(view_post_response.json()['noOfPosts'], 0)
 
-    def test_like_dislike_post(self):
-        like_dislike_post_payload = {
-            "postid": "P1273",
-            "liked": "false"
+    def test_dislike_post(self):
+        get_post_payload = {
+            "postid": "P1273"
         }
-        view_like_dislike_post_response = self.client.post(
-            '/like_dislike_post', like_dislike_post_payload, content_type='application/json')
-        self.assertEqual(view_like_dislike_post_response.json()[
+        dislike_post_payload = {
+            "postid": "P1273",
+            "liked": False
+        }
+        original_dislike_post_response = self.client.post(
+            '/get_post_details', get_post_payload, content_type='application/json')
+        self.assertEqual(original_dislike_post_response.json()[
                          'status'], 'SUCCESS')
+        modified_dislike_post_response = self.client.post(
+            '/like_dislike_post', dislike_post_payload, content_type='application/json')
+        self.assertEqual(modified_dislike_post_response.json()[
+                         'status'], 'SUCCESS')
+        self.assertEqual(modified_dislike_post_response.json()[
+                         'isUpdated'], True)
+        self.assertEqual(modified_dislike_post_response.json()[
+                         'no_dislikes'], original_dislike_post_response.json()['post']['no_dislikes']+1)
+
+    def test_like_post(self):
+        get_post_payload = {
+            "postid": "P1273"
+        }
+        like_post_payload = {
+            "postid": "P1273",
+            "liked": True
+        }
+        original_like_post_response = self.client.post(
+            '/get_post_details', get_post_payload, content_type='application/json')
+        self.assertEqual(original_like_post_response.json()[
+                         'status'], 'SUCCESS')
+        modified_like_post_response = self.client.post(
+            '/like_dislike_post', like_post_payload, content_type='application/json')
+        self.assertEqual(modified_like_post_response.json()[
+                         'status'], 'SUCCESS')
+        self.assertEqual(modified_like_post_response.json()[
+                         'isUpdated'], True)
+        self.assertEqual(modified_like_post_response.json()[
+                         'no_likes'], original_like_post_response.json()['post']['no_likes']+1)
