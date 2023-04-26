@@ -151,5 +151,16 @@ class AccessTestCases(TestCase):
         self.assertEqual(view_post_response.json()['status'], 'SUCCESS')
         self.assertEqual(view_post_response.json()[
                          'message'], 'Posts succesfully fetched.')
+        # not sure what a json()['post'] response should look like to test for
         # self.assertEqual(view_post_response.json()['posts'], [])
         # self.assertEqual(view_post_response.json()['noOfPosts'], 0)
+
+    def test_like_dislike_post(self):
+        like_dislike_post_payload = {
+            "postid": "P1273",
+            "liked": "false"
+        }
+        view_like_dislike_post_response = self.client.post(
+            '/like_dislike_post', like_dislike_post_payload, content_type='application/json')
+        self.assertEqual(view_like_dislike_post_response.json()[
+                         'status'], 'SUCCESS')
