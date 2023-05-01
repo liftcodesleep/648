@@ -170,3 +170,61 @@ export const generateDownload = async (imageSrc, croppedAreaPixels, filterClass,
         }
     };
 };
+
+export const croppedImg = async (imageSrc, croppedAreaPixels, filterClass, customFilter) => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const scaleFactor = img.naturalWidth / img.width;
+        const canvas = document.createElement('canvas');
+        canvas.width = croppedAreaPixels.width * scaleFactor;
+        canvas.height = croppedAreaPixels.height * scaleFactor;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(
+          img,
+          croppedAreaPixels.x * scaleFactor,
+          croppedAreaPixels.y * scaleFactor,
+          croppedAreaPixels.width * scaleFactor,
+          croppedAreaPixels.height * scaleFactor,
+          0,
+          0,
+          croppedAreaPixels.width * scaleFactor,
+          croppedAreaPixels.height * scaleFactor
+        );
+  
+        if (filterClass) {
+          const filter = document.createElement('div');
+          filter.classList.add(filterClass);
+          filter.style.width = `${canvas.width}px`;
+          filter.style.height = `${canvas.height}px`;
+          filter.style.position = 'absolute';
+          filter.style.top = '0';
+          filter.style.left = '0';
+          const imgResultRef = new Image();
+          imgResultRef.onload = () => {
+            filter.appendChild(imgResultRef);
+            document.body.appendChild(filter);
+            html2canvas(filter).then((canvas) => {
+              filter.remove();
+              resolve(canvas);
+            }).catch((error) => {
+              reject(error);
+            });
+          };
+          imgResultRef.onerror = (error) => {
+            reject(error);
+          };
+          imgResultRef.src = canvas.toDataURL('image/png');
+        } else {
+          resolve(canvas);
+        }
+      };
+      img.onerror = (error) => {
+        reject(error);
+      };
+      img.src = imageSrc;
+    });
+  };
+  
+  

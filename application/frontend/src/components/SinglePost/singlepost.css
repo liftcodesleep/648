@@ -40,9 +40,13 @@
     color: green;
   }
   
-  .post-comments {
-    margin-left: auto;
-  }
+ 
+    .post-comment {
+      display: flex;
+      justify-content: center;
+      
+    }
+  
   
   .post-body p {
     margin-top: 10px;
@@ -56,16 +60,9 @@
     border: 1px solid #ccc;
   }
   
-  .post-comment button {
-    background-color: #ccc;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
   
-  .post-comment button:hover {
-    background-color: #aaa;
+  .comment-button:hover {
+    background-color: #2c3e50;
   }
 
  
@@ -74,24 +71,13 @@
     min-width: 100vw;
     background-color: #684949;
   }
-  .header {
-    display: flex;
-    align-items: center;
-    padding: 20px;
   
-  }
   
   .logo-container {
     float: left;
   }
   
-  .logo {
-    height: 200px;
-    margin-right: 20px;
-    border-radius: 2%;
-    margin-top: 2px;
-    margin-left: 2px;
-  }
+  
   .search-container {
     display: flex;
     align-items: center;
@@ -283,8 +269,8 @@
   }
   
   .post-footer {
-    width: 80%;
-    display: flex;
+   
+   
     justify-content: center;
     margin-top: 10px;
   }
@@ -292,23 +278,24 @@
   
   
   .post-comment input[type="text"] {
-    width: 70%;
+    width: 40%;
     padding: 10px;
     margin-right: 10px;
+    border-radius: 5px;
   }
   
-  .post-comment button {
-    padding: 10px;
+  .comment-button {
+    padding: 12px 24px;
     background-color: #3f51b5;
     color: white;
     border: none;
     cursor: pointer;
-    margin-top: 4px;
+    
+    border-radius: 5px;
+
   }
   
-  .post-comment button:hover {
-    background-color: #2c3e50;
-  }
+ 
   .comment-username {
     color: white
   }
@@ -317,4 +304,22 @@
   }
   
   
+  .buy-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 70px;
+  }
   
+  .buy-button:hover {
+    background-color: #3e8e41;
+  }
+  .button-container{
+    flex: 1;
+  }

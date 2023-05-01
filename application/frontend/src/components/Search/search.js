@@ -9,6 +9,8 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons'
 import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import pic from '../../Images/photo2.jpeg'
 import { catImages } from '../utils/CategoryImg';
+import axios from 'axios';
+
 
 
 class Search extends Component {
@@ -33,7 +35,7 @@ class Search extends Component {
         event.preventDefault();
         const { limit, offset, searchText, sortby, sortType, category } = this.state;
         try {
-          const response = await fetch('http://44.197.240.111/view_public_posts', {
+          const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -69,7 +71,7 @@ class Search extends Component {
           username: username
         };
         try {
-          const response = await fetch('http://44.197.240.111/logout', {
+          const response = await fetch('http://127.0.0.1:8000/logout', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -97,12 +99,14 @@ class Search extends Component {
           console.log(error);
         }
       };
+    
+      
       
       
     componentDidMount = async () => {
         console.log("inside component did")
         try {
-            const response = await fetch('http://44.197.240.111/fetch_categories', {
+            const response = await fetch('http://127.0.0.1:8000/fetch_categories', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -115,7 +119,38 @@ class Search extends Component {
             console.log(error)
             this.setState({ error: 'Failed to fetch categories' });
         }
+  
     }
+    updateViews = async (postId) => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/add_view', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Cookies.get('token')}`
+          },
+          body: JSON.stringify({ postid: postId })
+        });
+        const data = await response.json();
+        if (data.status === 'SUCCESS') {
+          const { searchResults } = this.state;
+          const updatedSearchResults = searchResults.map(result => {
+            if (result.post_id === data.postid) {
+              return { ...result, no_views: data.noOfViews };
+            }
+            return result;
+          });
+          this.setState({ searchResults: updatedSearchResults });
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error) {
+        this.setState({ error: error.message });
+      }
+    }
+    
+
+  
     render() {
         const { searchText, categories, searchResults, error, isLoading,isLoggedout } = this.state;
         const username = Cookies.get('username');
@@ -134,7 +169,7 @@ class Search extends Component {
         <Link to="/uploadimage">
           <button  className="new-post-button">
             <FontAwesomeIcon icon={faPlus} className="icon" />
-            New Post
+            Post
           </button>
           </Link>
         </div>
@@ -156,7 +191,6 @@ class Search extends Component {
     </header>
                
                     
-                        {/* <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" /> */}
                    
                     <div className="profile-container">
                        
@@ -181,8 +215,9 @@ class Search extends Component {
   <div className="row-cards">
     {searchResults.map((result, index) => (
       !result.isHeading && (
-        <Link key={result.post_id} to={`/post/${result.post_id}`}>
-          <div className="publiccard">
+        <Link key={result.post_id} to={`/post/${result.post_id}`} onClick={() => this.updateViews(result.post_id)}>
+
+          <div className="publiccard" >
             <img src={result.image} alt={result.desc} />
             <h2>{result.desc}</h2>
             <p>Made by: {result.made_by}</p>
@@ -215,7 +250,7 @@ class Search extends Component {
                     </>
                 )}
                 {error && <div>{error}</div>}
-                 <Footer />
+                
             </div>
             
         );

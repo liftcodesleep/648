@@ -3,7 +3,7 @@ import { Box, Button, Container, Grid, Hidden, Tab, Tabs,TextField, MenuItem,Sel
 import "./ImageField.css";
 import Cropper from 'react-easy-crop';
 import Slider from '@mui/material/Slider';
-import  { generateDownload, generateImage } from '../utils/cropImage';
+import  { generateDownload, generateImage, croppedImg} from '../utils/cropImage';
 import { FilterContext } from '../Post/post';
 import { styled } from '@mui/system';
 import "../utils/effects.css";
@@ -12,22 +12,15 @@ import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import ImageComponent from '../ImageComponent/ImageComponent'
 import Cookies from 'js-cookie';
+import ReactQuill from "react-quill";
+import upload from '../../Images/upload.jpeg'
+import domtoimage from 'dom-to-image'
+import { saveAs } from 'file-saver'
+import DoneIcon from '@mui/icons-material/Done';
 
 
 
 
-const StyleBox = styled(Box)({
-    background: '#ddd',
-    marginBottom:'1rem',
-    borderRadius:'5px',
-    alignItems:'center',
-    justifyContent:'center',
-    width:"50vw",
-    height:'50vh'
-    
-
-
-})
 
 function ImageField() { 
 
@@ -43,6 +36,9 @@ function ImageField() {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [error, setError] = useState(null);
+    const [isCropClicked, setIsCropClicked] = useState(false);
+    const [isDoneClicked, setIsDoneClicked] = useState(false);
+
     const { filterClass, customFilter} = useContext(FilterContext);
     const {category, setCategory} = React.useContext(FilterContext); 
     const [formData, setFormData] = React.useState({
@@ -83,9 +79,41 @@ function ImageField() {
     
     const onDownload = () => {   
         const download = generateDownload(image, croppedArea, filterClass, customFilter);
-        console.log({download});
+        
 
     };
+    const handleDownload = () => {
+      domtoimage.toBlob(imgResultRef.current)
+      .then(function (blob) {
+          saveAs(blob, 'download.png');
+          const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const dataURL = reader.result;
+          setImage(dataURL);
+        };
+      })
+      .catch(function (error){
+        console.error('oops, something went wrong!', error)
+      });
+      
+    }
+
+    const onDone = () => {
+      domtoimage.toBlob(imgResultRef.current)
+      .then(function (blob) {
+          const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => {
+          const dataURL = reader.result;
+          setImage(dataURL);
+        };
+      })
+      .catch(function (error){
+        console.error('oops, something went wrong!', error)
+      });
+   
+    }
 
 
  
@@ -96,72 +124,30 @@ function ImageField() {
             image: croppedImage,
         });
     };
+    const completeCrop = async () => {
+      const cropImg = await croppedImg(image, croppedArea, filterClass, customFilter);
+      const dataUrl = cropImg.toDataURL('image/png');
+      setImage(dataUrl);
+      setIsCropClicked(false);
+    };
     
 
-    // const handlePostButtonClick = async () => {
-    //     try {
-    //       const croppedImage = generateDownload(image, croppedArea, filterClass, customFilter);
-    //       const file = await fetch(croppedImage).then((r) => r.blob());
-    //       const formData = new FormData();
-    //     // //   formData.append('username', formData.username);
-    //     //   formData.append('is_reshared', formData.is_reshared);
-    //       formData.append('image', file);
-    //       formData.append('description', formData.description);
-    //       formData.append('category', formData.category);
-      
-    //       const response = await axios.post('http://44.197.240.111/create_post', formData);
-    //       console.log(response.data);
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   };
-      
-      // const handleCreatePost = async () => {
-      //   try {
-      //     const croppedImage = await generateImage(image, croppedArea, filterClass, customFilter);
-      //     const name = Cookies.get('username');
-      //     const data = {
-      //       username: formData.username,
-      //       is_reshared: formData.is_reshared,
-      //       image: croppedImage,
-      //       description: formData.description,
-      //       category: formData.category,
-      //     };
-      //     const response = await axios.post("http://44.197.240.111/create_post", data);
-      //     console.log(response.data);
-      //     if (response.data.status === 'SUCCESS') {
-      //       // show success message and redirect to a new component
-      //       console.log('Post created successfully');
-      //     } else {
-      //       // show error message
-      //       console.error(response.data.message);
-      //     }
-         
-      //     setFormData({
-      //       username: '',
-      //       is_reshared: false,
-      //       image: null,
-      //       description: '',
-      //       category: '',
-            
-      //       });
-      //       } catch (err) {
-      //       console.log(err);
-      //       }
-      //       };
+
+  
             
       const onPost = async () => {
-        const croppedImage = await generateImage(image, croppedArea, filterClass, customFilter);
-        const canvasDataUrl = croppedImage.toDataURL('image/jpeg');
+
+        
+       
         const imageData = new FormData();
-        imageData.append('username', Cookies.get('username'));
+        imageData.append('username', "ishah_sfsu");
         imageData.append('is_reshared', false);
-        imageData.append('image', dataURLtoFile(canvasDataUrl, 'croppedImage.jpeg'));
+        imageData.append('image', dataURLtoFile(image , 'croppedImage.jpeg'));
         imageData.append('description', formData.description);
         imageData.append('category', formData.category);
         
         try {
-          const response = await axios.post('http://44.197.240.111/create_post', imageData);
+          const response = await axios.post('http://127.0.0.1:8000/create_post', imageData);
           if (response.data.status === 'SUCCESS') {
             window.location.href = "/user-profile";
           } else {
@@ -200,7 +186,7 @@ function ImageField() {
 
     const fetchCategories = async () => {
         try {
-          const response = await axios.get('http://44.197.240.111/fetch_categories');
+          const response = await axios.get('http://127.0.0.1:8000/fetch_categories');
           console.log(response.data);
           if (response.data.status === 'SUCCESS') {
             setCategories(response.data.categories);
@@ -226,74 +212,71 @@ function ImageField() {
     
 
 
-    // const handleSubmit = async () => {
-    //     const formData = new FormData();
-    //     formData.append('username', 'john_d');
-    //     formData.append('is_reshared', false);
-    //     formData.append('image', image);
-    //     formData.append('description', 'My new post');
-    //     formData.append('category', 'nature');
-    
-    //     try {
-    //       const response = await fetch('http://44.197.240.111/create_post', {
-    //         method: 'POST',
-    //         body: formData,
-    //       });
-    
-    //       if (!response.ok) {
-    //         throw new Error('Failed to create post');
-    //       }
-    
-    //       // Reset the state
-    //       setImage(null);
-    //       setCroppedArea(null);
-    //       setCrop({ x: 0, y: 0 });
-    //       setZoom(1);
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   };
+  
+
+    const StyledImage = styled('img') (props=>({
+      height: '50vh',
+      width: '50vw',
+      objectFit: 'contain',
+      filter: `contrast(${props.customFilter.contrast}%) brightness(${props.customFilter.brightness}%) saturate(${props.customFilter.saturate}%) sepia(${props.customFilter.sepia}%) grayScale(${props.customFilter.gray}%)`,
+      '@media screen and (max-width: 768px)': {
+        height: '20vh',
+        
+      },
+    }))
    
   return (
 
     <div style={{alignItems:'center', justifyContent:'center'}}>
       
-        <StyleBox className='container-cropper'>
+        <Box className='cropper-container'>
 
                 {           
                     image ? (
                     <>
-                    <div sx={{
-                    filter: `brightness(${filterClass.brightness}%) contrast(${filterClass.contrast}%) saturate(${filterClass.saturate}%) sepia(${filterClass.sepia}%) grayscale(${filterClass.gray}%)`,
-                    my: 4,
-                    }} ref={imgResultRef} className={filterClass} customFilter={!filterClass && customFilter} style={{ position:'relative', display:'flex', alignItems:"center", height:'50vh', width:'50vw'
-                    }}>
-                    <Cropper  image={image}  crop={crop} zoom={zoom} aspect={1.5} onCropChange={setCrop} onZoomChange={setZoom} onCropComplete={onCropComplete}/>
-                    </div>
+                    {isCropClicked ? (
+                      <div>
+                       <div id='image-box' className={filterClass} customFilter={!filterClass && customFilter}>
+                       <Cropper  image={image}  crop={crop} zoom={zoom} aspect={2} onCropChange={setCrop} onZoomChange={setZoom} onCropComplete={onCropComplete}/>
+                       </div>
+                       <div className='slider'>
+                       <Slider min={1} max={3} step={0.1} value={zoom} onChange={(e,zoom)=> setZoom(zoom)}/>
+                       
+                       </div>
+                       <div  className='done' >
+        
+        </div>
+                       
+                       </div>
+                    ) : (
+                      <StyledImage ref={imgResultRef} src={image} className={filterClass} customFilter={!filterClass && customFilter}>
+                      </StyledImage>
+                    )}
+                   
                 
-                    <div className='slider'>
-                    <Slider min={1} max={3} step={0.1} value={zoom} onChange={(e,zoom)=> setZoom(zoom)}/>
-                    </div>
+                    
                     <div className='Tabs'>
                 
                     </div>
                     
-                    </>): <img src={require('../../Images/upload.jpeg')} style={{cursor:'pointer' }} onClick={triggerFileSelect}></img>
-    
+                    </>): <img className='upload-img' src={upload} onClick={triggerFileSelect}></img>
                 } 
-        </StyleBox>
+        </Box>
+        
+        
         
         <input type='file' accept='image/*' ref={inputRef} style={{display:'none'}} onChange = {onSelectFile}/>
         
             <div className='container-form' >
             {image? (<>
-            <form style={{alignItems:'center', justifyContent:'center',marginRight:'80px'}} >
+            <form className='image-form'>
             {/* <input type="text" id="username" name="username" value={formData.username} onChange={handleFormChange}></input> */}
-           <textarea  style={{height:"10vh", width:'45vw', borderRadius:'10px', verticalAlign:'text-top', padding:'10px', marginBottom:'10px'}} type='text' name='description' placeholder='Description' value={formData.description} onChange={handleFormChange}></textarea> 
+           <textarea className='text-area' name='description' placeholder='Description' value={formData.description} onChange={handleFormChange}></textarea> 
            {/* <input type='text' name='category' placeholder='Category' value={formData.category} onChange={handleFormChange} /> */}
-           <div style={{display:'flex'}}>
-           <label style={{padding:'5px', backgroundColor:'white', borderRadius:'5px'}} htmlFor="categories" >Select a category</label>
-           <select style={{margin:'10px', marginLeft:'20px', borderRadius:'3px'}} id="categories" value={selectedCategory} onChange={handleCategoryChange}>
+           
+           <div className='select-filter-container'>
+           <label className='label' htmlFor="categories" >Select a category</label>
+           <select className='select-filters' id="categories" value={selectedCategory} onChange={handleCategoryChange}>
                 <option value="">-- Select --</option>
                 {categories.map(category => (
                 <option key={category} value={category}>{category}</option>
@@ -309,13 +292,20 @@ function ImageField() {
            
 
           
-           <div className='container-buttons' style={{alignItems:'center', justifyContent:'center'}}>             
+           <div className='buttons-container'>             
           
-           <Button variant='contained' style={{color:'white',margin: '10px'}} onClick={onDownload}> Downlaod </Button>
-           <Button variant='contained' onClick={onPost}>Post</Button>
-           {/* <Button variant='contained' onClick={handleCreatePost}>Post1</Button> */}
+           <Button variant='contained' onClick={handleDownload}> Downlaod </Button>
+           <Button variant='contained' onClick={() => setIsCropClicked(!isCropClicked)}>Crop</Button>
+            {isCropClicked && <Button  onClick={completeCrop}><DoneIcon className='DoneIcon'/> </Button>}
+           <Button variant='contained' onClick={onPost}> Post</Button>
+           <Button variant='contained' style={{color:'white', margin: '10px'}} onClick={triggerFileSelect}>Uplaod Image</Button>
+           <Button variant='contained' style={{color:'white', margin: '10px'}} onClick={onDone} >Done</Button>
+            
+
+           
            </div>
        </form>
+       
        </>):<Button variant='contained' style={{color:'white', margin: '10px'}} onClick={triggerFileSelect}>Uplaod Image</Button>
             }
         

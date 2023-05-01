@@ -137,18 +137,18 @@
   justify-content: center;
   flex-direction: row;
   padding: 2rem;
-  display: flex;
-  padding-bottom: 3rem;
+  flex: 1;
 }
 
+
+
 .signup-form {
-  max-width: 400px;
-  width: 100%;
+  width: 400px;
   background-color: #fff;
   border-radius: 5px;
   padding: 2rem;
   box-shadow: 0 2px 10;
-  min-width: 280px;
+
 }
 
 .signup-form h2 {
@@ -211,13 +211,16 @@
   padding: 8px 16px;
   text-align: center;
   text-decoration: none;
- 
-  margin-left: 70px;
-  margin-right: 70px;
+
   cursor: pointer;
   border-radius: 4px;
 }
-
+@media screen and (max-width: 768px) {
+  .button-container{
+  margin-left: 0px;
+  margin-right: 0px;
+  }
+}
 .account{
   font-family: Arial, sans-serif;
   font-size: 14px;
@@ -226,10 +229,7 @@
   
 }
 .login-button {
-  
-  
   border-radius: 4px;
-  
 }
 .dob{
   grid-column: 5/10;

@@ -26,7 +26,7 @@ class LoginForm extends Component {
     e.preventDefault()
     const { username, password } = this.state
     try {
-      const response = await fetch('http://44.197.240.111/user_login', {
+      const response = await fetch('http://127.0.0.1:8000//user_login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password, "user_type":"general"})
@@ -52,9 +52,9 @@ class LoginForm extends Component {
     }
 
     return (
-      <div>
+      <div className='box'>
         <div className='logo-container'>
-         <img src={logo} alt="Logo" className="logo" />
+         <img src={logo} alt="Logo" className="logo-img" />
          <p>Your creativity has found a home</p>
         </div>
       <div className="login-container">
@@ -71,7 +71,7 @@ class LoginForm extends Component {
           <label htmlFor="password">Password</label>
           <input type="password" id="password" name="password" value={password} onChange={this.handleInputChange} />
         </div>
-        <div className='button-container'>
+        <div className='buttons'>
         <button onClick={this.handleSubmit}>Login</button>
         </div>
         <div className='singup-account'>
@@ -83,7 +83,7 @@ class LoginForm extends Component {
       </form>
       
       </div>
-      <Footer/>
+      
       </div>
       
     )

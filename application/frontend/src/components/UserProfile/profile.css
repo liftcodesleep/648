@@ -12,6 +12,7 @@
   
 }
 
+
 .edit-button:hover {
   background-color: #0068d6; 
 }
@@ -94,12 +95,13 @@ button[type="submit"] {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
 }
 .publiccard {
-  width: 370px;
-  height: auto;
+  width: 30%;
+  height: max-content;
   margin: 20px;
-  background-color: #ffffff;
+  background-color: #f6f0fb;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 }
@@ -107,21 +109,21 @@ button[type="submit"] {
 
 .publiccard img {
   width: 100%;
-  height: 200px;
+  
   object-fit: cover;
 }
 
 .publiccard h2 {
   margin-top: 10px;
   font-size: 20px;
-  font-weight: bold;
+  
   text-align: center;
   color: black;
 }
 
 .publiccard p {
   margin: 5px 0;
-  font-size: 16px;
+  font-size: 20px;
   color: black;
   text-align: center;
 }
@@ -243,87 +245,34 @@ button[type="submit"] {
 
 
 
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
- 
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-}
 
-.header h1 {
-  padding: 10px;
-  border-radius: 5px;
-  color: rgb(49, 1, 101);
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-nav ul {
-  display: flex;
-  list-style: none;
- 
-}
-
-li {
-  margin-right: 20px;
-}
-nav ul {
-  list-style: none;
-  display: flex;
-}
-
-nav li {
-  margin: 0 1rem;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  
-  
-  
-  border-bottom: 2px solid transparent;
-  transition: border-bottom-color 0.2s ease-in-out;
-}
-
-nav a:hover {
-  border-bottom-color: white;
-}
-a {
-  color: #333;
-  text-decoration: none;
-}
 
 .search-bar {
-  padding: 8px;
+
   border: none;
-  border-radius: 5px;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
-  font-size: 16px;
-  width: 300px;
+  font-size: 18px;
+  width: 100%;
+  max-width: 500px;
+  flex: 1;
   margin-right: 10px;
+  padding: 11px;
+  border-radius: 5px;
+  margin-left: 5px;
+  width: 300px;
 }
 
-.search-button,
-.new-post-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #0077FF;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
- 
-  cursor: pointer;
-  
-  transition: background-color 0.2s ease-in-out;
-  
+@media screen and (max-width: 768px) {
+  .search-bar {
+    padding: 7px;
+    width: 80px;
+   
+  }
 }
+
+
 .search-button{
-  position: absolute;
+  
   margin-left: -10px;
   font-size: 20px;
   padding: 8px;
@@ -344,4 +293,118 @@ a {
 .search-button .icon,
 .new-post-button .icon {
   margin-right: 5px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  margin: 0 1rem;
+}
+
+nav a {
+  color: rgb(27, 0, 55);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  border-bottom-color: white;
+}
+
+@media screen and (max-width: 768px) {
+  nav ul {
+    
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    margin-top: 30px;
+   
+  }
+  
+  nav li {
+    margin: 1rem 0;
+  }
+}
+
+
+
+
+.search-button:hover,
+.new-post-button:hover {
+  background-color: #4b189e;
+}
+
+.search-button .icon,
+.new-post-button .icon {
+  margin-right: 5px;
+}
+
+.post_details{
+  display: flex;
+  justify-content: space-around;
+}
+.profile_name{
+  display: flex;
+  justify-content: space-around;
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.delete_dropdown{
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.profile-dropdown-content {
+  position: absolute;
+  top: auto;
+  right: 0;
+  background-color: #000000;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  display: none;
+  min-width: 120px;
+  z-index: 2; 
+}
+
+.delete_dropdown:hover .profile-dropdown-content {
+  display: block;
+}
+.delete_dropdown:hover .profile-dropdown-content {
+  display: block;
+}
+
+.name_profile{
+  flex: 10;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+.dropdown{
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  
 }

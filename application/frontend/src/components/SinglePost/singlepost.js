@@ -6,6 +6,7 @@ import './singlepost.css';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp, faThumbsDown, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { Button } from '@mui/base';
 
 
 class SinglePostClass extends Component {
@@ -25,7 +26,7 @@ class SinglePostClass extends Component {
         componentDidMount() {
           const { postId } = this.props;
        
-          fetch('http://44.197.240.111/get_post_details', {
+          fetch('http://127.0.0.1:8000/get_post_details', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -89,7 +90,7 @@ class SinglePostClass extends Component {
             const { comment, post } = this.state;
             const username = Cookies.get('username');
           
-            fetch('http://44.197.240.111/add_comment', {
+            fetch('http://127.0.0.1:8000/add_comment', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -132,7 +133,7 @@ class SinglePostClass extends Component {
               username: Cookies.get('username')
             };
             try {
-              const response = await fetch('http://44.197.240.111/delete_comment', {
+              const response = await fetch('http://127.0.0.1:8000/delete_comment', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -169,7 +170,7 @@ class SinglePostClass extends Component {
         handleLike = () => {
             const { postId } = this.props;
           
-            fetch('http://44.197.240.111/like_dislike_post', {
+            fetch('http://127.0.0.1:8000/like_dislike_post', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -206,7 +207,7 @@ class SinglePostClass extends Component {
        handleDislike = () => {
         const { postId } = this.props;
 
-  fetch('http://44.197.240.111/like_dislike_post', {
+  fetch('http://127.0.0.1:8000/like_dislike_post', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -250,7 +251,7 @@ class SinglePostClass extends Component {
           event.preventDefault();
           const { limit, offset, searchText, sortby, sortType } = this.state;
           try {
-              const response = await fetch('http://44.197.240.111/view_public_posts', {
+              const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
                   method: 'POST',
                   headers: {
                       'Content-Type': 'application/json',
@@ -275,7 +276,7 @@ class SinglePostClass extends Component {
       }
       handleLogout = async () => {
         try {
-            const response = await fetch('http://44.197.240.111/logout', {
+            const response = await fetch('http://127.0.0.1:8000/logout', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -308,7 +309,7 @@ class SinglePostClass extends Component {
           return <div>{error}</div>;
         }
         return (
-          <div className="container">
+          <div>
             <div className="header">
               <div className='logo-container'>
                 <img src={require('../../Images/picturePerfect.jpg')} alt="Logo" className="logo" />
@@ -379,12 +380,20 @@ class SinglePostClass extends Component {
               <div className="post-body">
                 <p>{post.desc}</p>
               </div>
-              <div className="post-footer">
+              
+            </div>
+            <div className="post-footer">
                 <div className="post-comment">
                   <input type="text" placeholder="Add a comment" value={this.state.comment} onChange={this.handleInputChangeComment} />
-                  <button onClick={this.handleCommentSubmit}>Comment</button>
+                  <button className='comment-button' onClick={this.handleCommentSubmit}>Comment</button>
+                  <Link to='/post/:postId/purchase'>
+                  <Button className='buy-button'>Buy</Button>
+                  </Link>
+                 
                 </div>
-              </div>
+               
+                  
+               
             </div>
           </div>
         );

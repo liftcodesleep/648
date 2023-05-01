@@ -7,6 +7,12 @@ import './profile.css';
 
 import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../Footer/Footer';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import { fontSize } from '@mui/system';
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
+import axios from 'axios';
 
 class UserProfile extends Component {
     state = {
@@ -22,12 +28,41 @@ class UserProfile extends Component {
     handleInputChange = (event) => {
         this.setState({ searchText: event.target.value });
     }
+    handleDelete(postId) {
+      const username = 'ishah_sfsu';
+      fetch('http://127.0.0.1:8000/delete_post', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              postid: postId,
+              username: username
+          })
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'SUCCESS') {
+             
+              const updatedPosts = this.state.posts.filter(post => post.post_id !== postId);
+              this.setState({ posts: updatedPosts });
+          } else {
+              console.log(data.message);
+          }
+      })
+      .catch(error => {
+          console.log(error);
+      });
+  }
+  
+
+    
 
     handleSubmit = async (event) => {
         event.preventDefault();
         const { limit, offset, searchText, sortby, sortType } = this.state;
         try {
-            const response = await fetch('http://44.197.240.111/view_public_posts', {
+            const response = await fetch('http://127.0.0.1:8000/view_public_posts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +81,7 @@ class UserProfile extends Component {
         try {
             const username = Cookies.get('username');
             const { limit, offset, searchText, sortby, sortType } = this.state;
-            const response = await fetch('http://44.197.240.111/list_user_posts', {
+            const response = await fetch('http://127.0.0.1:8000/list_user_posts', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -87,7 +122,7 @@ class UserProfile extends Component {
         <Link to="/uploadimage">
           <button  className="new-post-button">
             <FontAwesomeIcon icon={faPlus} className="icon" />
-            New Post
+            Post
           </button>
           </Link>
         </div>
@@ -145,17 +180,47 @@ class UserProfile extends Component {
             {posts.map((post, index) => (
                 <div key={post.post_id} className="publiccard">
                      <img src={post.image} alt={post.desc} />
-                    <h2>{post.desc}</h2>
-                    <p>Made by: {post.made_by}</p>
-                    <p>No. of views: {post.no_views}</p>
-                    <p>No. of likes: {post.no_likes}</p>
-                    <p>No. of dislikes: {post.no_dislikes}</p>
+                    
+                     <div className='profile_name'>
+                      <div className='name_profile'>
+  <p style={{fontWeight:'bold'}}>{post.made_by}</p>
+  </div>
+  <div className="dropdown">
+    <button className="delete_dropdown" onClick={(e) => {
+      e.stopPropagation();
+      const dropdown = e.currentTarget.nextElementSibling;
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }}>⋮</button>
+    <div className="delete_container" style={{ display: 'none' }}>
+    <button onClick={() => this.handleDelete(post.post_id)}>Delete</button>
+
+    </div>
+
+  </div>
+</div>
+
+                    <div className='post_details'>
+                    <div>
+                    <p>{post.no_views} <RemoveRedEyeIcon style={{fontSize:'medium'}}/> Views</p>
+                    </div>
+                    <p>{post.no_likes} <FavoriteIcon style={{fontSize:'medium'}}/> Likes</p>
+                    <p>{post.no_dislikes} <HeartBrokenIcon style={{fontSize:'medium'}}/> Dislikes</p>
+                    </div>
+                    
                     <span>{post.posted_on}</span>
+
+
+                    
+                    <div>
+                            <p>{post.desc}</p>
                             </div>
+                            </div>
+                            
+                           
                       ))}
                         
                     </div>
-                <Footer/>
+                
                 
             </div>
         );

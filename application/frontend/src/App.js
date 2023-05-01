@@ -13,7 +13,7 @@ import Post from './components/Post/post';
 import SinglePost from './components/SinglePost/singlepost';
 import Header from './components/Header/header';
 import Footer from './components/Footer/Footer';
-
+import Purchase from './components/buyPhoto/purchase';
 
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -39,7 +39,9 @@ const App = () => {
         <Route path="/edit-profile" element={<EditProfile/>} />
         <Route path='/uploadimage' element={<Post/>}/>
         <Route path="/post/:postId" element={<SinglePost/>}/>
+        <Route path="/post/:postId/purchase" element={<Purchase/>}/>
       </Routes>
+      <Footer/>
      
     </Router>
   );

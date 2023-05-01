@@ -22,7 +22,7 @@ class SignupForm extends Component {
     this.setState({ [name]: value });
   };
 
-  handleLignup = () => {
+  handleLogin = () => {
     window.location.href = "/login";
   }
 
@@ -30,7 +30,7 @@ class SignupForm extends Component {
     e.preventDefault();
     const { name, email, username, password, dob, phone } = this.state;
     try {
-      const response = await fetch('http://44.197.240.111/register_user', {
+      const response = await fetch('http://127.0.0.1:8000/register_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, username, password, dob, "phonenum":phone,"about":"", "usertype": "general","userpic": "" }),
@@ -59,9 +59,9 @@ class SignupForm extends Component {
     }
 
     return (
-      <div>
+      <div className='box'>
         <div className='logo-container'>
-         <img src={logo} alt="Logo" className="logo" />
+         <img src={logo} alt="Logo" className="logo-img" />
          <p>Your creativity has found a home</p>
         </div>
       <div className='signup-container'>
@@ -130,20 +130,20 @@ class SignupForm extends Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <div className='button-container'>
+        <div className='buttons'>
         <button onClick={this.handleSubmit}>Create Account</button>
         </div>
         <div className="already-member">
          
           <div className='account'><h4 >Already a member?</h4></div>  
-           <button style={{fontSize: "14px", width: "80px"}} className="login-button" onClick={this.handleLogin} >Signup</button> 
+           <button style={{fontSize: "14px", width: "80px"}} className="login-button" onClick={this.handleLogin} >Login</button> 
            <div>
         </div>
         </div>
         {error && <div className="error">{error}</div>}
       </form>
       </div>
-      <Footer/>
+      
       </div>
     );
   }
