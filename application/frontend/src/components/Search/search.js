@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import Cookies from "js-cookie";
 import { Link, Navigate } from "react-router-dom";
 import "./search.css";
+import Footer from "../Footer/Footer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+
+import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
+import pic from "../../Images/photo2.jpeg";
+import { catImages } from "../utils/CategoryImg";
+import axios from "axios";
 
 class Search extends Component {
   state = {
@@ -114,6 +122,34 @@ class Search extends Component {
       this.setState({ error: "Failed to fetch categories" });
     }
   };
+  updateViews = async (postId) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/add_view", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: JSON.stringify({ postid: postId }),
+      });
+      const data = await response.json();
+      if (data.status === "SUCCESS") {
+        const { searchResults } = this.state;
+        const updatedSearchResults = searchResults.map((result) => {
+          if (result.post_id === data.postid) {
+            return { ...result, no_views: data.noOfViews };
+          }
+          return result;
+        });
+        this.setState({ searchResults: updatedSearchResults });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
+  };
+
   render() {
     const {
       searchText,
@@ -129,48 +165,61 @@ class Search extends Component {
       return <Navigate to="/login" />;
     }
     return (
-      <div className="container">
-        <div className="header">
-          <div className="logo-container">
-            <Link to="/">
-              <img
-                src={require("../../Images/picturePerfect.jpg")}
-                alt="Logo"
-                className="logo"
-              />
-            </Link>
-          </div>
-          <div className="search-container">
+      <div>
+        <header className="header">
+          <h1>Picture Perfect</h1>
+
+          <div>
             <Link to="/uploadimage">
-              <button type="submit">+ New Post</button>
+              <button className="new-post-button">
+                <FontAwesomeIcon icon={faPlus} className="icon" />
+                Post
+              </button>
             </Link>
-
-            <form className="search-form" onSubmit={this.handleSubmit}>
-              <div className="input-wrapper">
-                <input
-                  type="text"
-                  value={searchText}
-                  onChange={this.handleInputChange}
-                  placeholder="Images, #tags, @users"
-                />
-                <button type="submit">Search</button>
-              </div>
-            </form>
           </div>
-          <div className="profile-container">
-            <div className="profile-initial">{firstInitial}</div>
-            <div className="profile-username">{username}</div>
 
-            <div className="profile-dropdown">
-              <button className="profile-dropdown-button">⋮</button>
-              <div className="profile-dropdown-content">
-                <Link to="/user-profile">View Profile</Link>
-                <button onClick={this.handleLogout}>Logout</button>
-              </div>
+          <form className="search-form" onSubmit={this.handleSubmit}>
+            <div className="header-right">
+              <input
+                className="search-bar"
+                type="text"
+                value={searchText}
+                onChange={this.handleInputChange}
+                placeholder="Images, #tags, @users"
+              />
+              <button className="search-button" onClick={this.handleSubmit}>
+                <FontAwesomeIcon icon={faSearch} className="icon" />
+              </button>
+            </div>
+          </form>
+
+          {/* </div> */}
+
+          <nav>
+            <ul>
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/about">About</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+        <div className="profile-container">
+          <div className="profile-initial">{firstInitial}</div>
+          <div className="profile-username">{username}</div>
+
+          <div className="profile-dropdown">
+            <button className="profile-dropdown-button">⋮</button>
+            <div className="profile-dropdown-content">
+              <Link to="/user-profile">View Profile</Link>
+              <button onClick={this.handleLogout}>Logout</button>
             </div>
           </div>
         </div>
-        {error && <div>{error}</div>}
+
         {isLoading ? (
           <div className="loading">Loading...</div>
         ) : (
@@ -180,7 +229,11 @@ class Search extends Component {
                 {searchResults.map(
                   (result, index) =>
                     !result.isHeading && (
-                      <Link key={result.post_id} to={`/post/${result.post_id}`}>
+                      <Link
+                        key={result.post_id}
+                        to={`/post/${result.post_id}`}
+                        onClick={() => this.updateViews(result.post_id)}
+                      >
                         <div className="publiccard">
                           <img src={result.image} alt={result.desc} />
                           <h2>{result.desc}</h2>
@@ -198,14 +251,17 @@ class Search extends Component {
             )}
             {searchResults.length === 0 && categories.length > 0 && (
               <>
-                <h2 className="category-heading">Categories</h2>
-                <div className="row-cards">
+                <div className="categories">
+                  <h2 className="category-head">Categories</h2>
+                </div>
+                <div className="row">
                   {categories.map((category, index) => (
                     <div
                       key={index}
                       className="search-card"
                       onClick={() => this.handleCategoryClick(category)}
                     >
+                      <img src={catImages.src} />
                       <h2 className="category">{category}</h2>
                     </div>
                   ))}
@@ -214,6 +270,7 @@ class Search extends Component {
             )}
           </>
         )}
+        {error && <div>{error}</div>}
       </div>
     );
   }

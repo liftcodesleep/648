@@ -4,6 +4,7 @@ import { Link, Navigate } from "react-router-dom";
 import "./singlepost.css";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "@mui/base";
 import {
   faThumbsUp,
   faThumbsDown,
@@ -11,6 +12,16 @@ import {
   faRetweet,
   faShare,
 } from "@fortawesome/free-solid-svg-icons";
+import { Box } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
+
+import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
+import Purchase from "../buyPhoto/purchase";
 
 class SinglePostClass extends Component {
   state = {
@@ -30,6 +41,7 @@ class SinglePostClass extends Component {
     isLoggedout: false,
     isReposted: false,
     isPostCreated: false,
+    isBuy: false,
   };
 
   componentDidMount() {
@@ -320,6 +332,14 @@ class SinglePostClass extends Component {
       isReposted: !prevState.isReposted,
     }));
   };
+  handleBuy = () => {
+    this.setState((prevState) => ({
+      isBuy: !prevState.isBuy,
+    }));
+  };
+  handleCloseBuy = () => {
+    this.setState({ isBuy: false });
+  };
 
   handleLogout = async () => {
     const username = Cookies.get("username");
@@ -356,7 +376,6 @@ class SinglePostClass extends Component {
     console.log("inside handle repost");
     console.log(post);
 
-    // Construct the payload
     const payload = {
       username: Cookies.get("username"),
       is_reshared: true,
@@ -368,7 +387,6 @@ class SinglePostClass extends Component {
     console.log({ payload });
 
     try {
-      // Make the POST request to the /create_post endpoint
       const response = await fetch("http://127.0.0.1:8000/create_post", {
         method: "POST",
         headers: {
@@ -412,12 +430,23 @@ class SinglePostClass extends Component {
       isLoggedout,
       isReposted,
       isPostCreated,
+      isBuy,
     } = this.state;
-    console.log("initial render");
-    console.log("checking what is coming in post");
-    console.log({ post });
+
     const username = Cookies.get("username");
     const firstInitial = username ? username.charAt(0) : "";
+    // handleBuyClick = () => {
+    //   const { post } = this.state;
+    //   const { history } = this.props;
+    //   history.push({
+    //     pathname: `/post/${post.postId}/purchase`,
+    //     state: {
+    //       postedBy: post.madeBy,
+    //       phoneNumber: 9845,
+    //       email: "abc@gmail.com",
+    //     },
+    //   });
+    // };
     if (isLoggedout) {
       return <Navigate to="/login" />;
     }
@@ -432,32 +461,20 @@ class SinglePostClass extends Component {
       return <div>{error}</div>;
     }
     return (
-      <div className="container">
+      <div>
         <div className="header">
-          <div className="logo-container">
-            <Link to="/">
-              <img
-                src={require("../../Images/picturePerfect.jpg")}
-                alt="Logo"
-                className="logo"
-              />
-            </Link>
-          </div>
+          <header className="header">
+            <h1>Picture Perfect</h1>
+          </header>
           <div className="search-container">
-            <Link to="/uploadimage">
-              <button type="submit">+ New Post</button>
-            </Link>
-            {/* <form className="search-form" onSubmit={this.handleSubmit}>
-              <div className="input-wrapper">
-                <input
-                  type="text"
-                  value={searchText}
-                  onChange={this.handleInputChange}
-                  placeholder="Images, #tags, @users"
-                />
-                <button type="submit">Search</button>
-              </div>
-            </form> */}
+            <div>
+              <Link to="/uploadimage">
+                <button className="new-post-button">
+                  <FontAwesomeIcon icon={faPlus} className="icon" />
+                  Post
+                </button>
+              </Link>
+            </div>
           </div>
           <div className="profile-container">
             <div className="profile-initial">{firstInitial}</div>
@@ -498,82 +515,133 @@ class SinglePostClass extends Component {
             </div>
           </div>
         ) : (
-          <div className="single-post">
-            <div className="post-header">
-              <img src={post.image} alt={post.desc} />
-              <div className="post-info">
+          <div className="single-post-container ">
+            <div className="single-post">
+              <div className="post-header">
                 <div className="post-user">
-                  <span>Username : {post.madeBy}</span>
+                  <span>{post.madeBy}</span>
                 </div>
-                <div className="post-stats">
-                  <span className="post-views">{post.noViews} views</span>
-                  <span className="post-likes">
-                    <FontAwesomeIcon
-                      icon={faThumbsUp}
-                      className={`${isLiked ? "active" : ""}`}
-                      onClick={this.handleLike}
-                    />
-                    <span>{numLikes}</span>
-                  </span>
-                  <span className="post-dislikes">
-                    <FontAwesomeIcon
-                      icon={faThumbsDown}
-                      className={`${isDisliked ? "active" : ""}`}
-                      onClick={this.handleDislike}
-                    />
-                    <span>{numDislikes}</span>
-                  </span>
-                  {post.noComments > 0 && (
-                    <span
-                      className="post-comments"
-                      onClick={this.handleCommentsClick}
-                    >
-                      {post.noComments} comments
-                    </span>
-                  )}
-                  <span className="post-repost">
-                    <FontAwesomeIcon
-                      icon={faRetweet}
-                      onClick={this.handleRepost}
-                    />
-                  </span>
-                  <span className="post-share">
-                    <FontAwesomeIcon
-                      icon={faShare}
-                      onClick={this.handleShare}
-                    />
-                  </span>
+                <div className="post-image">
+                  <img
+                    src={post.image}
+                    alt={post.desc}
+                    style={{ display: "block", margin: "0 auto" }}
+                  />
                 </div>
-              </div>
-            </div>
-            {showComments && post.noComments > 0 && (
-              <div className="post-comments-section">
-                {post.comments.map((comment, index) => (
-                  <div className="post-comment" key={index}>
-                    <span className="comment-username">
-                      {comment.username}:{" "}
-                    </span>
-                    <span className="comment-text">{comment.comment}</span>
-                    <button onClick={() => this.handleCommentDelete(index)}>
-                      <FontAwesomeIcon icon={faTrash} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
 
-            <div className="post-body">
-              <p>{post.desc}</p>
-            </div>
-            <div className="post-footer">
-              <div className="post-comment">
-                <input
-                  type="text"
-                  placeholder=""
-                  value={this.state.comment}
-                  onChange={this.handleInputChangeComment}
-                />
-                <button onClick={this.handleCommentSubmit}>Comment</button>
+                <div className="post-info">
+                  <div className="post-stats">
+                    <span className="post-views">{post.noViews} views</span>
+                    <span className="post-likes">
+                      <FontAwesomeIcon
+                        icon={faThumbsUp}
+                        className={`${isLiked ? "active" : ""}`}
+                        onClick={this.handleLike}
+                      />
+                      <span>{numLikes}</span>
+                    </span>
+                    <span className="post-dislikes">
+                      <FontAwesomeIcon
+                        icon={faThumbsDown}
+                        className={`${isDisliked ? "active" : ""}`}
+                        onClick={this.handleDislike}
+                      />
+                      <span>{numDislikes}</span>
+                    </span>
+                    {post.noComments > 0 && (
+                      <span
+                        className="post-comments"
+                        onClick={this.handleCommentsClick}
+                      >
+                        {post.noComments} comments
+                      </span>
+                    )}
+                    <span className="post-repost">
+                      <FontAwesomeIcon
+                        icon={faRetweet}
+                        onClick={this.handleRepost}
+                      />
+                    </span>
+                    <span className="post-share">
+                      <FontAwesomeIcon
+                        icon={faShare}
+                        onClick={this.handleShare}
+                      />
+                    </span>
+
+                    <Button onClick={this.handleBuy} className="buy-button">
+                      Buy
+                    </Button>
+
+                    <Dialog open={isBuy} onClose={this.handleCloseBuy}>
+                      <DialogTitle>Purchase</DialogTitle>
+                      <DialogContent>
+                        <Purchase
+                          postedBy={post.madeBy}
+                          phoneNumber={9845}
+                          email={"abc@gmail.com"}
+                        />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={this.handleCloseBuy}>Close</Button>
+                      </DialogActions>
+                    </Dialog>
+                  </div>
+                </div>
+              </div>
+
+              <div className="post-body">
+                <p>{post.desc}</p>
+              </div>
+              <div
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <div className="post-footer">
+                  <div className="post-comment">
+                    <div className="comment-container">
+                      <input
+                        type="text"
+                        placeholder="Add Comment"
+                        value={this.state.comment}
+                        onChange={this.handleInputChangeComment}
+                      />
+                      <button
+                        className="comment-button"
+                        onClick={this.handleCommentSubmit}
+                      >
+                        Comment
+                      </button>
+                    </div>
+                    {/* <Link to="/post/:postId/purchase">
+            <Button className="buy-button">Buy</Button>
+            </Link> */}
+                  </div>
+                  {showComments && post.noComments > 0 && (
+                    <div className="post-comments-section">
+                      <div>
+                        {post.comments.map((comment, index) => (
+                          <Box className="each-comment" key={index}>
+                            <span className="comment-username">
+                              {comment.username}:{" "}
+                            </span>
+                            <span className="comment-text">
+                              {comment.comment}
+                            </span>
+                            <button
+                              onClick={() => this.handleCommentDelete(index)}
+                            >
+                              <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                          </Box>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
