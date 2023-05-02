@@ -79,3 +79,25 @@ def delete_comment_response(status="SUCCESS", message="", isdeleted=False):
     }
 
     return JsonResponse(delete_comment_response_obj)
+
+
+def add_view_response(status="SUCCESS", message="", isviewupdated=False, no_views=0, postid=""):
+    add_view_response_obj = {
+        'status': status,
+        'message': message,
+        "isViewUpdated": isviewupdated,
+        "noOfViews": no_views,
+        "postid": postid
+    }
+
+    return JsonResponse(add_view_response_obj)
+
+
+def delete_post_response(status="SUCCESS", message="", isdeleted=False):
+    delete_post_response_obj = {
+        'status': status,
+        'message': message,
+        "isPostDeleted": isdeleted,
+    }
+
+    return JsonResponse(delete_post_response_obj)
