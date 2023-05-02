@@ -36,16 +36,15 @@ class AccessTestCases(TestCase):
             "username": "ishah_sfsu",
             
         }
-        activity_log_response = self.client.post('/get_activity_log', input_payload, content_type='application/json')
+        activity_log_response = self.client.post('/activity_log', input_payload, content_type='application/json')
         self.assertEqual(activity_log_response.json()['status'], 'SUCCESS')
         self.assertEqual(activity_log_response.json()['message'],'Profile found succesfully')
 
-    def test_succuessful_view_user_profile(self):
+    def test_successful_view_user_profile(self):
         input_payload = {
             "username": "ishah_sfsu",
-            
         }
-        view_user_profile_response = self.client.post('/get_view_user_profile', input_payload, content_type='application/json')
+        view_user_profile_response = self.client.post('/view_user_profile', input_payload, content_type='application/json')
         self.assertEqual(view_user_profile_response.json()['status'], 'SUCCESS')
         self.assertEqual(view_user_profile_response.json()['username'], input_payload['username'])
         

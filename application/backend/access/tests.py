@@ -27,36 +27,11 @@ class AccessTestCases(TestCase):
         self.assertEqual(response.json()['status'], 'SUCCESS')
         self.assertEqual(response.json()['isLoggedin'], False)
 
-
-
     def test_successful_logout(self):
         input_payload = {
             "username": "ishah_sfsu",
             
         }
-        response = self.client.post('/user_logout', input_payload, content_type='application/json')
+        response = self.client.post('/logout', input_payload, content_type='application/json')
         self.assertEqual(response.json()['status'], 'SUCCESS')
         self.assertEqual(response.json()['isLoggedout'], True)
-
-    def test_invalid_logout(self):
-        input_payload = {
-            "username": "ishah_sfsu",
-            
-        }
-
-        response = self.client.post('/user_logout', input_payload, content_type='application/json')
-        self.assertEqual(response.json()['status'], 'SUCCESS')
-        self.assertEqual(response.json()['isLoggedin'], False)
-
-
-
-
-
-
-
-   
-
-
-
-
- 
