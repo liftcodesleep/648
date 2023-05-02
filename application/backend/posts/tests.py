@@ -103,3 +103,18 @@ class AccessTestCases(TestCase):
                                                   content_type='application/json')
         self.assertEqual(updated_views_response.json()['status'], 'SUCCESS')
         self.assertEqual(updated_views_response.json()['post']['post_id'], create_post_response.json()['postid'])
+
+    def test_successful_get_post_details(self):
+        input_payload = {
+            "postid": random.choice(['P1012', 'P1084', 'P630', 'P959', 'P1456'])
+        }
+        get_post_deails_response = self.client.post('/get_post_details', input_payload, content_type='application/json')
+        self.assertEqual(get_post_deails_response .json()['status'], 'SUCCESS')
+        self.assertIsNotNone(get_post_deails_response .json()['post'], )
+        
+    def test_successful_fetch_categories(self):
+        fetch_categories_response = self.client.get('/get_fetch_catagories', content_type='application/json')
+        self.assertEqual(fetch_categories_response.json()['status'], 'SUCCESS')
+
+
+
