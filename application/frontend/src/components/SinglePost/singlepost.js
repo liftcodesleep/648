@@ -13,8 +13,15 @@ import {
   faShare,
 } from "@fortawesome/free-solid-svg-icons";
 import { Box } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
+import Purchase from "../buyPhoto/purchase";
 
 class SinglePostClass extends Component {
   state = {
@@ -34,6 +41,7 @@ class SinglePostClass extends Component {
     isLoggedout: false,
     isReposted: false,
     isPostCreated: false,
+    isBuy: false,
   };
 
   componentDidMount() {
@@ -324,6 +332,14 @@ class SinglePostClass extends Component {
       isReposted: !prevState.isReposted,
     }));
   };
+  handleBuy = () => {
+    this.setState((prevState) => ({
+      isBuy: !prevState.isBuy,
+    }));
+  };
+  handleCloseBuy = () => {
+    this.setState({ isBuy: false });
+  };
 
   handleLogout = async () => {
     const username = Cookies.get("username");
@@ -414,12 +430,23 @@ class SinglePostClass extends Component {
       isLoggedout,
       isReposted,
       isPostCreated,
+      isBuy,
     } = this.state;
-    console.log("initial render");
-    console.log("checking what is coming in post");
-    console.log({ post });
+
     const username = Cookies.get("username");
     const firstInitial = username ? username.charAt(0) : "";
+    // handleBuyClick = () => {
+    //   const { post } = this.state;
+    //   const { history } = this.props;
+    //   history.push({
+    //     pathname: `/post/${post.postId}/purchase`,
+    //     state: {
+    //       postedBy: post.madeBy,
+    //       phoneNumber: 9845,
+    //       email: "abc@gmail.com",
+    //     },
+    //   });
+    // };
     if (isLoggedout) {
       return <Navigate to="/login" />;
     }
@@ -541,9 +568,24 @@ class SinglePostClass extends Component {
                         onClick={this.handleShare}
                       />
                     </span>
-                    <Link to="/post/:postId/purchase">
-                      <Button className="buy-button">Buy</Button>
-                    </Link>
+
+                    <Button onClick={this.handleBuy} className="buy-button">
+                      Buy
+                    </Button>
+
+                    <Dialog open={isBuy} onClose={this.handleCloseBuy}>
+                      <DialogTitle>Purchase</DialogTitle>
+                      <DialogContent>
+                        <Purchase
+                          postedBy={post.madeBy}
+                          phoneNumber={9845}
+                          email={"abc@gmail.com"}
+                        />
+                      </DialogContent>
+                      <DialogActions>
+                        <Button onClick={this.handleCloseBuy}>Close</Button>
+                      </DialogActions>
+                    </Dialog>
                   </div>
                 </div>
               </div>
@@ -551,55 +593,59 @@ class SinglePostClass extends Component {
               <div className="post-body">
                 <p>{post.desc}</p>
               </div>
+              <div
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <div className="post-footer">
+                  <div className="post-comment">
+                    <div className="comment-container">
+                      <input
+                        type="text"
+                        placeholder="Add Comment"
+                        value={this.state.comment}
+                        onChange={this.handleInputChangeComment}
+                      />
+                      <button
+                        className="comment-button"
+                        onClick={this.handleCommentSubmit}
+                      >
+                        Comment
+                      </button>
+                    </div>
+                    {/* <Link to="/post/:postId/purchase">
+            <Button className="buy-button">Buy</Button>
+            </Link> */}
+                  </div>
+                  {showComments && post.noComments > 0 && (
+                    <div className="post-comments-section">
+                      <div>
+                        {post.comments.map((comment, index) => (
+                          <Box className="each-comment" key={index}>
+                            <span className="comment-username">
+                              {comment.username}:{" "}
+                            </span>
+                            <span className="comment-text">
+                              {comment.comment}
+                            </span>
+                            <button
+                              onClick={() => this.handleCommentDelete(index)}
+                            >
+                              <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                          </Box>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         )}
-        <div
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-            display: "flex",
-          }}
-        >
-          <div className="post-footer">
-            <div className="post-comment">
-              <div className="comment-container">
-                <input
-                  type="text"
-                  placeholder="Add Comment"
-                  value={this.state.comment}
-                  onChange={this.handleInputChangeComment}
-                />
-                <button
-                  className="comment-button"
-                  onClick={this.handleCommentSubmit}
-                >
-                  Comment
-                </button>
-              </div>
-              {/* <Link to="/post/:postId/purchase">
-            <Button className="buy-button">Buy</Button>
-            </Link> */}
-            </div>
-            {showComments && post.noComments > 0 && (
-              <div className="post-comments-section">
-                <div>
-                  {post.comments.map((comment, index) => (
-                    <Box className="each-comment" key={index}>
-                      <span className="comment-username">
-                        {comment.username}:{" "}
-                      </span>
-                      <span className="comment-text">{comment.comment}</span>
-                      <button onClick={() => this.handleCommentDelete(index)}>
-                        <FontAwesomeIcon icon={faTrash} />
-                      </button>
-                    </Box>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
       </div>
     );
   }

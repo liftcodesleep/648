@@ -1,10 +1,7 @@
-
-
 .header {
   display: flex;
   align-items: center;
   padding: 20px;
-
 }
 
 .logo-container {
@@ -22,13 +19,11 @@
   display: flex;
   align-items: center;
 }
-.row-card{
+.row-card {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
-
 
 .search-form {
   display: flex;
@@ -36,10 +31,10 @@
 
 .input-wrapper {
   display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 400px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 400px;
 }
 
 .input-wrapper input[type="text"] {
@@ -64,9 +59,6 @@
   transition: background-color 0.3s ease;
 }
 
-
-
-
 button[type="submit"] {
   background-color: blue;
   color: #fff;
@@ -82,25 +74,29 @@ button[type="submit"] {
 .search-form button:hover {
   background-color: #0d8bf2;
 }
-.header-right{
+.header-right {
   display: flex;
   align-items: center;
 }
-
 
 .row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
 }
-
-
 
 .publiccard img {
   width: 100%;
-  
+
   object-fit: cover;
+}
+.publiccard {
+  width: 300px;
+  height: max-content;
+  margin: 20px;
+  background-color: #f6f0fb;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
 }
 
 .publiccard h2 {
@@ -123,9 +119,8 @@ button[type="submit"] {
   margin-top: 10px;
   font-size: 14px;
   text-align: center;
-  color:black;
+  color: black;
 }
-
 
 .search-card {
   width: 350px;
@@ -136,7 +131,6 @@ button[type="submit"] {
   border-radius: 5px;
   overflow: hidden;
 }
-
 
 .search-card img {
   width: 100%;
@@ -188,7 +182,6 @@ button[type="submit"] {
   margin-right: 10px;
 }
 
-
 .profile-username {
   font-size: 16px;
   font-weight: bold;
@@ -219,7 +212,7 @@ button[type="submit"] {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   display: none;
   min-width: 120px;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .profile-dropdown:hover .profile-dropdown-content {
@@ -240,15 +233,15 @@ button[type="submit"] {
 }
 
 .category-head {
-color: rgb(27, 0, 55);
+  color: rgb(27, 0, 55);
   font-size: 30px;
   padding: 10px;
   padding-left: 35px;
   padding-right: 20px;
-  text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
   border-bottom: 0.1px solid #b1a6ff;
 }
-.categories{
+.categories {
   margin-left: 50px;
   margin-right: 50px;
 }

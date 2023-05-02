@@ -157,7 +157,7 @@ function ImageField() {
 
   const onPost = async () => {
     const imageData = new FormData();
-    imageData.append("username", "ishah_sfsu");
+    imageData.append("username", Cookies.get("username"));
     imageData.append("is_reshared", false);
     imageData.append("image", dataURLtoFile(image, "croppedImage.jpeg"));
     imageData.append("description", formData.description);

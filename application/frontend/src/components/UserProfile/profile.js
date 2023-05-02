@@ -139,17 +139,20 @@ class UserProfile extends Component {
             </Link>
           </div>
 
-          <div className="header-right">
-            <input
-              type="text"
-              placeholder="Images, #tags, @users"
-              className="search-bar"
-              onClick={this.handleInputChange}
-            />
-            <button className="search-button" onClick={this.handleSubmit}>
-              <FontAwesomeIcon icon={faSearch} className="icon" />
-            </button>
-          </div>
+          <form className="search-form" onSubmit={this.handleSubmit}>
+            <div className="header-right">
+              <input
+                className="search-bar"
+                type="text"
+                value={searchText}
+                onChange={this.handleInputChange}
+                placeholder="Images, #tags, @users"
+              />
+              <button className="search-button" onClick={this.handleSubmit}>
+                <FontAwesomeIcon icon={faSearch} className="icon" />
+              </button>
+            </div>
+          </form>
 
           <nav>
             <ul>
@@ -157,10 +160,7 @@ class UserProfile extends Component {
                 <a href="/">Home</a>
               </li>
               <li>
-                <a href="#">About</a>
-              </li>
-              <li>
-                <a href="#">Contact</a>
+                <a href="/about">About</a>
               </li>
             </ul>
           </nav>

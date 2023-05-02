@@ -1,20 +1,14 @@
-
-
 .edit-button {
-  background-color: #003d7e; 
+  background-color: #003d7e;
   color: #fff;
-  border: none; 
-  font-size: 16px; 
-  cursor: pointer; 
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
   border-radius: 8px;
-  
-  
-  
 }
 
-
 .edit-button:hover {
-  background-color: #0068d6; 
+  background-color: #0068d6;
 }
 
 .logo-container {
@@ -33,18 +27,16 @@
   align-items: center;
 }
 
-
-
 .search-form {
   display: flex;
 }
 
 .input-wrapper {
   display: flex;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    width: 400px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 400px;
 }
 
 .input-wrapper input[type="text"] {
@@ -69,9 +61,6 @@
   transition: background-color 0.3s ease;
 }
 
-
-
-
 button[type="submit"] {
   background-color: blue;
   color: #fff;
@@ -88,17 +77,13 @@ button[type="submit"] {
   background-color: #0d8bf2;
 }
 
-
-
-
 .row-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
 }
 .publiccard {
-  width: 30%;
+  width: 300px;
   height: max-content;
   margin: 20px;
   background-color: #f6f0fb;
@@ -106,17 +91,16 @@ button[type="submit"] {
   border-radius: 5px;
 }
 
-
 .publiccard img {
   width: 100%;
-  
+
   object-fit: cover;
 }
 
 .publiccard h2 {
   margin-top: 10px;
   font-size: 20px;
-  
+
   text-align: center;
   color: black;
 }
@@ -133,7 +117,7 @@ button[type="submit"] {
   margin-top: 10px;
   font-size: 14px;
   text-align: center;
-  color:black;
+  color: black;
 }
 .profile-container {
   display: flex;
@@ -158,7 +142,6 @@ button[type="submit"] {
   width: 40px;
   margin-right: 10px;
 }
-
 
 .profile-username {
   font-size: 16px;
@@ -190,7 +173,7 @@ button[type="submit"] {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   display: none;
   min-width: 120px;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .profile-dropdown:hover .profile-dropdown-content {
@@ -239,16 +222,15 @@ button[type="submit"] {
   font-weight: bold;
 }
 .edit-button {
-  width: 50px; 
-  margin-left: 10px; 
+  width: 50px;
+  margin-left: 10px;
 }
 
-
-
-
+.publiccard > * {
+  flex: 1;
+}
 
 .search-bar {
-
   border: none;
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
   font-size: 18px;
@@ -266,13 +248,10 @@ button[type="submit"] {
   .search-bar {
     padding: 7px;
     width: 80px;
-   
   }
 }
 
-
-.search-button{
-  
+.search-button {
   margin-left: -10px;
   font-size: 20px;
   padding: 8px;
@@ -280,14 +259,12 @@ button[type="submit"] {
 
 .new-post-button {
   font-size: 12px;
-   padding: 12px;
+  padding: 12px;
 }
-
-
 
 .search-button:hover,
 .new-post-button:hover {
-  background-color: #0053BA;
+  background-color: #0053ba;
 }
 
 .search-button .icon,
@@ -300,8 +277,6 @@ button[type="submit"] {
   justify-content: space-between;
   padding: 1rem;
 }
-
-
 
 nav ul {
   list-style: none;
@@ -328,21 +303,16 @@ nav a:hover {
 
 @media screen and (max-width: 768px) {
   nav ul {
-    
     flex-direction: column;
     align-items: center;
     font-size: 12px;
     margin-top: 30px;
-   
   }
-  
+
   nav li {
     margin: 1rem 0;
   }
 }
-
-
-
 
 .search-button:hover,
 .new-post-button:hover {
@@ -354,11 +324,11 @@ nav a:hover {
   margin-right: 5px;
 }
 
-.post_details{
+.post_details {
   display: flex;
   justify-content: space-around;
 }
-.profile_name{
+.profile_name {
   display: flex;
   justify-content: space-around;
 }
@@ -367,7 +337,7 @@ nav a:hover {
   position: relative;
 }
 
-.delete_dropdown{
+.delete_dropdown {
   background-color: transparent;
   border: none;
   color: rgb(0, 0, 0);
@@ -386,7 +356,7 @@ nav a:hover {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   display: none;
   min-width: 120px;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .delete_dropdown:hover .profile-dropdown-content {
@@ -396,15 +366,14 @@ nav a:hover {
   display: block;
 }
 
-.name_profile{
+.name_profile {
   flex: 10;
   justify-content: center;
   align-items: center;
   margin-left: 30px;
 }
-.dropdown{
+.dropdown {
   flex: 1;
   justify-content: center;
   align-items: center;
-  
 }

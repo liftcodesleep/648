@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { Link, Navigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
-import "./login.css";
+import "./LoginForm.css";
 import logo from "../../Images/picturePerfect.jpg";
 import { Button } from "@mui/material";
 class LoginForm extends Component {
