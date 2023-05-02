@@ -17,11 +17,11 @@ def get_cursor():
     return cursor, conn
 
 
-def insert_activity(username):
+def insert_activity(username, text):
     cursor, conn = get_cursor()
     sql_statement = f"""INSERT INTO activity_log
                         VALUES
-                        ('{username}', 'User logged out', CURRENT_TIMESTAMP)
+                        ('{username}', '{text}', CURRENT_TIMESTAMP)
                         """
     cursor.execute(sql_statement)
     conn.commit()
@@ -63,7 +63,7 @@ VALUES
 "{userid}",
 "{password}",
 "{dob}",
-"CURRENT_TIMESTAMP",
+NOW(),
 "{username}",
 "{phonenum}",
 "{userpic}",

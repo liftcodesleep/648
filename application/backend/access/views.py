@@ -26,6 +26,7 @@ def login(request):
             data = check_login_info(username, password, user_type)
 
             if data and len(data) > 0:
+                logged_out = insert_activity(username, "User logged in")
                 return login_response('SUCCESS', True, 'User has been logged in successfully.',
                                       data[2])
 
@@ -156,7 +157,7 @@ def logout(request):
             collected_data = json.loads(request.body)
             username = collected_data.get("username")
 
-            logged_out = insert_activity(username)
+            logged_out = insert_activity(username, "User logged out")
 
             if logged_out:
                 return logout_response("SUCCESS", "Logout successful", True)
@@ -169,4 +170,4 @@ def logout(request):
 
 
 def handle_404_view(request, exception):
-    return redirect("http://44.197.240.111/login")
+    return redirect("http://127.0.0.1:8000/login")
