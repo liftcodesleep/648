@@ -128,7 +128,7 @@ def create_post_in_db(username, is_reshared, description, s3_url, category):
 def find_post_details(postid):
     cursor, conn = get_cursor()
     sql_statement = f"SELECT * FROM Posts WHERE post_id='{postid}'"
-    print(sql_statement)
+    # print(sql_statement)
     cursor.execute(sql_statement)
     data = cursor.fetchone()
     conn.close()
@@ -212,7 +212,7 @@ def add_comment_to_db(postid, comment, username):
                         ('{postid}', '{username}', CURRENT_TIMESTAMP,
                         '{comment}', 0)
                     """
-    print(sql_statement)
+    # print(sql_statement)
     cursor.execute(sql_statement)
 
     sql_statement = f"""

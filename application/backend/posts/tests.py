@@ -11,6 +11,7 @@ class PostsTestCases(TestCase):
             "postid": random.choice(['P1012', 'P1084', 'P630', 'P1456'])
         }
 
+        print("Testing add view API")
         # getting current number of views
         current_views_response = self.client.post('/get_post_details', input_payload, content_type='application/json')
         self.assertEqual(current_views_response.json()['status'], 'SUCCESS')
@@ -25,7 +26,7 @@ class PostsTestCases(TestCase):
 
     def test_successful_add_comment(self):
         input_payload_add_comment = {
-            "postid": random.choice(['P1012', 'P1084', 'P630', 'P959', 'P1456']),
+            "postid": random.choice(['P1012', 'P630', 'P959', 'P1456']),
             "comment": "This is a dummy comment made using django tests",
             "username": "ishah_sfsu"
         }
@@ -34,10 +35,13 @@ class PostsTestCases(TestCase):
             "postid": input_payload_add_comment['postid']
         }
 
+        print("Testing add comment API")
+
         # checking current number of comments
         current_views_response = self.client.post('/get_post_details', post_details_input_payload, content_type='application/json')
         self.assertEqual(current_views_response.json()['status'], 'SUCCESS')
 
+        # adding new comment
         add_comment_response = self.client.post('/add_comment', input_payload_add_comment, content_type='application/json')
         self.assertEqual(add_comment_response.json()['status'], 'SUCCESS')
         self.assertEqual(add_comment_response.json()['isCommentAdded'], True)
@@ -60,6 +64,8 @@ class PostsTestCases(TestCase):
         post_details_input_payload = {
             "postid": input_payload_delete_comment['postid']
         }
+
+        print("Testing delete comment API")
 
         # checking current number of comments
         current_views_response = self.client.post('/get_post_details', post_details_input_payload, content_type='application/json')
@@ -92,6 +98,8 @@ class PostsTestCases(TestCase):
             "category": "Nature"
         }
 
+        print("Testing create new post API")
+
         create_post_response = self.client.post('/create_post', create_post_payload,)
         self.assertEqual(create_post_response.json()['status'], 'SUCCESS')
         self.assertEqual(create_post_response.json()['isPostCreated'], True)
@@ -106,13 +114,16 @@ class PostsTestCases(TestCase):
 
     def test_successful_get_post_details(self):
         input_payload = {
-            "postid": random.choice(['P1012', 'P1084', 'P630', 'P959', 'P1456'])
+            "postid": random.choice(['P1012', 'P630', 'P1456'])
         }
+        print("Testing get post details API")
+
         get_post_deails_response = self.client.post('/get_post_details', input_payload, content_type='application/json')
         self.assertEqual(get_post_deails_response.json()['status'], 'SUCCESS')
         self.assertIsNotNone(get_post_deails_response.json()['post'])
-        
+
     def test_successful_fetch_categories(self):
+        print("Testing fetch categories API")
         fetch_categories_response = self.client.get('/fetch_categories', content_type='application/json')
         self.assertEqual(fetch_categories_response.json()['status'], 'SUCCESS')
         self.assertIsNotNone(fetch_categories_response.json()['categories'])
