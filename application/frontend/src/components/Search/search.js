@@ -4,12 +4,9 @@ import { Link, Navigate } from "react-router-dom";
 import "./search.css";
 import Footer from "../Footer/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
-import pic from "../../Images/photo2.jpeg";
 import { catImages } from "../utils/CategoryImg";
-import axios from "axios";
 
 class Search extends Component {
   state = {
@@ -187,7 +184,11 @@ class Search extends Component {
                 onChange={this.handleInputChange}
                 placeholder="Images, #tags, @users"
               />
-              <button className="search-button" onClick={this.handleSubmit}>
+              <button
+                className="search-button"
+                onClick={this.handleSubmit}
+                data-testid="search-button"
+              >
                 <FontAwesomeIcon icon={faSearch} className="icon" />
               </button>
             </div>

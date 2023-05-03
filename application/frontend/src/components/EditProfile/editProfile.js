@@ -103,7 +103,6 @@ class EditProfile extends Component {
 
   render() {
     const { name, username, email, activityLog, noOfPosts } = this.state;
-    console.log({ name });
 
     return (
       <div>
@@ -124,6 +123,7 @@ class EditProfile extends Component {
                 <input
                   type="text"
                   name="name"
+                  id="name"
                   value={name}
                   onChange={this.handleInputChange}
                   required
@@ -133,6 +133,7 @@ class EditProfile extends Component {
                 <input
                   type="text"
                   name="username"
+                  id="username"
                   value={username}
                   onChange={this.handleInputChange}
                   required
@@ -142,6 +143,7 @@ class EditProfile extends Component {
                 <input
                   type="email"
                   name="email"
+                  id="email"
                   value={email}
                   onChange={this.handleInputChange}
                   required
@@ -167,6 +169,7 @@ class EditProfile extends Component {
             </ul>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
