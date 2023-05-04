@@ -26,7 +26,7 @@ jobs:
         echo $(pwd)
         python -m pip install --upgrade pip
         pip install -r application/requirements.txt
-    - name: Run Tests
+    - name: Run Backend API Tests
       run: |
         python application/backend/manage.py test access --noinput --keepdb
         python application/backend/manage.py test posts --noinput --keepdb
