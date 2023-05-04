@@ -25,7 +25,7 @@ jobs:
       run: |
         cd application/frontend
         npm cache clean -f
-        npm install
+        npm ci
         npm run build --if-present
     - name: Run Frontend react tests
       run: |
