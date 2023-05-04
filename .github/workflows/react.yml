@@ -23,7 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm ci and build
       run: |
-        npm install
+        npm ci
         cd application/frontend
         npm install
         npm ci
