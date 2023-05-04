@@ -23,6 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm ci and build
       run: |
+        npm install @emotion/react 
         npm ci
         cd application/frontend
         npm run build --if-present
