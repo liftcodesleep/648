@@ -8,18 +8,22 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "@mui/material": "^5.11.16",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.12.2",
     "@mui/styled-engine-sc": "^5.11.11",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.5",
+    "dom-to-image": "^2.6.0",
+    "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-cookies": "^0.1.1",
     "react-dom": "^18.2.0",
     "react-easy-crop": "^4.7.4",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.10.0",
     "react-script": "^2.0.5",
     "react-scripts": "^5.0.1",
@@ -49,6 +53,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-react": "^7.18.6",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
+    "babel-jest": "^29.5.0",
+    "enzyme": "^3.11.0",
+    "ts-jest": "^29.1.0"
   },
   "jest": {
     "moduleNameMapper": {
