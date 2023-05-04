@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
 import "./editProfile.css";
+import Footer from "../Footer/Footer";
+import Header from "../Header/header";
 
 class EditProfile extends Component {
   state = {
@@ -102,19 +103,58 @@ class EditProfile extends Component {
 
   render() {
     const { name, username, email, activityLog, noOfPosts } = this.state;
-    console.log({ name });
 
     return (
-      <div className="container">
-        <div className="edit-container">
-          <div className="logo-container">
-            <Link to="/">
+      <div>
+        <Header />
+        <div className="edit-box">
+          <div className="edit-container">
+            <div className="logo-container">
               <img
                 src={require("../../Images/picturePerfect.jpg")}
                 alt="Logo"
-                className="logo"
+                className="img-logo"
               />
-            </Link>{" "}
+            </div>
+
+            <form>
+              <div className="form-group">
+                <label htmlFor="name">Name:</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={name}
+                  onChange={this.handleInputChange}
+                  required
+                />
+
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  value={username}
+                  onChange={this.handleInputChange}
+                  required
+                />
+
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={email}
+                  onChange={this.handleInputChange}
+                  required
+                />
+              </div>
+              <div>
+                <button className="button-save" onClick={this.handleFormSubmit}>
+                  Save Changes
+                </button>
+              </div>
+            </form>
           </div>
           <div className="activity-log">
             <h2 className="activity-heading">Activity Log:</h2>
@@ -129,42 +169,7 @@ class EditProfile extends Component {
             </ul>
           </div>
         </div>
-
-        <form onSubmit={this.handleFormSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleInputChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              name="username"
-              value={username}
-              onChange={this.handleInputChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleInputChange}
-              required
-            />
-          </div>
-          <button type="submit">Save Changes</button>
-        </form>
+        <Footer />
       </div>
     );
   }

@@ -1,24 +1,90 @@
-import React from 'react'
-import { render, fireEvent, waitFor } from '@testing-library/react'
-import LoginForm from './LoginForm'
-import Cookies from 'js-cookie'
+import React from "react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import LoginForm from "../LoginForm/LoginForm";
 
-test('renders login form elements', () => {
-  const { getByText, getByLabelText } = render(<LoginForm />)
-  expect(getByText('Login Form')).toBeInTheDocument()
-  expect(getByLabelText('Username')).toBeInTheDocument()
-  expect(getByLabelText('Password')).toBeInTheDocument()
-  expect(getByText('Login')).toBeInTheDocument()
-  expect(getByText("Don't have an account?")).toBeInTheDocument()
-  expect(getByText('Sign up')).toBeInTheDocument()
-})
+describe("LoginForm", () => {
+  beforeEach(() => {
+    jest.spyOn(console, "error");
+    console.error.mockImplementation(() => { });
+  });
 
-test('submits login form successfully', async () => {
-  const { getByLabelText, getByText } = render(<LoginForm />)
-  const usernameInput = getByLabelText('Username')
-  const passwordInput = getByLabelText('Password')
-  const loginButton = getByText('Login')
-  fireEvent.change(usernameInput, {
-    target: { value: 'testuser' }
-  })
-})
+  afterEach(() => {
+    console.error.mockRestore();
+  });
+
+  test("submitting the form with valid credentials should redirect to homepage", async () => {
+    console.info(
+      "submitting the form with valid credentials should redirect to homepage"
+    );
+    // mock the fetch function
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            isLoggedin: true,
+            status: "SUCCESS",
+          }),
+      })
+    );
+
+    const { getByLabelText, getByText } = render(
+      <BrowserRouter>
+        <LoginForm />
+      </BrowserRouter>
+    );
+
+    // fill in the form
+    fireEvent.change(getByLabelText("Username"), {
+      target: { value: "testuser" },
+    });
+    fireEvent.change(getByLabelText("Password"), {
+      target: { value: "testpassword" },
+    });
+
+    // submit the form
+    fireEvent.click(getByText("Login"));
+
+    // wait for the redirect to happen
+    await waitFor(() => expect(window.location.pathname).toEqual("/"));
+  });
+
+  test("submitting the form with invalid credentials should show an error message", async () => {
+    console.info(
+      "submitting the form with invalid credentials should show an error message"
+    );
+    // mock the fetch function
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () =>
+          Promise.resolve({
+            isLoggedin: false,
+            status: "FAILURE",
+            message: "Invalid username or password",
+          }),
+      })
+    );
+
+    const { getByLabelText, getByText, getByTestId } = render(
+      <BrowserRouter>
+        <LoginForm />
+      </BrowserRouter>
+    );
+
+    // fill in the form
+    fireEvent.change(getByLabelText("Username"), {
+      target: { value: "invaliduser" },
+    });
+    fireEvent.change(getByLabelText("Password"), {
+      target: { value: "invalidpassword" },
+    });
+
+    // submit the form
+    fireEvent.click(getByText("Login"));
+
+    // wait for the error message to appear
+    const errorMessage = await waitFor(() => getByTestId("login-error"));
+    expect(errorMessage).toHaveTextContent("Invalid username or password");
+    expect(errorMessage).toBeInTheDocument();
+  });
+});

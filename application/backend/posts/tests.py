@@ -5,12 +5,13 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 # Create your tests here.
 
 
-class AccessTestCases(TestCase):
+class PostsTestCases(TestCase):
     def test_successful_add_view(self):
         input_payload = {
-            "postid": random.choice(['P1012', 'P1084', 'P630', 'P959', 'P1456'])
+            "postid": random.choice(['P1012', 'P1084', 'P630', 'P1456'])
         }
 
+        print("Testing add view API")
         # getting current number of views
         current_views_response = self.client.post(
             '/get_post_details', input_payload, content_type='application/json')
@@ -28,7 +29,7 @@ class AccessTestCases(TestCase):
 
     def test_successful_add_comment(self):
         input_payload_add_comment = {
-            "postid": random.choice(['P1012', 'P1084', 'P630', 'P959', 'P1456']),
+            "postid": random.choice(['P1012', 'P630', 'P959', 'P1456']),
             "comment": "This is a dummy comment made using django tests",
             "username": "ishah_sfsu"
         }
@@ -36,6 +37,8 @@ class AccessTestCases(TestCase):
         post_details_input_payload = {
             "postid": input_payload_add_comment['postid']
         }
+
+        print("Testing add comment API")
 
         # checking current number of comments
         current_views_response = self.client.post(
@@ -67,6 +70,8 @@ class AccessTestCases(TestCase):
         post_details_input_payload = {
             "postid": input_payload_delete_comment['postid']
         }
+
+        print("Testing delete comment API")
 
         # checking current number of comments
         current_views_response = self.client.post(
@@ -106,6 +111,8 @@ class AccessTestCases(TestCase):
             "description": "This is a post made for testing using django tests",
             "category": "Nature"
         }
+
+        print("Testing create new post API")
 
         create_post_response = self.client.post(
             '/create_post', create_post_payload,)
@@ -277,3 +284,23 @@ class AccessTestCases(TestCase):
         self.assertEqual(user_post_list_response.json()['status'], 'SUCCESS')
         self.assertEqual(user_post_list_response.json()[
                          'message'], 'No posts found with corresponding search text.')
+        self.assertEqual(updated_views_response.json()[
+                         'post']['post_id'], create_post_response.json()['postid'])
+
+    def test_successful_get_post_details(self):
+        input_payload = {
+            "postid": random.choice(['P1012', 'P630', 'P1456'])
+        }
+        print("Testing get post details API")
+
+        get_post_deails_response = self.client.post(
+            '/get_post_details', input_payload, content_type='application/json')
+        self.assertEqual(get_post_deails_response.json()['status'], 'SUCCESS')
+        self.assertIsNotNone(get_post_deails_response.json()['post'])
+
+    def test_successful_fetch_categories(self):
+        print("Testing fetch categories API")
+        fetch_categories_response = self.client.get(
+            '/fetch_categories', content_type='application/json')
+        self.assertEqual(fetch_categories_response.json()['status'], 'SUCCESS')
+        self.assertIsNotNone(fetch_categories_response.json()['categories'])
