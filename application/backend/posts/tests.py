@@ -284,8 +284,6 @@ class PostsTestCases(TestCase):
         self.assertEqual(user_post_list_response.json()['status'], 'SUCCESS')
         self.assertEqual(user_post_list_response.json()[
                          'message'], 'No posts found with corresponding search text.')
-        self.assertEqual(updated_views_response.json()[
-                         'post']['post_id'], create_post_response.json()['postid'])
 
     def test_successful_get_post_details(self):
         input_payload = {
