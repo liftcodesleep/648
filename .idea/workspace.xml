@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Tests made by Nic updated and done">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/access/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/access/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/backend/env_details.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/env_details.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/posts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/posts/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/users/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/users/tests.py" afterDir="false" />
-    </list>
+    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Updated react.yml" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -114,27 +107,6 @@
       <workItem from="1682983276567" duration="4186000" />
       <workItem from="1683051517445" duration="745000" />
       <workItem from="1683063222087" duration="3418000" />
-    </task>
-    <task id="LOCAL-00001" summary="Added basic django structure">
-      <created>1676591430878</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1676591430878</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Added about us app in backend">
-      <created>1676592655928</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1676592655928</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Added files for hosting on ec2 instance">
-      <created>1676592982788</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1676592982788</updated>
     </task>
     <task id="LOCAL-00004" summary="Updated docker files for deploying on ec2">
       <created>1676603481837</created>
@@ -458,7 +430,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683052319603</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="Updated react.yml">
+      <created>1683177149500</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1683177149500</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Updated react.yml">
+      <created>1683177300835</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1683177300835</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Updated react.yml">
+      <created>1683177355398</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1683177355398</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,7 +469,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added files for hosting on ec2 instance" />
     <MESSAGE value="Updated docker files for deploying on ec2" />
     <MESSAGE value="Added .env file" />
     <MESSAGE value="Updated .env file" />
@@ -501,7 +493,8 @@
     <MESSAGE value="Added tests for update user profile api" />
     <MESSAGE value="Added tests for create post api" />
     <MESSAGE value="Tests made by Nic updated and done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests made by Nic updated and done" />
+    <MESSAGE value="Updated react.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated react.yml" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/csc648_spring23_01_team01$constants.coverage" NAME="constants Coverage Results" MODIFIED="1680378387875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/backend/users" />
