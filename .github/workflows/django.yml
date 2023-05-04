@@ -28,4 +28,6 @@ jobs:
         pip install -r application/requirements.txt
     - name: Run Tests
       run: |
-        python application/backend/manage.py test
+        python application/backend/manage.py test access
+        python application/backend/manage.py test posts
+        python application/backend/manage.py test users
