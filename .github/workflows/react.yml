@@ -13,7 +13,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        node-version: [17.x]
+        node-version: [17.0.x]
 
     steps:
     - uses: actions/checkout@v3
