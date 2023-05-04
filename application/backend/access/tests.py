@@ -46,9 +46,11 @@ class AccessTestCases(TestCase):
         response = self.client.post(
             '/register_user', input_payload, content_type='application/json')
         self.assertEqual(response.json()['status'], 'SUCCESS')
+        self.assertEqual(
+            response.json()['message'], 'Welcome to PicturePerfect Bob')
         self.assertEqual(response.json()['isRegistered'], True)
 
-    def test_invalid_signup(self):
+    def test_invalid_password_signup(self):
         input_payload = {
             "username": "Bob",
             "name": "Bob",
@@ -63,4 +65,22 @@ class AccessTestCases(TestCase):
         response = self.client.post(
             '/register_user', input_payload, content_type='application/json')
         self.assertEqual(response.json()['status'], 'SUCCESS')
+        self.assertEqual(response.json()['isRegistered'], False)
+
+    def test_invalid_phonenum_signup(self):
+        input_payload = {
+            "username": "Bob",
+            "name": "Bob",
+            "password": "Validpassword1!",
+            "email": "totallyvalid@gmail.com",
+            "phonenum": "404",
+            "dob": "01-01-0001",
+            "userpic": "fakepic",
+            "about": "mindyobidniss",
+            "usertype": "random",
+        }
+        response = self.client.post(
+            '/register_user', input_payload, content_type='application/json')
+        self.assertEqual(response.json()['status'], 'SUCCESS')
+        self.assertEqual(response.json()['message'], 'Invalid phone number')
         self.assertEqual(response.json()['isRegistered'], False)

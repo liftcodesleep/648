@@ -149,7 +149,7 @@ def view_user_posts(request):
             formatted_data = format_post_data(data)
 
             if data and len(data) > 0:
-                return view_post_response('SUCCESS', 'Posts succesfully fetched.', formatted_data, len(data))
+                return view_post_response('SUCCESS', 'Posts successfully fetched.', formatted_data, len(data))
 
             else:
                 return view_post_response('SUCCESS', 'No posts found with corresponding search text.', [], 0)

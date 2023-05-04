@@ -196,3 +196,76 @@ class AccessTestCases(TestCase):
                          'isUpdated'], True)
         self.assertEqual(modified_like_post_response.json()[
                          'no_likes'], original_like_post_response.json()['post']['no_likes']+1)
+
+    def test_delete_post(self):
+
+        file = SimpleUploadedFile(
+            "nature_dummy.jpg", b"file_content", content_type='image/jpeg')
+        create_post_payload = {
+            "username": "ishah_sfsu",
+            "is_reshared": True,
+            "image": file,
+            "description": "This is a third post made for testing post deletion using django tests",
+            "category": "Nature"
+        }
+
+        create_post_response = self.client.post(
+            '/create_post', create_post_payload,)
+        self.assertEqual(create_post_response.json()['status'], 'SUCCESS')
+        self.assertEqual(create_post_response.json()['isPostCreated'], True)
+
+        postid = create_post_response.json()['postid']
+
+        delete_post_payload = {
+            "username": "ishah_sfsu",
+            "postid": postid
+        }
+
+        delete_post_response = self.client.post(
+            '/delete_post', delete_post_payload, content_type='application/json')
+        self.assertEqual(delete_post_response.json()[
+                         'message'], 'Post deleted.')
+        self.assertEqual(delete_post_response.json()['status'], 'SUCCESS')
+        self.assertEqual(delete_post_response.json()['isPostDeleted'], True)
+
+        file = SimpleUploadedFile(
+            "nature_dummy.jpg", b"file_content", content_type='image/jpeg')
+        create_post_payload = {
+            "username": "ishah_sfsu",
+            "is_reshared": True,
+            "image": file,
+            "description": "This is a third post made for testing post deletion using django tests",
+            "category": "Nature"
+        }
+
+    def test_list_user_posts(self):
+        input_payload = {
+            "limit": 1,
+            "username": "ishah_sfsu",
+            "offset": 0,
+            "searchtext": "post",
+            "sortby": "Creation_date",
+            "sortType": "ASC"
+        }
+        user_post_list_response = self.client.post(
+            '/list_user_posts', input_payload, content_type="application/json"
+        )
+        self.assertEqual(user_post_list_response.json()['status'], 'SUCCESS')
+        self.assertEqual(user_post_list_response.json()[
+                         'message'], 'Posts successfully fetched.')
+
+    def test_list_fake_user_posts(self):
+        input_payload = {
+            "limit": 1,
+            "username": "fake_user",
+            "offset": 0,
+            "searchtext": "post",
+            "sortby": "Creation_date",
+            "sortType": "ASC"
+        }
+        user_post_list_response = self.client.post(
+            '/list_user_posts', input_payload, content_type="application/json"
+        )
+        self.assertEqual(user_post_list_response.json()['status'], 'SUCCESS')
+        self.assertEqual(user_post_list_response.json()[
+                         'message'], 'No posts found with corresponding search text.')
