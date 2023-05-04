@@ -435,18 +435,6 @@ class SinglePostClass extends Component {
 
     const username = Cookies.get("username");
     const firstInitial = username ? username.charAt(0) : "";
-    // handleBuyClick = () => {
-    //   const { post } = this.state;
-    //   const { history } = this.props;
-    //   history.push({
-    //     pathname: `/post/${post.postId}/purchase`,
-    //     state: {
-    //       postedBy: post.madeBy,
-    //       phoneNumber: 9845,
-    //       email: "abc@gmail.com",
-    //     },
-    //   });
-    // };
     if (isLoggedout) {
       return <Navigate to="/login" />;
     }
@@ -519,7 +507,7 @@ class SinglePostClass extends Component {
             <div className="single-post">
               <div className="post-header">
                 <div className="post-user">
-                  <span>{post.madeBy}</span>
+                  <span data-testid="post-author">{post.madeBy}</span>
                 </div>
                 <div className="post-image">
                   <img
@@ -537,7 +525,9 @@ class SinglePostClass extends Component {
                         icon={faThumbsUp}
                         className={`${isLiked ? "active" : ""}`}
                         onClick={this.handleLike}
+                        data-testid="like-icon"
                       />
+
                       <span>{numLikes}</span>
                     </span>
                     <span className="post-dislikes">
@@ -545,6 +535,7 @@ class SinglePostClass extends Component {
                         icon={faThumbsDown}
                         className={`${isDisliked ? "active" : ""}`}
                         onClick={this.handleDislike}
+                        data-testid="like-button"
                       />
                       <span>{numDislikes}</span>
                     </span>

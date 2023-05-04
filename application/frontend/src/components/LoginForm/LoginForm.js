@@ -59,7 +59,7 @@ class LoginForm extends Component {
         </div>
         <div className="login-container">
           <form className="login-form" onSubmit={this.handleSubmit}>
-            <h2>Login</h2>
+            <h2>Login Form</h2>
 
             <div className="login-form-group">
               <label htmlFor="username">Username</label>
@@ -97,7 +97,11 @@ class LoginForm extends Component {
                 Signup
               </button>
             </div>
-            {error && <div className="error">{error}</div>}
+            {error && (
+              <div className="error" data-testid="login-error">
+                {error}
+              </div>
+            )}
           </form>
         </div>
       </div>
