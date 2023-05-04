@@ -4,7 +4,7 @@ import random
 # Create your tests here.
 
 
-class AccessTestCases(TestCase):
+class UsersTestCases(TestCase):
     def test_successful_update_user_profile(self):
         view_profile_input_payload = {
             "username": "ishah_sfsu"
