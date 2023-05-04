@@ -46,7 +46,6 @@ def login(request):
 def register(request):
     try:
         if request.method == 'POST':
-            print(request.body)
             collected_data = json.loads(request.body)
             name = collected_data.get("name")
             email = collected_data.get("email")

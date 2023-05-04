@@ -43,7 +43,7 @@ def check_login_info(username, password, user_type):
 
 
 def insert_register(collected_data):
-    print(collected_data)
+    # print(collected_data)
     cursor, conn = get_cursor()
     sql_statement = """INSERT INTO `team1_database`.`User`
 (`Name`,
@@ -69,13 +69,13 @@ CURRENT_TIMESTAMP,
 "{userpic}",
 "{about}",
 "{usertype}");""".format(**collected_data)
-    print(sql_statement)
+    # print(sql_statement)
     try:
         cursor.execute(sql_statement)
         conn.commit()
     except Exception as e:
         conn.rollback()
-        print(e)
+        # print(e)
     finally:
         cursor.close()
         conn.close()

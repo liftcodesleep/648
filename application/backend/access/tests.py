@@ -51,6 +51,7 @@ class AccessTestCases(TestCase):
         self.assertEqual(response.json()['isRegistered'], True)
 
     def test_invalid_password_signup(self):
+        print("Testing register API")
         input_payload = {
             "username": "Bob",
             "name": "Bob",

@@ -139,6 +139,7 @@ class AccessTestCases(TestCase):
         self.assertEqual(view_post_response.json()['noOfPosts'], 0)
 
     def test_successful_nonempty_view_post(self):
+        print("Testing public posts viewing")
         view_posts_payload = {
             "limit": 1,
             "offset": 0,
@@ -152,8 +153,8 @@ class AccessTestCases(TestCase):
         self.assertEqual(view_post_response.json()[
                          'message'], 'Posts succesfully fetched.')
         # not sure what a json()['post'] response should look like to test for
-        # self.assertEqual(view_post_response.json()['posts'], [])
-        # self.assertEqual(view_post_response.json()['noOfPosts'], 0)
+        self.assertIsNotNone(view_post_response.json()['posts'])
+        self.assertGreaterEqual(view_post_response.json()['noOfPosts'], 1)
 
     def test_dislike_post(self):
         get_post_payload = {
@@ -180,6 +181,7 @@ class AccessTestCases(TestCase):
                          'no_dislikes'], original_dislike_post_response.json()['post']['no_dislikes']+1)
 
     def test_like_post(self):
+        print("Testing like/dislike")
         get_post_payload = {
             "postid": "P1273"
         }
@@ -203,7 +205,7 @@ class AccessTestCases(TestCase):
                          'no_likes'], original_like_post_response.json()['post']['no_likes']+1)
 
     def test_delete_post(self):
-
+        print("Testing post deletion")
         file = SimpleUploadedFile(
             "nature_dummy.jpg", b"file_content", content_type='image/jpeg')
         create_post_payload = {
@@ -244,6 +246,7 @@ class AccessTestCases(TestCase):
         }
 
     def test_list_user_posts(self):
+        print("Test listing user posts")
         input_payload = {
             "limit": 1,
             "username": "ishah_sfsu",
