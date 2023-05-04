@@ -174,6 +174,9 @@ class AccessTestCases(TestCase):
         self.assertEqual(modified_dislike_post_response.json()[
                          'isUpdated'], True)
         self.assertEqual(modified_dislike_post_response.json()[
+                         'message'], "Post succesfully fetched.")
+
+        self.assertEqual(modified_dislike_post_response.json()[
                          'no_dislikes'], original_dislike_post_response.json()['post']['no_dislikes']+1)
 
     def test_like_post(self):
@@ -194,6 +197,8 @@ class AccessTestCases(TestCase):
                          'status'], 'SUCCESS')
         self.assertEqual(modified_like_post_response.json()[
                          'isUpdated'], True)
+        self.assertEqual(modified_like_post_response.json()[
+                         'message'], "Post succesfully fetched.")
         self.assertEqual(modified_like_post_response.json()[
                          'no_likes'], original_like_post_response.json()['post']['no_likes']+1)
 
