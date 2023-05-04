@@ -25,7 +25,6 @@ jobs:
       run: |
         cd application/frontend
         npm cache clean -f
-        npm install fs-extra@9.0.1
         npm install
     - name: Run Frontend react tests
       run: |
