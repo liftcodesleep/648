@@ -25,7 +25,6 @@ const App = () => {
 
   return (
     <Router>
-      {isLoginOrSignup ? <Header /> : null}
       <Routes>
         <Route path="/signup" element={<SignupForm />} />
         <Route path="/about" element={<About />} />

@@ -80,7 +80,7 @@ describe("Search", () => {
             offset: 0,
             searchText: "test",
             sortby: "",
-            sortType: "DSC",
+            sortType: "DESC",
             category: "",
           }),
         })

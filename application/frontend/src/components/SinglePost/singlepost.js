@@ -28,7 +28,7 @@ class SinglePostClass extends Component {
     limit: 5,
     offset: 0,
     sortby: "",
-    sortType: "ASC",
+    sortType: "DESC",
     post: null,
     comment: "",
     isLiked: false,
@@ -42,6 +42,8 @@ class SinglePostClass extends Component {
     isReposted: false,
     isPostCreated: false,
     isBuy: false,
+    phone: "",
+    email: "",
   };
 
   componentDidMount() {
@@ -332,11 +334,28 @@ class SinglePostClass extends Component {
       isReposted: !prevState.isReposted,
     }));
   };
-  handleBuy = () => {
+  handleBuy = async (madeBy) => {
+    const userDetailsResponse = await fetch(
+      "http://44.197.240.111/view_user_profile",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: JSON.stringify({ username: madeBy }),
+      }
+    );
+    const userDetailsData = await userDetailsResponse.json();
+    console.log({ userDetailsData });
+
     this.setState((prevState) => ({
       isBuy: !prevState.isBuy,
+      phone: userDetailsData.phoneNumber,
+      email: userDetailsData.email,
     }));
   };
+
   handleCloseBuy = () => {
     this.setState({ isBuy: false });
   };
@@ -431,6 +450,8 @@ class SinglePostClass extends Component {
       isReposted,
       isPostCreated,
       isBuy,
+      phone,
+      email,
     } = this.state;
 
     const username = Cookies.get("username");
@@ -571,16 +592,20 @@ class SinglePostClass extends Component {
                         <FontAwesomeIcon icon={faShare} />
                       </button>
                     </span>
-                    <Button onClick={this.handleBuy} className="buy-button">
+                    <Button
+                      onClick={() => this.handleBuy(post.madeBy)}
+                      className="buy-button"
+                    >
                       Buy
                     </Button>
+
                     <Dialog open={isBuy} onClose={this.handleCloseBuy}>
                       <DialogTitle>Purchase</DialogTitle>
                       <DialogContent>
                         <Purchase
                           postedBy={post.madeBy}
-                          phoneNumber={9845}
-                          email={"abc@gmail.com"}
+                          phoneNumber={phone}
+                          email={email}
                         />
                       </DialogContent>
                       <DialogActions>
@@ -617,9 +642,6 @@ class SinglePostClass extends Component {
                         Comment
                       </button>
                     </div>
-                    {/* <Link to="/post/:postId/purchase">
-            <Button className="buy-button">Buy</Button>
-            </Link> */}
                   </div>
                   {showComments && post.noComments > 0 && (
                     <div className="post-comments-section">

@@ -15,7 +15,7 @@ class Search extends Component {
     searchText: "",
     category: "",
     sortby: "",
-    sortType: "DSC",
+    sortType: "DESC",
     categories: [],
     searchResults: [],
     error: null,
