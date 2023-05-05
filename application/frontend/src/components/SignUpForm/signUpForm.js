@@ -33,7 +33,7 @@ class SignupForm extends Component {
       const response = await fetch('http://127.0.0.1:8000/register_user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, username, password, dob, "phonenum": phone, "about": "", "usertype": "general", "userpic": "" }),
+        body: JSON.stringify({ name, email, username, password, dob, "phonenum":phone,"about":"", "usertype": "general","userpic": "" }),
       });
       const { isRegistered, status, message } = await response.json();
       if (status === 'SUCCESS' && isRegistered) {
@@ -49,7 +49,7 @@ class SignupForm extends Component {
       });
     }
   };
-
+  
 
   render() {
     const { name, email, username, password, dob, phone, error, redirectToReferrer } = this.state;

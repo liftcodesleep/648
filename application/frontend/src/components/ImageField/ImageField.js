@@ -58,7 +58,7 @@ function ImageField() {
   const [isCropClicked, setIsCropClicked] = useState(false);
   const [isDoneClicked, setIsDoneClicked] = useState(false);
 
-  const { filterClass = "", customFilter = "" } = useContext(FilterContext);
+  const { filterClass, customFilter } = useContext(FilterContext);
   const { category, setCategory } = React.useContext(FilterContext);
   const [formData, setFormData] = React.useState({
     username: Cookies.get("username"),

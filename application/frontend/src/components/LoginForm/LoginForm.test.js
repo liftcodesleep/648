@@ -6,7 +6,7 @@ import LoginForm from "../LoginForm/LoginForm";
 describe("LoginForm", () => {
   beforeEach(() => {
     jest.spyOn(console, "error");
-    console.error.mockImplementation(() => { });
+    console.error.mockImplementation(() => {});
   });
 
   afterEach(() => {

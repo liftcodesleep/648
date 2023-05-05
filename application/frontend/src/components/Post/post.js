@@ -14,12 +14,12 @@ import { generateDownload } from "../utils/cropImage";
 import Filters from "../Filters/Filters";
 import FilterEffect from "../FilterEffects/FilterEffect";
 import Edit from "../EditPhoto/Edit";
-import ImageField from "../ImageField/ImageField.js";
+import ImageField from "../ImageField/ImageField";
 import ImageComponent from "../ImageComponent/ImageComponent";
 import Header from "../Header/header";
 
-export const FilterContext = React.createContext();
-function Post() {
+export const FilterContext = createContext();
+export default function Post() {
   const [tabFilter, setTabFilter] = React.useState("filter");
   const [filterClass, setFilterClass] = useState("");
   const [customFilter, setCustomFilter] = useState({
@@ -64,4 +64,3 @@ function Post() {
     </div>
   );
 }
-export default Post;
