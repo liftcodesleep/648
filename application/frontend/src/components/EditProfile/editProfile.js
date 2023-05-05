@@ -17,7 +17,7 @@ class EditProfile extends Component {
       // Fetch user details and activity log from the server
       const username = Cookies.get("username");
       const userDetailsResponse = await fetch(
-        "http://127.0.0.1:8000/view_user_profile",
+        "http://44.197.240.111/view_user_profile",
         {
           method: "POST",
           headers: {
@@ -31,7 +31,7 @@ class EditProfile extends Component {
       console.log({ userDetailsData });
 
       const activityLogResponse = await fetch(
-        "http://127.0.0.1:8000/activity_log",
+        "http://44.197.240.111/activity_log",
         {
           method: "POST",
           headers: {
@@ -72,7 +72,7 @@ class EditProfile extends Component {
     try {
       // Send updated user details to the server
       const response = await fetch(
-        "http://127.0.0.1:8000/update_user_profile",
+        "http://44.197.240.111/update_user_profile",
         {
           method: "POST",
           headers: {
