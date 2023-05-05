@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="Added category column; Completed upload/create post API; Tagging completed: reads tags from description.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/backend/env_details.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/backend/env_details.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/posts/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/constants.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/posts/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/backend/posts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/application/backend/posts/views.py" afterDir="false" />
+    <list default="true" id="c407d816-4fee-470a-aa65-f33f850ac040" name="Changes" comment="updated fe">
+      <change beforePath="$PROJECT_DIR$/application/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/application/frontend/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="development" />
+        <entry key="$PROJECT_DIR$" value="M2_login_and_signup" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -53,7 +49,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/codes/python_codes/csc648-spring23-01-team01/application/frontend/src/components&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/codes/python_codes/back-end-ashmitha/back-end&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -103,34 +99,16 @@
       <workItem from="1680278539866" duration="6863000" />
       <workItem from="1680377551923" duration="9274000" />
       <workItem from="1680495629343" duration="406000" />
-    </task>
-    <task id="LOCAL-00001" summary="Added basic django structure">
-      <created>1676591430878</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1676591430878</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Added about us app in backend">
-      <created>1676592655928</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1676592655928</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Added files for hosting on ec2 instance">
-      <created>1676592982788</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1676592982788</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Updated docker files for deploying on ec2">
-      <created>1676603481837</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1676603481837</updated>
+      <workItem from="1682112405322" duration="2238000" />
+      <workItem from="1682122958544" duration="21000" />
+      <workItem from="1682125735606" duration="3000" />
+      <workItem from="1682204165720" duration="3906000" />
+      <workItem from="1682212594070" duration="1914000" />
+      <workItem from="1682310576217" duration="173000" />
+      <workItem from="1682459931343" duration="81000" />
+      <workItem from="1682983276567" duration="4186000" />
+      <workItem from="1683051517445" duration="745000" />
+      <workItem from="1683063222087" duration="3418000" />
     </task>
     <task id="LOCAL-00005" summary="Added .env file">
       <created>1676604675804</created>
@@ -412,7 +390,70 @@
       <option name="project" value="LOCAL" />
       <updated>1680392227060</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Added tests for login api">
+      <created>1682114771261</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1682114771261</updated>
+    </task>
+    <task id="LOCAL-00046" summary="Added tests for add, delete comment and add view">
+      <created>1682206916308</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1682206916308</updated>
+    </task>
+    <task id="LOCAL-00047" summary="Added tests for update user profile api">
+      <created>1682208114203</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1682208114203</updated>
+    </task>
+    <task id="LOCAL-00048" summary="Added tests for create post api">
+      <created>1682214495354</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1682214495354</updated>
+    </task>
+    <task id="LOCAL-00049" summary="Tests made by Nic updated and done">
+      <created>1683052319603</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1683052319603</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Updated react.yml">
+      <created>1683177149500</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1683177149500</updated>
+    </task>
+    <task id="LOCAL-00051" summary="Updated react.yml">
+      <created>1683177300835</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1683177300835</updated>
+    </task>
+    <task id="LOCAL-00052" summary="Updated react.yml">
+      <created>1683177355398</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1683177355398</updated>
+    </task>
+    <task id="LOCAL-00053" summary="updated fe">
+      <created>1683257445475</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1683257445475</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -430,10 +471,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added basic django structure" />
-    <MESSAGE value="Added about us app in backend" />
-    <MESSAGE value="Added files for hosting on ec2 instance" />
-    <MESSAGE value="Updated docker files for deploying on ec2" />
     <MESSAGE value="Added .env file" />
     <MESSAGE value="Updated .env file" />
     <MESSAGE value="Updated ec2 files" />
@@ -452,7 +489,14 @@
     <MESSAGE value="Completed search API: integrated tag and user search" />
     <MESSAGE value="Completed edit profile API" />
     <MESSAGE value="Added category column; Completed upload/create post API; Tagging completed: reads tags from description." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added category column; Completed upload/create post API; Tagging completed: reads tags from description." />
+    <MESSAGE value="Added tests for login api" />
+    <MESSAGE value="Added tests for add, delete comment and add view" />
+    <MESSAGE value="Added tests for update user profile api" />
+    <MESSAGE value="Added tests for create post api" />
+    <MESSAGE value="Tests made by Nic updated and done" />
+    <MESSAGE value="Updated react.yml" />
+    <MESSAGE value="updated fe" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated fe" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/csc648_spring23_01_team01$constants.coverage" NAME="constants Coverage Results" MODIFIED="1680378387875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/application/backend/users" />

@@ -435,18 +435,6 @@ class SinglePostClass extends Component {
 
     const username = Cookies.get("username");
     const firstInitial = username ? username.charAt(0) : "";
-    // handleBuyClick = () => {
-    //   const { post } = this.state;
-    //   const { history } = this.props;
-    //   history.push({
-    //     pathname: `/post/${post.postId}/purchase`,
-    //     state: {
-    //       postedBy: post.madeBy,
-    //       phoneNumber: 9845,
-    //       email: "abc@gmail.com",
-    //     },
-    //   });
-    // };
     if (isLoggedout) {
       return <Navigate to="/login" />;
     }
@@ -519,12 +507,13 @@ class SinglePostClass extends Component {
             <div className="single-post">
               <div className="post-header">
                 <div className="post-user">
-                  <span>{post.madeBy}</span>
+                  <span data-testid="post-author">{post.madeBy}</span>
                 </div>
                 <div className="post-image">
                   <img
                     src={post.image}
                     alt={post.desc}
+                    data-testid="post-image"
                     style={{ display: "block", margin: "0 auto" }}
                   />
                 </div>
@@ -533,19 +522,29 @@ class SinglePostClass extends Component {
                   <div className="post-stats">
                     <span className="post-views">{post.noViews} views</span>
                     <span className="post-likes">
-                      <FontAwesomeIcon
-                        icon={faThumbsUp}
-                        className={`${isLiked ? "active" : ""}`}
+                      <button
+                        className="like-button"
                         onClick={this.handleLike}
-                      />
+                        data-testid="like-but"
+                      >
+                        <FontAwesomeIcon
+                          icon={faThumbsUp}
+                          className={`${isLiked ? "active" : ""}`}
+                        />
+                      </button>
                       <span>{numLikes}</span>
                     </span>
                     <span className="post-dislikes">
-                      <FontAwesomeIcon
-                        icon={faThumbsDown}
-                        className={`${isDisliked ? "active" : ""}`}
+                      <button
+                        className="dislike-button"
                         onClick={this.handleDislike}
-                      />
+                        data-testid="button-dislike"
+                      >
+                        <FontAwesomeIcon
+                          icon={faThumbsDown}
+                          className={`${isDisliked ? "active" : ""}`}
+                        />
+                      </button>
                       <span>{numDislikes}</span>
                     </span>
                     {post.noComments > 0 && (
@@ -557,22 +556,24 @@ class SinglePostClass extends Component {
                       </span>
                     )}
                     <span className="post-repost">
-                      <FontAwesomeIcon
-                        icon={faRetweet}
+                      <button
+                        className="repost-button"
                         onClick={this.handleRepost}
-                      />
+                      >
+                        <FontAwesomeIcon icon={faRetweet} />
+                      </button>
                     </span>
                     <span className="post-share">
-                      <FontAwesomeIcon
-                        icon={faShare}
+                      <button
+                        className="share-button"
                         onClick={this.handleShare}
-                      />
+                      >
+                        <FontAwesomeIcon icon={faShare} />
+                      </button>
                     </span>
-
                     <Button onClick={this.handleBuy} className="buy-button">
                       Buy
                     </Button>
-
                     <Dialog open={isBuy} onClose={this.handleCloseBuy}>
                       <DialogTitle>Purchase</DialogTitle>
                       <DialogContent>

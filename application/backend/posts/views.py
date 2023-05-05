@@ -22,7 +22,8 @@ def view_posts(request):
             sort_type = collected_data.get("sortType")
             category = collected_data.get("category", "")
 
-            data = find_post_data(limit, offset, searchText, sortby, sort_type, category)
+            data = find_post_data(limit, offset, searchText,
+                                  sortby, sort_type, category)
             formatted_data = format_post_data(data)
 
             if data and len(data) > 0:
@@ -31,7 +32,7 @@ def view_posts(request):
             else:
                 return view_post_response('SUCCESS', 'No posts found with corresponding search text.', [], 0)
 
-        return view_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method', [], 0)
+        return view_post_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method', [], 0)
 
     except Exception as e:
         print(traceback.print_exc())
@@ -68,17 +69,19 @@ def create_post(request):
 
             tags = find_tags_from_description(description)
 
-            post_id = create_post_in_db(username, is_reshared, description, s3_url, category)
+            post_id = create_post_in_db(
+                username, is_reshared, description, s3_url, category)
             tags_added = add_tags_in_db(tags, post_id)
 
             if post_id and tags_added:
-                create_post_ = insert_activity(username, f"User created post {post_id}")
+                create_post_ = insert_activity(
+                    username, f"User created post {post_id}")
                 return create_post_response('SUCCESS', 'Post succesfully created.', True, post_id)
 
             else:
                 return create_post_response('SUCCESS', 'Something went wrong in post creation, please recheck.')
 
-        return create_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return create_post_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())
@@ -91,8 +94,9 @@ def upload_image_to_s3(image):
     random_filename = "image_" + str(random.randint(1, 1000000)) + '.jpeg'
 
     s3 = boto3.client('s3', aws_access_key_id=s3_details.aws_access_key,
-                        aws_secret_access_key=s3_details.aws_secret_key)
-    response = s3.upload_file(filename, s3_details.bucket_name, random_filename)
+                      aws_secret_access_key=s3_details.aws_secret_key)
+    response = s3.upload_file(
+        filename, s3_details.bucket_name, random_filename)
     s3_url = s3_details.base_s3_url + random_filename
 
     os.remove(filename)
@@ -119,7 +123,7 @@ def view_categories(request):
             else:
                 return view_categories_response('SUCCESS', 'Something went wrong in fetching categories')
 
-        return view_categories_response('SUCCESS', 'This API has been wrongly called. Needs to be GET method')
+        return view_categories_response('SUCCESS', 'This API has been called incorrectly. Needs to be GET method')
 
     except Exception as e:
         print(traceback.print_exc())
@@ -140,16 +144,17 @@ def view_user_posts(request):
             sort_type = collected_data.get("sortType")
             username = collected_data.get("username", "")
 
-            data = find_user_post_data(limit, offset, searchText, sortby, sort_type, username)
+            data = find_user_post_data(
+                limit, offset, searchText, sortby, sort_type, username)
             formatted_data = format_post_data(data)
 
             if data and len(data) > 0:
-                return view_post_response('SUCCESS', 'Posts succesfully fetched.', formatted_data, len(data))
+                return view_post_response('SUCCESS', 'Posts successfully fetched.', formatted_data, len(data))
 
             else:
                 return view_post_response('SUCCESS', 'No posts found with corresponding search text.', [], 0)
 
-        return view_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method', [], 0)
+        return view_post_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method', [], 0)
 
     except Exception as e:
         print(traceback.print_exc())
@@ -180,7 +185,7 @@ def get_post_details(request):
             else:
                 return view_single_post_response('SUCCESS', 'No posts found with corresponding search text.', {})
 
-        return view_single_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method', {})
+        return view_single_post_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method', {})
 
     except Exception as e:
         print(traceback.print_exc())
@@ -202,7 +207,7 @@ def like_dislike_post(request):
             else:
                 return liked_disliked_response('SUCCESS', 'No posts found with corresponding search text.')
 
-        return liked_disliked_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return liked_disliked_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())
@@ -217,7 +222,8 @@ def add_comment(request):
             comment = collected_data.get("comment")
             username = collected_data.get("username")
 
-            is_updated, no_of_comments, comments = add_comment_to_db(postid, comment, username)
+            is_updated, no_of_comments, comments = add_comment_to_db(
+                postid, comment, username)
             comments = format_comment_data(comments)
 
             if is_updated and comments and len(comments) > 0:
@@ -226,7 +232,7 @@ def add_comment(request):
             else:
                 return add_comment_response('SUCCESS', 'No posts found with corresponding search text.')
 
-        return add_comment_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return add_comment_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())
@@ -263,7 +269,7 @@ def delete_comment(request):
             else:
                 return delete_comment_response('SUCCESS', 'Something went wrong')
 
-        return delete_comment_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return delete_comment_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())
@@ -284,7 +290,7 @@ def add_view(request):
             else:
                 return add_view_response('SUCCESS', 'No posts found with corresponding post id.')
 
-        return add_view_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return add_view_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())
@@ -310,7 +316,7 @@ def delete_post(request):
             else:
                 return delete_post_response('SUCCESS', 'Something went wrong')
 
-        return delete_post_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return delete_post_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())

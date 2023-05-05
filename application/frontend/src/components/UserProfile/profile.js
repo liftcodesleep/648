@@ -8,11 +8,8 @@ import "./profile.css";
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import Footer from "../Footer/Footer";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import { fontSize } from "@mui/system";
-import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
-import axios from "axios";
 
 class UserProfile extends Component {
   state = {
@@ -31,7 +28,6 @@ class UserProfile extends Component {
     this.setState({ searchText: event.target.value });
   };
   handleDelete(postId) {
-    const username = "ishah_sfsu";
     fetch("http://127.0.0.1:8000/delete_post", {
       method: "POST",
       headers: {
@@ -39,7 +35,7 @@ class UserProfile extends Component {
       },
       body: JSON.stringify({
         postid: postId,
-        username: username,
+        username: Cookies.get("username"),
       }),
     })
       .then((response) => response.json())
@@ -116,9 +112,6 @@ class UserProfile extends Component {
 
   render() {
     const { searchText, posts, error, isLoggedout, searchResults } = this.state;
-    console.log("***********");
-    console.log({ searchResults });
-    console.log({ posts });
     const username = Cookies.get("username");
     console.log(username);
     const firstInitial = username ? username.charAt(0) : "";
@@ -148,7 +141,11 @@ class UserProfile extends Component {
                 onChange={this.handleInputChange}
                 placeholder="Images, #tags, @users"
               />
-              <button className="search-button" onClick={this.handleSubmit}>
+              <button
+                className="search-button"
+                onClick={this.handleSubmit}
+                data-testid="search-button"
+              >
                 <FontAwesomeIcon icon={faSearch} className="icon" />
               </button>
             </div>
