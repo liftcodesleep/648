@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Search from "./Search";
+import Search from "./search";
 import Cookies from "js-cookie";
 
 jest.mock("js-cookie");

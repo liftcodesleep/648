@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import SignupForm from "../SignupForm/SignupForm";
+import SignupForm from "../SignUpForm/signUpForm";
 
 describe("SignupForm", () => {
   beforeEach(() => {

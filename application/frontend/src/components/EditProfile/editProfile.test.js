@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import EditProfile from "../EditProfile/EditProfile";
+import EditProfile from "../EditProfile/editProfile";
 import Cookies from "js-cookie";
 
 jest.mock("js-cookie");
