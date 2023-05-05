@@ -17,7 +17,7 @@ class UserProfile extends Component {
     offset: 0,
     searchText: "",
     sortby: "",
-    sortType: "ASC",
+    sortType: "DESC",
     posts: [],
     error: null,
     searchResults: [],

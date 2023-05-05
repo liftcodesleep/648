@@ -133,7 +133,7 @@ describe("UserProfile", () => {
             offset: 0,
             searchText: "searchtext",
             sortby: "",
-            sortType: "ASC",
+            sortType: "DESC",
           }),
         })
       )

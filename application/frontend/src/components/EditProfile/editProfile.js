@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "js-cookie";
 import "./editProfile.css";
-import Footer from "../Footer/Footer";
 import Header from "../Header/header";
 
 class EditProfile extends Component {
@@ -169,7 +168,6 @@ class EditProfile extends Component {
             </ul>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
