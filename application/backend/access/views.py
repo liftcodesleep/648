@@ -2,7 +2,7 @@ from .models import *
 from .constants import *
 from email_validator import validate_email, EmailNotValidError
 import re
-import random
+import uuid
 import traceback
 import json
 from django.shortcuts import render, redirect
@@ -34,7 +34,7 @@ def login(request):
                 return login_response('SUCCESS', False, 'User credentials are incorrect',
                                       "")
 
-        return login_response('SUCCESS', False, 'This API has been wrongly called. Needs to be POST method',
+        return login_response('SUCCESS', False, 'This API has been called incorrectly. Needs to be POST method',
                               "")
 
     except Exception as e:
@@ -46,13 +46,12 @@ def login(request):
 def register(request):
     try:
         if request.method == 'POST':
-            print(request.body)
             collected_data = json.loads(request.body)
             name = collected_data.get("name")
             email = collected_data.get("email")
             password = collected_data.get("password")
             phonenum = collected_data.get("phonenum")
-            userid = name[0] + str(random.randint(0, 999999))
+            userid = uuid.uuid1()
             collected_data["userid"] = userid
 
             if email_is_valid(email):

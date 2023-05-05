@@ -22,7 +22,7 @@ def edit_profile(request):
             else:
                 return edit_profile_response('SUCCESS', 'Username not found.', False)
 
-        return edit_profile_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method', False)
+        return edit_profile_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method', False)
 
     except Exception as e:
         print(traceback.print_exc())
@@ -44,7 +44,7 @@ def view_profile(request):
             else:
                 return view_profile_response('SUCCESS', 'Username not found.')
 
-        return view_profile_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return view_profile_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())
@@ -53,9 +53,12 @@ def view_profile(request):
 
 def process_data(data):
     data = list(data)
-    data.pop(2); data.pop(2); data.pop(3)
+    data.pop(2)
+    data.pop(2)
+    data.pop(3)
     print(data)
-    columns = ["name", "email", "dob", "username", "phonenum", "userpic", "about", "usertype"]
+    columns = ["name", "email", "dob", "username",
+               "phonenum", "userpic", "about", "usertype"]
     processed_data = {}
 
     for i in range(len(data)):
@@ -80,7 +83,7 @@ def get_activity_log(request):
             else:
                 return view_activity_log_response('SUCCESS', 'Username not found.')
 
-        return view_activity_log_response('SUCCESS', 'This API has been wrongly called. Needs to be POST method')
+        return view_activity_log_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
 
     except Exception as e:
         print(traceback.print_exc())

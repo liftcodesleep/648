@@ -50,7 +50,7 @@ def find_post_data(limit, offset, search_text, sort_col, sort_type, category):
     if limit > 0 and offset > 0:
         sql_statement += f" LIMIT {limit} OFFSET {offset}"
 
-    print(sql_statement)
+    # print(sql_statement)
     cursor.execute(sql_statement)
     data = cursor.fetchall()
     conn.close()
@@ -90,11 +90,12 @@ def find_user_post_data(limit, offset, search_text, sort_col, sort_type, usernam
     if limit > 0 and offset > 0:
         sql_statement += f" LIMIT {limit} OFFSET {offset}"
 
-    print(sql_statement)
+    # print(sql_statement)
     cursor.execute(sql_statement)
     data = cursor.fetchall()
     conn.close()
     return data
+
 
 def create_post_in_db(username, is_reshared, description, s3_url, category):
     cursor, conn = get_cursor()
@@ -187,7 +188,7 @@ def like_dislike_post_db(postid, liked):
                             WHERE
                             post_id='{postid}'    
                         """
-        print(sql_statement)
+        # print(sql_statement)
         cursor.execute(sql_statement)
 
         sql_statement = f"""SELECT No_of_likes, No_of_dislikes FROM Posts WHERE post_id='{postid}'"""
