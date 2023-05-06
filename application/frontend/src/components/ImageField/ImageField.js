@@ -367,7 +367,7 @@ function ImageField() {
                   style={{ color: "white", margin: "10px" }}
                   onClick={triggerFileSelect}
                 >
-                  Uplaod Image
+                  Upload Image
                 </Button>
                 <Button
                   variant="contained"
@@ -385,11 +385,11 @@ function ImageField() {
             style={{ color: "white", margin: "10px" }}
             onClick={triggerFileSelect}
           >
-            Uplaod Image
+            Upload Image
           </Button>
         )}
 
-        {/* ):  <Button variant='contained' style={{color:'white', margin: '10px'}} onClick={triggerFileSelect}>Uplaod Image</Button>} */}
+        {/* ):  <Button variant='contained' style={{color:'white', margin: '10px'}} onClick={triggerFileSelect}>Upload Image</Button>} */}
       </div>
 
       {error && <div>{error}</div>}

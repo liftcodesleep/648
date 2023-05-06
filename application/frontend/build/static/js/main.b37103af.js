@@ -56609,7 +56609,7 @@
                                 variant: "contained",
                                 style: { color: "white", margin: "10px" },
                                 onClick: r,
-                                children: "Uplaod Image",
+                                children: "Upload Image",
                               }),
                               (0, We.jsx)(af, {
                                 variant: "contained",
@@ -56643,7 +56643,7 @@
                       variant: "contained",
                       style: { color: "white", margin: "10px" },
                       onClick: r,
-                      children: "Uplaod Image",
+                      children: "Upload Image",
                     }),
               }),
               L && (0, We.jsx)("div", { children: L }),
