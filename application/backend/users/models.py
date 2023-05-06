@@ -50,7 +50,8 @@ def view_profile_data(username):
 
 def fetch_activity_log(username):
     cursor, conn = get_cursor()
-    sql_statement = f"""SELECT activity, activity_time FROM activity_log WHERE username='{username}'"""
+    sql_statement = f"""SELECT activity, activity_time FROM activity_log 
+                        WHERE username='{username}' ORDER BY activity_time DESC LIMIT 10"""
 
     cursor.execute(sql_statement)
     data = cursor.fetchall()
