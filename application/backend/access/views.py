@@ -64,10 +64,10 @@ def register(request):
                             return register_response('SUCCESS', False, message, False)
                     else:
                         return register_response('SUCCESS', False, "Invalid phone number", False)
+                else:
+                    return register_response('SUCCESS', False, "Invalid email", False)
             else:
-                return register_response('SUCCESS', False, "Invalid email", False)
-        else:
-            return register_response('SUCCESS', False, "That username is already in use", False)
+                return register_response('SUCCESS', False, "That username is already in use", False)
 
     except Exception as e:
         print(traceback.print_exc())

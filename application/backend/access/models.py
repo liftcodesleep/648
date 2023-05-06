@@ -29,12 +29,21 @@ def insert_activity(username, text):
     return True
 
 
-def check_username(username):
+def delete_by_email(email):
     cursor, conn = get_cursor()
-    sql_statement = f"""IF [NOT] EXISTS (SELECT 1 FROM User WHERE username='{username}')
+    sql_statement = f"""
+    DELETE FROM User WHERE Email='{email}'
     """
     cursor.execute(sql_statement)
-    if cursor.rowcount == 0:
+
+
+def check_username(username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""SELECT * from User WHERE username='{username}'
+    """
+    cursor.execute(sql_statement)
+    row = cursor.fetchone()
+    if row == None:
         return True
     return False
 
