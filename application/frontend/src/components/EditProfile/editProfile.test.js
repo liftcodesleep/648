@@ -71,7 +71,7 @@ describe("EditProfile", () => {
       expect(fetch).toHaveBeenCalledTimes(3);
       expect(fetch).toHaveBeenNthCalledWith(
         3,
-        "http://44.197.240.111/update_user_profile",
+        "http://127.0.0.1:8000/update_user_profile",
         expect.objectContaining({
           body: JSON.stringify({
             username: "testuser",

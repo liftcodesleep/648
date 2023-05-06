@@ -24,7 +24,7 @@ class LoginForm extends Component {
     e.preventDefault();
     const { username, password } = this.state;
     try {
-      const response = await fetch("http://44.197.240.111/user_login", {
+      const response = await fetch("http://127.0.0.1:8000/user_login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password, user_type: "general" }),

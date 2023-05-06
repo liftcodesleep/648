@@ -28,7 +28,7 @@ class UserProfile extends Component {
     this.setState({ searchText: event.target.value });
   };
   handleDelete(postId) {
-    fetch("http://44.197.240.111/delete_post", {
+    fetch("http://127.0.0.1:8000/delete_post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +58,7 @@ class UserProfile extends Component {
     event.preventDefault();
     const { limit, offset, searchText, sortby, sortType } = this.state;
     try {
-      const response = await fetch("http://44.197.240.111/view_public_posts", {
+      const response = await fetch("http://127.0.0.1:8000/view_public_posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,12 +72,46 @@ class UserProfile extends Component {
       this.setState({ error: "Failed to fetch search results" });
     }
   };
+  handleLogout = async () => {
+    const username = Cookies.get("username");
+    const payload = {
+      username: username,
+    };
+    try {
+      const response = await fetch("http://127.0.0.1:8000/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        console.log({ data });
+        console.log(data.status);
+        console.log(data.isLoggedout);
+        console.log(data.status === "SUCCESS" && data.isLoggedout);
+        if (data.status === "SUCCESS" && data.isLoggedout) {
+          Cookies.remove("token");
+          Cookies.remove("username");
+          this.setState({ isLoggedout: data.isLoggedout });
+        } else {
+          console.log(data.message);
+        }
+      } else {
+        console.log("Something went wrong. Please try again later.");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   componentDidMount = async () => {
     try {
       const username = Cookies.get("username");
       const { limit, offset, searchText, sortby, sortType } = this.state;
-      const response = await fetch("http://44.197.240.111/list_user_posts", {
+      const response = await fetch("http://127.0.0.1:8000/list_user_posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

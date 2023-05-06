@@ -49,7 +49,7 @@ class SinglePostClass extends Component {
   componentDidMount() {
     const { postId } = this.props;
 
-    fetch("http://44.197.240.111/get_post_details", {
+    fetch("http://127.0.0.1:8000/get_post_details", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ class SinglePostClass extends Component {
     const { comment, post } = this.state;
     const username = Cookies.get("username");
 
-    fetch("http://44.197.240.111/add_comment", {
+    fetch("http://127.0.0.1:8000/add_comment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -169,7 +169,7 @@ class SinglePostClass extends Component {
       username: Cookies.get("username"),
     };
     try {
-      const response = await fetch("http://44.197.240.111/delete_comment", {
+      const response = await fetch("http://127.0.0.1:8000/delete_comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -203,7 +203,7 @@ class SinglePostClass extends Component {
   handleLike = () => {
     const { postId } = this.props;
 
-    fetch("http://44.197.240.111/like_dislike_post", {
+    fetch("http://127.0.0.1:8000/like_dislike_post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -248,7 +248,7 @@ class SinglePostClass extends Component {
   handleDislike = () => {
     const { postId } = this.props;
 
-    fetch("http://44.197.240.111/like_dislike_post", {
+    fetch("http://127.0.0.1:8000/like_dislike_post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -297,7 +297,7 @@ class SinglePostClass extends Component {
     event.preventDefault();
     const { limit, offset, searchText, sortby, sortType } = this.state;
     try {
-      const response = await fetch("http://44.197.240.111/view_public_posts", {
+      const response = await fetch("http://127.0.0.1:8000/view_public_posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -336,7 +336,7 @@ class SinglePostClass extends Component {
   };
   handleBuy = async (madeBy) => {
     const userDetailsResponse = await fetch(
-      "http://44.197.240.111/view_user_profile",
+      "http://127.0.0.1:8000/view_user_profile",
       {
         method: "POST",
         headers: {
@@ -351,7 +351,7 @@ class SinglePostClass extends Component {
 
     this.setState((prevState) => ({
       isBuy: !prevState.isBuy,
-      phone: userDetailsData.phoneNumber,
+      phone: userDetailsData.phonenum,
       email: userDetailsData.email,
     }));
   };
@@ -366,7 +366,7 @@ class SinglePostClass extends Component {
       username: username,
     };
     try {
-      const response = await fetch("http://44.197.240.111/logout", {
+      const response = await fetch("http://127.0.0.1:8000/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -394,11 +394,15 @@ class SinglePostClass extends Component {
     const { post } = this.state;
     console.log("inside handle repost");
     console.log(post);
+    const parsedUrl = new URL(post.image);
+
+    // Construct a new URL using a different domain
+    const newImageURL = `https://example.com/images${parsedUrl.pathname}`;
 
     const payload = {
       username: Cookies.get("username"),
       is_reshared: true,
-      image: post.image,
+      image: newImageURL,
       description: post.description,
       category: post.category,
     };
@@ -406,7 +410,7 @@ class SinglePostClass extends Component {
     console.log({ payload });
 
     try {
-      const response = await fetch("http://44.197.240.111/create_post", {
+      const response = await fetch("http://127.0.0.1:8000/create_post", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

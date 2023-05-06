@@ -31,7 +31,7 @@ class Search extends Component {
     const { limit, offset, searchText, sortby, sortType, category } =
       this.state;
     try {
-      const response = await fetch("http://44.197.240.111/view_public_posts", {
+      const response = await fetch("http://127.0.0.1:8000/view_public_posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +73,7 @@ class Search extends Component {
       username: username,
     };
     try {
-      const response = await fetch("http://44.197.240.111/logout", {
+      const response = await fetch("http://127.0.0.1:8000/logout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -105,7 +105,7 @@ class Search extends Component {
   componentDidMount = async () => {
     console.log("inside component did");
     try {
-      const response = await fetch("http://44.197.240.111/fetch_categories", {
+      const response = await fetch("http://127.0.0.1:8000/fetch_categories", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -121,7 +121,7 @@ class Search extends Component {
   };
   updateViews = async (postId) => {
     try {
-      const response = await fetch("http://44.197.240.111/add_view", {
+      const response = await fetch("http://127.0.0.1:8000/add_view", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

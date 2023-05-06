@@ -165,7 +165,7 @@ function ImageField() {
 
     try {
       const response = await axios.post(
-        "http://44.197.240.111/create_post",
+        "http://127.0.0.1:8000/create_post",
         imageData
       );
       if (response.data.status === "SUCCESS") {
@@ -204,7 +204,7 @@ function ImageField() {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://44.197.240.111/fetch_categories"
+        "http://127.0.0.1:8000/fetch_categories"
       );
       console.log(response.data);
       if (response.data.status === "SUCCESS") {
