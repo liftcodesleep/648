@@ -291,10 +291,10 @@ class PostsTestCases(TestCase):
         }
         print("Testing get post details API")
 
-        get_post_deails_response = self.client.post(
+        get_post_details_response = self.client.post(
             '/get_post_details', input_payload, content_type='application/json')
-        self.assertEqual(get_post_deails_response.json()['status'], 'SUCCESS')
-        self.assertIsNotNone(get_post_deails_response.json()['post'])
+        self.assertEqual(get_post_details_response.json()['status'], 'SUCCESS')
+        self.assertIsNotNone(get_post_details_response.json()['post'])
 
     def test_successful_fetch_categories(self):
         print("Testing fetch categories API")
