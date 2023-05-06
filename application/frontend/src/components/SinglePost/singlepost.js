@@ -527,8 +527,11 @@ class SinglePostClass extends Component {
           <div className="single-post-container ">
             <div className="single-post">
               <div className="post-header">
-                <div className="post-user">
-                  <span data-testid="post-author">{post.madeBy}</span>
+                <div style={{ display: "flex" }}>
+                  <div className="profile_initial">{post.madeBy.charAt(0)}</div>
+                  <div className="post-user">
+                    <span data-testid="post-author">{post.madeBy}</span>
+                  </div>
                 </div>
                 <div className="post-image">
                   <img

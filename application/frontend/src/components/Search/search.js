@@ -7,6 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { catImages } from "../utils/CategoryImg";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 
 class Search extends Component {
   state = {
@@ -158,6 +161,7 @@ class Search extends Component {
     } = this.state;
     const username = Cookies.get("username");
     const firstInitial = username ? username.charAt(0) : "";
+
     if (isLoggedout) {
       return <Navigate to="/login" />;
     }
@@ -226,28 +230,68 @@ class Search extends Component {
         ) : (
           <>
             {searchResults.length > 0 && (
-              <div className="row-cards">
-                {searchResults.map(
-                  (result, index) =>
-                    !result.isHeading && (
-                      <Link
-                        key={result.post_id}
-                        to={`/post/${result.post_id}`}
-                        onClick={() => this.updateViews(result.post_id)}
-                      >
-                        <div className="publiccard">
-                          <img src={result.image} alt={result.desc} />
-                          <h2>{result.desc}</h2>
-                          <p>Made by: {result.made_by}</p>
-                          <p>No. of views: {result.no_views}</p>
-                          <p>No. of likes: {result.no_likes}</p>
-                          <p>No. of dislikes: {result.no_dislikes}</p>
-                          <p>Posted on: {result.creation_date}</p>
-                          <p>Category: {result.category}</p>
+              <div className="images-background">
+                <div className="row-cards">
+                  {searchResults.map(
+                    (result, index) =>
+                      !result.isHeading && (
+                        <div>
+                          <div style={{ display: "flex" }}>
+                            <div className="profile_initial">
+                              {result.made_by.charAt(0)}
+                            </div>
+                            <h1
+                              style={{
+                                marginLeft: "10px",
+                                fontWeight: "bold",
+                                fontSize: "20px",
+                                color: "white",
+                              }}
+                            >
+                              {result.made_by}
+                            </h1>
+                          </div>
+                          <div className="publiccard">
+                            <Link
+                              key={result.post_id}
+                              to={`/post/${result.post_id}`}
+                              onClick={() => this.updateViews(result.post_id)}
+                            >
+                              <img src={result.image} alt={result.desc} />
+                            </Link>
+                            <h2>{result.desc}</h2>
+
+                            <div className="post-data">
+                              <p>
+                                {result.no_views}{" "}
+                                <RemoveRedEyeIcon
+                                  style={{ fontSize: "medium" }}
+                                />{" "}
+                                Views
+                              </p>
+                              <p>
+                                {result.no_likes}{" "}
+                                <FavoriteIcon style={{ fontSize: "medium" }} />{" "}
+                                Likes
+                              </p>
+
+                              <p>
+                                {result.no_dislikes}
+                                <HeartBrokenIcon
+                                  style={{ fontSize: "medium" }}
+                                />{" "}
+                                Dislikes{" "}
+                              </p>
+                            </div>
+                            <p>Posted on: {result.creation_date}</p>
+                            <p style={{ paddingBottom: "10px" }}>
+                              Category: {result.category}
+                            </p>
+                          </div>
                         </div>
-                      </Link>
-                    )
-                )}
+                      )
+                  )}
+                </div>
               </div>
             )}
             {searchResults.length === 0 && categories.length > 0 && (

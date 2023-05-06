@@ -1,8 +1,10 @@
 .post-user {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  color: #270c35;
+  color: white;
+  margin-left: 10px;
+  margin-top: 5px;
 }
 
 .post-stats span {
@@ -401,6 +403,8 @@ button[type="submit"] {
   align-items: center;
   justify-content: center;
   display: flex;
+  background-color: rgb(38, 27, 48);
+  border-radius: 20px 20px 0px 0px;
 }
 .post-image {
   margin: 10px 0px 10px 0px;
