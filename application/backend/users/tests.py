@@ -55,6 +55,3 @@ class UsersTestCases(TestCase):
         view_user_profile_response = self.client.post('/view_user_profile', input_payload, content_type='application/json')
         self.assertEqual(view_user_profile_response.json()['status'], 'SUCCESS')
         self.assertEqual(view_user_profile_response.json()['username'], input_payload['username'])
-        
-     
-

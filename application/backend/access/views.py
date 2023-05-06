@@ -163,7 +163,7 @@ def logout(request):
             if logged_out:
                 return logout_response("SUCCESS", "Logout successful", True)
             else:
-                return logout_response("SUCCESS", "Something went wrong", True)
+                return logout_response("SUCCESS", "Something went wrong", False)
 
     except Exception as e:
         print(traceback.print_exc())
