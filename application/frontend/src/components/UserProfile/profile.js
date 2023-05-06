@@ -119,7 +119,7 @@ class UserProfile extends Component {
       return <Navigate to="/login" />;
     }
     return (
-      <div>
+      <div style={{ minHeight: "100vh" }}>
         <header className="header">
           <h1>Picture Perfect</h1>
 
@@ -190,8 +190,9 @@ class UserProfile extends Component {
         <div className="categories">
           <h2 className="category-head">All Posts</h2>
         </div>
-        {error && <div>{error}</div>}
+
         <div className="row-cards">
+          <div className="error-box">{error && <h1>{error}</h1>}</div>
           {posts.map((post, index) => (
             <div key={post.post_id} className="publiccard">
               <img src={post.image} alt={post.desc} />

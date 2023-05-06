@@ -23,25 +23,19 @@ import {
 import "./ImageField.css";
 import Cropper from "react-easy-crop";
 import Slider from "@mui/material/Slider";
-import {
-  generateDownload,
-  generateImage,
-  croppedImg,
-} from "../utils/cropImage";
+import { generateDownload, croppedImg } from "../utils/cropImage";
 import { FilterContext } from "../Post/post";
 import { styled } from "@mui/system";
 import "../utils/effects.css";
-import html2canvas from "html2canvas";
 import axios from "axios";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import ImageComponent from "../ImageComponent/ImageComponent";
 import Cookies from "js-cookie";
-import ReactQuill from "react-quill";
 import upload from "../../Images/upload.jpeg";
 import domtoimage from "dom-to-image";
 import { saveAs } from "file-saver";
 import DoneIcon from "@mui/icons-material/Done";
-
+import CropIcon from "@mui/icons-material/Crop";
+import DownloadIcon from "@mui/icons-material/Download";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 function ImageField() {
   const inputRef = React.useRef();
 
@@ -165,7 +159,7 @@ function ImageField() {
 
     try {
       const response = await axios.post(
-        "http://44.197.240.111/create_post",
+        "http://127.0.0.1:8000/create_post",
         imageData
       );
       if (response.data.status === "SUCCESS") {
@@ -204,7 +198,7 @@ function ImageField() {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://44.197.240.111/fetch_categories"
+        "http://127.0.0.1:8000/fetch_categories"
       );
       console.log(response.data);
       if (response.data.status === "SUCCESS") {
@@ -235,7 +229,10 @@ function ImageField() {
     objectFit: "contain",
     filter: `contrast(${props.customFilter.contrast}%) brightness(${props.customFilter.brightness}%) saturate(${props.customFilter.saturate}%) sepia(${props.customFilter.sepia}%) grayScale(${props.customFilter.gray}%)`,
     "@media screen and (max-width: 768px)": {
-      height: "20vh",
+      height: "25vh",
+      display: "block",
+      margin: "0 auto",
+      width: "100%",
     },
   }));
 
@@ -345,38 +342,43 @@ function ImageField() {
               <div className="buttons-container">
                 <Button variant="contained" onClick={handleDownload}>
                   {" "}
-                  Downlaod{" "}
+                  <DownloadIcon />{" "}
                 </Button>
                 <Button
                   variant="contained"
                   onClick={() => setIsCropClicked(!isCropClicked)}
                 >
-                  Crop
+                  <CropIcon />
                 </Button>
                 {isCropClicked && (
                   <Button onClick={completeCrop}>
                     <DoneIcon className="DoneIcon" />{" "}
                   </Button>
                 )}
-                <Button variant="contained" onClick={onPost}>
-                  {" "}
-                  Post
-                </Button>
+
                 <Button
                   variant="contained"
-                  style={{ color: "white", margin: "10px" }}
+                  style={{ color: "white" }}
                   onClick={triggerFileSelect}
                 >
-                  Uplaod Image
+                  <FileUploadIcon />
                 </Button>
                 <Button
                   variant="contained"
-                  style={{ color: "white", margin: "10px" }}
+                  style={{ color: "white" }}
                   onClick={onDone}
                 >
                   Done
                 </Button>
               </div>
+              <Button
+                style={{ margin: "10px", float: "right" }}
+                variant="contained"
+                onClick={onPost}
+              >
+                {" "}
+                Post
+              </Button>
             </form>
           </>
         ) : (

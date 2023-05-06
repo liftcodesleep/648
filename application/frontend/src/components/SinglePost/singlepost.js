@@ -657,11 +657,34 @@ class SinglePostClass extends Component {
                             <span className="comment-text">
                               {comment.comment}
                             </span>
-                            <button
-                              onClick={() => this.handleCommentDelete(index)}
-                            >
-                              <FontAwesomeIcon icon={faTrash} />
-                            </button>
+
+                            {comment.username === username ? (
+                              <div style={{ display: "flex" }}>
+                                <button
+                                  className="delete_dropdown"
+                                  style={{ color: "white" }}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    const dropdown =
+                                      e.currentTarget.nextElementSibling;
+                                    dropdown.style.display =
+                                      dropdown.style.display === "block"
+                                        ? "none"
+                                        : "block";
+                                  }}
+                                >
+                                  ⋮
+                                </button>
+                                <button
+                                  style={{ display: "none" }}
+                                  onClick={() =>
+                                    this.handleCommentDelete(index)
+                                  }
+                                >
+                                  <FontAwesomeIcon icon={faTrash} />
+                                </button>
+                              </div>
+                            ) : null}
                           </Box>
                         ))}
                       </div>

@@ -104,7 +104,7 @@ class EditProfile extends Component {
     const { name, username, email, activityLog, noOfPosts } = this.state;
 
     return (
-      <div>
+      <div style={{ marginBottom: "5rem" }}>
         <Header />
         <div className="edit-box">
           <div className="edit-container">
@@ -157,15 +157,24 @@ class EditProfile extends Component {
           </div>
           <div className="activity-log">
             <h2 className="activity-heading">Activity Log:</h2>
-            <p>Number of Posts: {noOfPosts}</p>
-            <ul>
-              {activityLog.map((activity) => (
-                <li key={activity.activity_time}>
-                  <p>{activity.activity}</p>
-                  <p>{activity.activity_time}</p>
-                </li>
-              ))}
-            </ul>
+            <div className="log-container">
+              <p>Number of Posts: {noOfPosts}</p>
+              <ul>
+                {activityLog.map((activity) => (
+                  <li key={activity.activity_time}>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <p>{activity.activity} :</p>
+                      <p>{activity.activity_time}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

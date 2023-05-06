@@ -360,9 +360,11 @@ button[type="submit"] {
 .comment-username {
   color: white;
   font-weight: bold;
+  flex: 1;
 }
 .comment-text {
   color: white;
+  flex: 3;
 }
 
 .buy-button {

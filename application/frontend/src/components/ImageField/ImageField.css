@@ -18,7 +18,7 @@
 }
 @media screen and (max-width: 768px) {
   .upload-img {
-    height: 20vh;
+    height: 25vh;
 
     cursor: pointer;
     align-items: center;
@@ -58,10 +58,13 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin: 10px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 10px;
 }
 .text-area {
-  width: 100%;
+  width: 30vw;
   height: 10vh;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -73,7 +76,7 @@
 }
 @media screen and (max-width: 768px) {
   .text-area {
-    width: 50vw;
+    width: 70vw;
   }
 }
 
@@ -81,6 +84,10 @@
   background-color: rgb(36, 36, 247);
 }
 .image-form {
+  align-items: center;
+  justify-content: center;
+}
+.image-field {
   align-items: center;
   justify-content: center;
 }
@@ -131,19 +138,16 @@
   align-items: center;
   justify-content: center;
 
-  padding: 20px;
   margin: 20px;
-
-  height: 52vh;
   position: relative;
   display: block;
-  width: 50vw;
 }
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   .cropper-container {
     margin: 20px;
-
+    height: 52vh;
     padding: 20px;
+    width: 50vw;
   }
 }
 #image-box {
