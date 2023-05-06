@@ -29,6 +29,16 @@ def insert_activity(username, text):
     return True
 
 
+def check_username(username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""IF [NOT] EXISTS (SELECT 1 FROM User WHERE username='{username}')
+    """
+    cursor.execute(sql_statement)
+    if cursor.rowcount == 0:
+        return True
+    return False
+
+
 def check_login_info(username, password, user_type):
     cursor, conn = get_cursor()
     sql_statement = f"""SELECT * FROM User
