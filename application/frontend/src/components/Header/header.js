@@ -12,7 +12,10 @@ import { Link, Navigate } from "react-router-dom";
 function Header() {
   return (
     <header className="header">
-      <h1>Picture Perfect</h1>
+      <Link to={"/"}>
+        <h1>Picture Perfect</h1>
+      </Link>
+
       {/* {showSearchBarAndButton && (
         <div>
           <button  className="new-post-button">

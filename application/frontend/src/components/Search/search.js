@@ -236,7 +236,7 @@ class Search extends Component {
                     (result, index) =>
                       !result.isHeading && (
                         <div>
-                          <div style={{ display: "flex" }}>
+                          <div style={{ display: "flex", marginTop: "20px" }}>
                             <div className="profile_initial">
                               {result.made_by.charAt(0)}
                             </div>
