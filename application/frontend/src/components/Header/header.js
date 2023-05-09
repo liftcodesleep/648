@@ -12,9 +12,7 @@ import { Link, Navigate } from "react-router-dom";
 function Header() {
   return (
     <header className="header">
-      <Link to={"/"}>
-        <h1>Picture Perfect</h1>
-      </Link>
+      <h1>Picture Perfect</h1>
 
       {/* {showSearchBarAndButton && (
         <div>

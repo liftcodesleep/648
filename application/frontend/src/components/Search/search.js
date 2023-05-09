@@ -33,6 +33,7 @@ class Search extends Component {
     event.preventDefault();
     const { limit, offset, searchText, sortby, sortType, category } =
       this.state;
+
     try {
       const response = await fetch("http://44.197.240.111/view_public_posts", {
         method: "POST",
@@ -224,7 +225,7 @@ class Search extends Component {
             </div>
           </div>
         </div>
-
+        {error && <div className="error">{error}</div>}
         {isLoading ? (
           <div className="loading">Loading...</div>
         ) : (
@@ -294,6 +295,7 @@ class Search extends Component {
                 </div>
               </div>
             )}
+
             {searchResults.length === 0 && categories.length > 0 && (
               <>
                 <div className="categories">
@@ -315,7 +317,6 @@ class Search extends Component {
             )}
           </>
         )}
-        {error && <div>{error}</div>}
       </div>
     );
   }
