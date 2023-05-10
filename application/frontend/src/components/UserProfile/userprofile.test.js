@@ -125,7 +125,7 @@ describe("UserProfile", () => {
 
     await waitFor(() =>
       expect(global.fetch).toHaveBeenCalledWith(
-        "http://127.0.0.1:8000/view_public_posts",
+        "http://44.197.240.111/view_public_posts",
         expect.objectContaining({
           method: "POST",
           body: JSON.stringify({

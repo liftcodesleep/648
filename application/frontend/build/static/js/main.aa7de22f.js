@@ -40097,7 +40097,7 @@
                                 (l = r.phone),
                                 (t.prev = 2),
                                 (t.next = 5),
-                                fetch("http://127.0.0.1:8000/register_user", {
+                                fetch("http://44.197.240.111/register_user", {
                                   method: "POST",
                                   headers: {
                                     "Content-Type": "application/json",
@@ -40377,7 +40377,7 @@
                                 (o = r.password),
                                 (t.prev = 2),
                                 (t.next = 5),
-                                fetch("http://127.0.0.1:8000/user_login", {
+                                fetch("http://44.197.240.111/user_login", {
                                   method: "POST",
                                   headers: {
                                     "Content-Type": "application/json",
@@ -43706,7 +43706,7 @@
                                 (t.prev = 2),
                                 (t.next = 5),
                                 fetch(
-                                  "http://127.0.0.1:8000/view_public_posts",
+                                  "http://44.197.240.111/view_public_posts",
                                   {
                                     method: "POST",
                                     headers: {
@@ -43780,7 +43780,7 @@
                               (r = { username: n }),
                               (t.prev = 2),
                               (t.next = 5),
-                              fetch("http://127.0.0.1:8000/logout", {
+                              fetch("http://44.197.240.111/logout", {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
@@ -43846,7 +43846,7 @@
                               console.log("inside component did"),
                               (t.prev = 1),
                               (t.next = 4),
-                              fetch("http://127.0.0.1:8000/fetch_categories", {
+                              fetch("http://44.197.240.111/fetch_categories", {
                                 method: "GET",
                                 headers: {
                                   "Content-Type": "application/json",
@@ -43896,7 +43896,7 @@
                               return (
                                 (t.prev = 0),
                                 (t.next = 3),
-                                fetch("http://127.0.0.1:8000/add_view", {
+                                fetch("http://44.197.240.111/add_view", {
                                   method: "POST",
                                   headers: {
                                     "Content-Type": "application/json",
@@ -44245,7 +44245,7 @@
                                 (t.prev = 2),
                                 (t.next = 5),
                                 fetch(
-                                  "http://127.0.0.1:8000/view_public_posts",
+                                  "http://44.197.240.111/view_public_posts",
                                   {
                                     method: "POST",
                                     headers: {
@@ -44310,7 +44310,7 @@
                               (a = r.sortby),
                               (s = r.sortType),
                               (t.next = 5),
-                              fetch("http://127.0.0.1:8000/list_user_posts", {
+                              fetch("http://44.197.240.111/list_user_posts", {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
@@ -44374,7 +44374,7 @@
                 key: "handleDelete",
                 value: function (e) {
                   var t = this;
-                  fetch("http://127.0.0.1:8000/delete_post", {
+                  fetch("http://44.197.240.111/delete_post", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -44729,7 +44729,7 @@
                                 (t.prev = 2),
                                 (t.next = 5),
                                 fetch(
-                                  "http://127.0.0.1:8000/update_user_profile",
+                                  "http://44.197.240.111/update_user_profile",
                                   {
                                     method: "POST",
                                     headers: {
@@ -44802,7 +44802,7 @@
                                   (t = at.get("username")),
                                   (e.next = 4),
                                   fetch(
-                                    "http://127.0.0.1:8000/view_user_profile",
+                                    "http://44.197.240.111/view_user_profile",
                                     {
                                       method: "POST",
                                       headers: {
@@ -44822,7 +44822,7 @@
                                   (r = e.sent),
                                   console.log({ userDetailsData: r }),
                                   (e.next = 11),
-                                  fetch("http://127.0.0.1:8000/activity_log", {
+                                  fetch("http://44.197.240.111/activity_log", {
                                     method: "POST",
                                     headers: {
                                       "Content-Type": "application/json",
@@ -56319,7 +56319,7 @@
                               t.append("category", q.category),
                               (e.prev = 6),
                               (e.next = 9),
-                              sp.post("http://127.0.0.1:8000/create_post", t)
+                              sp.post("http://44.197.240.111/create_post", t)
                             );
                           case 9:
                             "SUCCESS" === (n = e.sent).data.status
@@ -56377,7 +56377,7 @@
                           return (
                             (e.prev = 0),
                             (e.next = 3),
-                            sp.get("http://127.0.0.1:8000/fetch_categories")
+                            sp.get("http://44.197.240.111/fetch_categories")
                           );
                         case 3:
                           (t = e.sent),
@@ -57496,7 +57496,7 @@
                   A = r.comment,
                   o = r.post,
                   i = at.get("username");
-                fetch("http://127.0.0.1:8000/add_comment", {
+                fetch("http://44.197.240.111/add_comment", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -57539,7 +57539,7 @@
                                 }),
                                 (t.prev = 4),
                                 (t.next = 7),
-                                fetch("http://127.0.0.1:8000/delete_comment", {
+                                fetch("http://44.197.240.111/delete_comment", {
                                   method: "POST",
                                   headers: {
                                     "Content-Type": "application/json",
@@ -57597,7 +57597,7 @@
               })()),
               (e.handleLike = function () {
                 var t = e.props.postId;
-                fetch("http://127.0.0.1:8000/like_dislike_post", {
+                fetch("http://44.197.240.111/like_dislike_post", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -57633,7 +57633,7 @@
               }),
               (e.handleDislike = function () {
                 var t = e.props.postId;
-                fetch("http://127.0.0.1:8000/like_dislike_post", {
+                fetch("http://44.197.240.111/like_dislike_post", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -57687,7 +57687,7 @@
                                 (t.prev = 2),
                                 (t.next = 5),
                                 fetch(
-                                  "http://127.0.0.1:8000/view_public_posts",
+                                  "http://44.197.240.111/view_public_posts",
                                   {
                                     method: "POST",
                                     headers: {
@@ -57767,7 +57767,7 @@
                           case 0:
                             return (
                               (t.next = 2),
-                              fetch("http://127.0.0.1:8000/view_user_profile", {
+                              fetch("http://44.197.240.111/view_user_profile", {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
@@ -57817,7 +57817,7 @@
                               (r = { username: n }),
                               (t.prev = 2),
                               (t.next = 5),
-                              fetch("http://127.0.0.1:8000/logout", {
+                              fetch("http://44.197.240.111/logout", {
                                 method: "POST",
                                 headers: {
                                   "Content-Type": "application/json",
@@ -57886,7 +57886,7 @@
                               console.log({ payload: r }),
                               (t.prev = 5),
                               (t.next = 8),
-                              fetch("http://127.0.0.1:8000/create_post", {
+                              fetch("http://44.197.240.111/create_post", {
                                 method: "POST",
                                 headers: { "Content-Type": "application/json" },
                                 body: JSON.stringify(r),
@@ -57937,7 +57937,7 @@
                 value: function () {
                   var e = this,
                     t = this.props.postId;
-                  fetch("http://127.0.0.1:8000/get_post_details", {
+                  fetch("http://44.197.240.111/get_post_details", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",

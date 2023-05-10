@@ -73,7 +73,7 @@ describe("Search", () => {
       expect(fetch).toHaveBeenCalledTimes(2);
       expect(fetch).toHaveBeenNthCalledWith(
         2,
-        "http://127.0.0.1:8000/view_public_posts",
+        "http://44.197.240.111/view_public_posts",
         expect.objectContaining({
           body: JSON.stringify({
             limit: 5,
