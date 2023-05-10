@@ -1,21 +1,46 @@
-from .models import *
-from .constants import *
-from email_validator import validate_email, EmailNotValidError
-import re
-import uuid
-import traceback
 import json
+import re
+import traceback
+import uuid
+
 from django.shortcuts import render, redirect
+from email_validator import validate_email
+
+from .constants import *
+from .models import *
+
 
 # Create your views here.
 
 
 def render_index_page(request):
+    """
+    Summary: This view renders the index page of react project
+    """
     return render(request, 'index.html')
 
 
-# This method is used to log in a given user by verifying their credentials
 def login(request):
+    """
+        Summary: This method is used to log in a given user by verifying their credentials.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+            password
+            user_type
+
+        Returns:
+            dict object containing following information
+                status
+                isLoggedIn
+                message
+                username
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -44,6 +69,30 @@ def login(request):
 
 
 def register(request):
+    """
+        Summary: This method is used to validate and register a user based on their input details.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            name
+            email
+            password
+            phonenum
+            dob
+            username
+            usertype
+
+        Returns:
+            dict object containing following information
+                status
+                isRegistered
+                message
+                isUnique
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -76,6 +125,9 @@ def register(request):
 
 
 def email_is_valid(email):
+    """
+    Summary: This method checks if email (parameter) is a valid email.
+    """
     try:
         validity = validate_email(email)
         email = validity["email"]
@@ -85,6 +137,9 @@ def email_is_valid(email):
 
 
 def password_is_valid(password):
+    """
+    Summary: This method validates the password (parameter).
+    """
     reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{6,20}$"
     pat = re.compile(reg)
     mat = re.search(pat, password)
@@ -94,6 +149,9 @@ def password_is_valid(password):
 
 
 def get_pw_message(password):
+    """
+    Summary: This method validates the password (parameter).
+    """
     message = check_pw_len(password) + check_pw_lowercase(password)
     message += check_pw_uppercase(password) + check_pw_digit(password)
     message += check_pw_special_char(password)
@@ -101,6 +159,9 @@ def get_pw_message(password):
 
 
 def check_pw_len(password):
+    """
+    Summary: This method validates the password (parameter) for it's length.
+    """
     if len(password) < 6 or len(password) > 20:
         return "Password must be 6 to 20 characters in length.\n"
     else:
@@ -108,6 +169,9 @@ def check_pw_len(password):
 
 
 def check_pw_lowercase(password):
+    """
+    Summary: This method validates the password (parameter) for presence of a lowercase letter.
+    """
     reg = "^(?=.*[a-z])$"
     pat = re.compile(reg)
     mat = re.search(pat, password)
@@ -118,6 +182,9 @@ def check_pw_lowercase(password):
 
 
 def check_pw_uppercase(password):
+    """
+    Summary: This method validates the password (parameter) for presence of a uppercase letter.
+    """
     reg = "^(?=.*[A-Z])$"
     pat = re.compile(reg)
     mat = re.search(pat, password)
@@ -128,6 +195,9 @@ def check_pw_uppercase(password):
 
 
 def check_pw_digit(password):
+    """
+    Summary: This method validates the password (parameter) for presence of digit.
+    """
     reg = "^(?=.*\d)$"
     pat = re.compile(reg)
     mat = re.search(pat, password)
@@ -138,6 +208,9 @@ def check_pw_digit(password):
 
 
 def check_pw_special_char(password):
+    """
+    Summary: This method validates the password (parameter) for presence of a special character.
+    """
     reg = "^(?=.*[@$!%*#?&])$"
     pat = re.compile(reg)
     mat = re.search(pat, password)
@@ -148,11 +221,31 @@ def check_pw_special_char(password):
 
 
 def phonenum_is_valid(phonenum):
+    """
+    Summary: This method validates the phone number (parameter).
+    """
     reg = re.compile(r'^\d{10}$')
     return bool(reg.match(phonenum))
 
 
 def logout(request):
+    """
+        Summary: This method is used to log out a given user.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+
+        Returns:
+            dict object containing following information
+                status
+                isLoggedout
+                message
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
