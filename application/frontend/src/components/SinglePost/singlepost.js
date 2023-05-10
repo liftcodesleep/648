@@ -351,7 +351,7 @@ class SinglePostClass extends Component {
 
     this.setState((prevState) => ({
       isBuy: !prevState.isBuy,
-      phone: userDetailsData.phoneNumber,
+      phone: userDetailsData.phonenum,
       email: userDetailsData.email,
     }));
   };
@@ -394,24 +394,19 @@ class SinglePostClass extends Component {
     const { post } = this.state;
     console.log("inside handle repost");
     console.log(post);
+    const imageData = new FormData();
+    imageData.append("username", Cookies.get("username"));
+    imageData.append("is_reshared", true);
+    imageData.append("imageLink", post.image);
+    imageData.append("description", post.description);
+    imageData.append("category", post.category);
 
-    const payload = {
-      username: Cookies.get("username"),
-      is_reshared: true,
-      image: post.image,
-      description: post.description,
-      category: post.category,
-    };
-
-    console.log({ payload });
+    console.log({ i: imageData });
 
     try {
       const response = await fetch("http://44.197.240.111/create_post", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+        body: imageData,
       });
 
       const data = await response.json();

@@ -102,19 +102,21 @@ def register(request):
             phonenum = collected_data.get("phonenum")
             userid = uuid.uuid1()
             collected_data["userid"] = userid
-
-            if email_is_valid(email):
-                if phonenum_is_valid(phonenum):
-                    if password_is_valid(password):
-                        insert_register(collected_data)
-                        return register_response('SUCCESS', True, "Welcome to PicturePerfect " + name, True)
+            if check_username(name):
+                if email_is_valid(email):
+                    if phonenum_is_valid(phonenum):
+                        if password_is_valid(password):
+                            insert_register(collected_data)
+                            return register_response('SUCCESS', True, "Welcome to PicturePerfect " + name, True)
+                        else:
+                            message = get_pw_message(password)
+                            return register_response('SUCCESS', False, message, False)
                     else:
-                        message = get_pw_message(password)
-                        return register_response('SUCCESS', False, message, False)
+                        return register_response('SUCCESS', False, "Invalid phone number", False)
                 else:
-                    return register_response('SUCCESS', False, "Invalid phone number", False)
+                    return register_response('SUCCESS', False, "Invalid email", False)
             else:
-                return register_response('SUCCESS', False, "Invalid email", False)
+                return register_response('SUCCESS', False, "That username is already in use", False)
 
     except Exception as e:
         print(traceback.print_exc())
@@ -262,7 +264,4 @@ def logout(request):
 
 
 def handle_404_view(request, exception):
-    """
-    Summary: This view handlers all 404 requests made.
-    """
-    return redirect("http://44.197.240.111/login")
+    return redirect("http://127.0.0.1:8000/login")
