@@ -111,9 +111,12 @@ def create_post(request):
             is_reshared = collected_data['is_reshared']
             description = collected_data['description']
             category = collected_data['category']
-            image = request.FILES['image']
 
-            s3_url = upload_image_to_s3(image)
+            try:
+                image = request.FILES['image']
+                s3_url = upload_image_to_s3(image)
+            except:
+                s3_url = collected_data['imageLink']
 
             tags = find_tags_from_description(description)
 
