@@ -171,4 +171,4 @@ def logout(request):
 
 
 def handle_404_view(request, exception):
-    return redirect("http://44.197.240.111/login")
+    return redirect("http://127.0.0.1:8000/login")

@@ -394,15 +394,11 @@ class SinglePostClass extends Component {
     const { post } = this.state;
     console.log("inside handle repost");
     console.log(post);
-    const parsedUrl = new URL(post.image);
-
-    // Construct a new URL using a different domain
-    const newImageURL = `https://example.com/images${parsedUrl.pathname}`;
 
     const payload = {
       username: Cookies.get("username"),
       is_reshared: true,
-      image: newImageURL,
+      imageLink: post.image,
       description: post.description,
       category: post.category,
     };

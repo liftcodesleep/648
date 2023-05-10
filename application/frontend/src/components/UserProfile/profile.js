@@ -106,6 +106,33 @@ class UserProfile extends Component {
       console.log(error);
     }
   };
+  updateViews = async (postId) => {
+    try {
+      const response = await fetch("http://127.0.0.1:8000/add_view", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: JSON.stringify({ postid: postId }),
+      });
+      const data = await response.json();
+      if (data.status === "SUCCESS") {
+        const { searchResults } = this.state;
+        const updatedSearchResults = searchResults.map((result) => {
+          if (result.post_id === data.postid) {
+            return { ...result, no_views: data.noOfViews };
+          }
+          return result;
+        });
+        this.setState({ searchResults: updatedSearchResults });
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
+  };
 
   componentDidMount = async () => {
     try {
@@ -227,56 +254,65 @@ class UserProfile extends Component {
         {error && <div>{error}</div>}
         <div className="row-cards">
           {posts.map((post, index) => (
-            <div key={post.post_id} className="publiccard">
-              <img src={post.image} alt={post.desc} />
+            <Link
+              key={post.post_id}
+              to={`/post/${post.post_id}`}
+              onClick={() => this.updateViews(post.post_id)}
+            >
+              <div key={post.post_id} className="publiccard">
+                <img src={post.image} alt={post.desc} />
 
-              <div className="profile_name">
-                <div className="name_profile">
-                  <p style={{ fontWeight: "bold" }}>{post.made_by}</p>
-                </div>
-                <div className="dropdown">
-                  <button
-                    className="delete_dropdown"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      const dropdown = e.currentTarget.nextElementSibling;
-                      dropdown.style.display =
-                        dropdown.style.display === "block" ? "none" : "block";
-                    }}
-                  >
-                    ⋮
-                  </button>
-                  <div className="delete_container" style={{ display: "none" }}>
-                    <button onClick={() => this.handleDelete(post.post_id)}>
-                      Delete
+                <div className="profile_name">
+                  <div className="name_profile">
+                    <p style={{ fontWeight: "bold" }}>{post.made_by}</p>
+                  </div>
+                  <div className="dropdown">
+                    <button
+                      className="delete_dropdown"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const dropdown = e.currentTarget.nextElementSibling;
+                        dropdown.style.display =
+                          dropdown.style.display === "block" ? "none" : "block";
+                      }}
+                    >
+                      ⋮
                     </button>
+                    <div
+                      className="delete_container"
+                      style={{ display: "none" }}
+                    >
+                      <button onClick={() => this.handleDelete(post.post_id)}>
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="post_details">
-                <div>
+                <div className="post_details">
+                  <div>
+                    <p>
+                      {post.no_views}{" "}
+                      <RemoveRedEyeIcon style={{ fontSize: "medium" }} /> Views
+                    </p>
+                  </div>
                   <p>
-                    {post.no_views}{" "}
-                    <RemoveRedEyeIcon style={{ fontSize: "medium" }} /> Views
+                    {post.no_likes}{" "}
+                    <FavoriteIcon style={{ fontSize: "medium" }} /> Likes
+                  </p>
+                  <p>
+                    {post.no_dislikes}{" "}
+                    <HeartBrokenIcon style={{ fontSize: "medium" }} /> Dislikes
                   </p>
                 </div>
-                <p>
-                  {post.no_likes}{" "}
-                  <FavoriteIcon style={{ fontSize: "medium" }} /> Likes
-                </p>
-                <p>
-                  {post.no_dislikes}{" "}
-                  <HeartBrokenIcon style={{ fontSize: "medium" }} /> Dislikes
-                </p>
-              </div>
 
-              <span>{post.posted_on}</span>
+                <span>{post.posted_on}</span>
 
-              <div>
-                <p>{post.desc}</p>
+                <div>
+                  <p>{post.desc}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
