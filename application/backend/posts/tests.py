@@ -8,7 +8,7 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 class PostsTestCases(TestCase):
     def test_successful_add_view(self):
         input_payload = {
-            "postid": random.choice(['P1012', 'P1084', 'P630', 'P1456'])
+            "postid": 'P001'
         }
 
         print("Testing add view API")
@@ -29,9 +29,9 @@ class PostsTestCases(TestCase):
 
     def test_successful_add_comment(self):
         input_payload_add_comment = {
-            "postid": random.choice(['P1012', 'P630', 'P959', 'P1456']),
+            "postid": 'P001',
             "comment": "This is a dummy comment made using django tests",
-            "username": "ishah_sfsu"
+            "username": "testuser"
         }
 
         post_details_input_payload = {
@@ -64,7 +64,7 @@ class PostsTestCases(TestCase):
         input_payload_delete_comment = {
             "postid": self.test_successful_add_comment(),
             "commentid": "",
-            "username": "ishah_sfsu"
+            "username": "testuser"
         }
 
         post_details_input_payload = {
@@ -105,7 +105,7 @@ class PostsTestCases(TestCase):
         file = SimpleUploadedFile(
             "nature_dummy.jpg", b"file_content", content_type='image/jpeg')
         create_post_payload = {
-            "username": "ishah_sfsu",
+            "username": "testuser",
             "is_reshared": True,
             "image": file,
             "description": "This is a post made for testing using django tests",
@@ -165,10 +165,10 @@ class PostsTestCases(TestCase):
 
     def test_dislike_post(self):
         get_post_payload = {
-            "postid": "P1273"
+            "postid": 'P001'
         }
         dislike_post_payload = {
-            "postid": "P1273",
+            "postid": 'P001',
             "liked": False
         }
         original_dislike_post_response = self.client.post(
@@ -190,10 +190,10 @@ class PostsTestCases(TestCase):
     def test_like_post(self):
         print("Testing like/dislike")
         get_post_payload = {
-            "postid": "P1273"
+            "postid": 'P001'
         }
         like_post_payload = {
-            "postid": "P1273",
+            "postid": 'P001',
             "liked": True
         }
         original_like_post_response = self.client.post(
@@ -216,7 +216,7 @@ class PostsTestCases(TestCase):
         file = SimpleUploadedFile(
             "nature_dummy.jpg", b"file_content", content_type='image/jpeg')
         create_post_payload = {
-            "username": "ishah_sfsu",
+            "username": "testuser",
             "is_reshared": True,
             "image": file,
             "description": "This is a third post made for testing post deletion using django tests",
@@ -231,7 +231,7 @@ class PostsTestCases(TestCase):
         postid = create_post_response.json()['postid']
 
         delete_post_payload = {
-            "username": "ishah_sfsu",
+            "username": "testuser",
             "postid": postid
         }
 
@@ -242,21 +242,11 @@ class PostsTestCases(TestCase):
         self.assertEqual(delete_post_response.json()['status'], 'SUCCESS')
         self.assertEqual(delete_post_response.json()['isPostDeleted'], True)
 
-        file = SimpleUploadedFile(
-            "nature_dummy.jpg", b"file_content", content_type='image/jpeg')
-        create_post_payload = {
-            "username": "ishah_sfsu",
-            "is_reshared": True,
-            "image": file,
-            "description": "This is a third post made for testing post deletion using django tests",
-            "category": "Nature"
-        }
-
     def test_list_user_posts(self):
         print("Test listing user posts")
         input_payload = {
             "limit": 1,
-            "username": "ishah_sfsu",
+            "username": "testuser",
             "offset": 0,
             "searchtext": "post",
             "sortby": "Creation_date",
@@ -287,7 +277,7 @@ class PostsTestCases(TestCase):
 
     def test_successful_get_post_details(self):
         input_payload = {
-            "postid": random.choice(['P1012', 'P630', 'P1456'])
+            "postid": 'P001'
         }
         print("Testing get post details API")
 

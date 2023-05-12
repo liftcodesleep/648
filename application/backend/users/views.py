@@ -8,6 +8,24 @@ import traceback
 
 
 def edit_profile(request):
+    """
+        Summary: This method is used to edit profile of a given user.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+            updates which is a dict input
+
+        Returns:
+            dict object containing following information
+                status
+                isUpdated
+                message
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -30,6 +48,27 @@ def edit_profile(request):
 
 
 def view_profile(request):
+    """
+        Summary: This method is used to fetch profile details of a given user.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+
+        Returns:
+            dict object containing following information
+                status
+                message
+                email
+                dob
+                username
+                phonenum
+                usertype
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -52,6 +91,9 @@ def view_profile(request):
 
 
 def process_data(data):
+    """
+    Summary: This method processes profile data to a required format.
+    """
     data = list(data)
     data.pop(2)
     data.pop(2)
@@ -68,6 +110,25 @@ def process_data(data):
 
 
 def get_activity_log(request):
+    """
+        Summary: This method is used to fetch activity log for a given user. It fetches
+        the last 10 entries.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+
+        Returns:
+            dict object containing following information
+                status
+                log
+                message
+                no_of_posts
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -91,6 +152,9 @@ def get_activity_log(request):
 
 
 def process_log_data(data):
+    """
+    Summary: This method processes log data to a required format
+    """
     formatted_list = []
     cols = ['activity', 'activity_time']
 

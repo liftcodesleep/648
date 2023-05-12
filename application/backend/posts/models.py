@@ -6,6 +6,8 @@ import random
 
 
 def get_cursor():
+    # This method creates a connection to the MySQL Database
+
     conn = pymysql.connect(
         host='csc648-db-team-1.cp7px58ibcuh.us-east-1.rds.amazonaws.com',
         port=3306,
@@ -18,6 +20,8 @@ def get_cursor():
 
 
 def find_post_data(limit, offset, search_text, sort_col, sort_type, category):
+    # This method finds the posts based on inputs
+
     cursor, conn = get_cursor()
     sql_statement = "SELECT * FROM Posts"
 
@@ -58,6 +62,8 @@ def find_post_data(limit, offset, search_text, sort_col, sort_type, category):
 
 
 def find_user_post_data(limit, offset, search_text, sort_col, sort_type, username):
+    # This method finds posts for a particular user
+
     cursor, conn = get_cursor()
     sql_statement = "SELECT * FROM Posts"
 
@@ -98,6 +104,8 @@ def find_user_post_data(limit, offset, search_text, sort_col, sort_type, usernam
 
 
 def create_post_in_db(username, is_reshared, description, s3_url, category):
+    # This method saves a new post in database
+
     cursor, conn = get_cursor()
     post_id = ''
 
@@ -127,6 +135,8 @@ def create_post_in_db(username, is_reshared, description, s3_url, category):
 
 
 def find_post_details(postid):
+    # This method finds details related to a single post
+
     cursor, conn = get_cursor()
     sql_statement = f"SELECT * FROM Posts WHERE post_id='{postid}'"
     # print(sql_statement)
@@ -137,6 +147,8 @@ def find_post_details(postid):
 
 
 def add_tags_in_db(tags, post_id):
+    # This method adds new tags to the database
+
     cursor, conn = get_cursor()
 
     for tag in tags:
@@ -177,6 +189,8 @@ def add_tags_in_db(tags, post_id):
 
 
 def like_dislike_post_db(postid, liked):
+    # This method updates likes and dislikes for a given post
+
     try:
         cursor, conn = get_cursor()
         to_update_col = "No_of_likes" if liked else "No_of_dislikes"
@@ -203,6 +217,8 @@ def like_dislike_post_db(postid, liked):
 
 
 def add_comment_to_db(postid, comment, username):
+    # This method saves a new comment to the database
+
     cursor, conn = get_cursor()
     sql_statement = f"""
                         INSERT INTO comments 
@@ -233,6 +249,8 @@ def add_comment_to_db(postid, comment, username):
 
 
 def fetch_comments(postid):
+    # This method fetches comments for a given post
+
     cursor, conn = get_cursor()
 
     sql_statement = f"""SELECT no_of_comments FROM Posts WHERE post_id='{postid}'"""
@@ -254,6 +272,8 @@ def fetch_comments(postid):
 
 
 def delete_comment_from_db(postid, commentid, username):
+    # This method deletes comment data for a given post and comment
+
     cursor, conn = get_cursor()
 
     sql_statement = f"""SELECT COUNT(*) FROM Posts WHERE post_id='{postid}' and Made_by='{username}'"""
@@ -289,6 +309,8 @@ def delete_comment_from_db(postid, commentid, username):
 
 
 def insert_activity(username, text):
+    # This method inserts details into activity_log table
+
     cursor, conn = get_cursor()
     sql_statement = f"""INSERT INTO activity_log
                         VALUES
@@ -301,6 +323,8 @@ def insert_activity(username, text):
 
 
 def update_views(postid):
+    # This method updates views for a given post
+
     cursor, conn = get_cursor()
     sql_statement = f"""UPDATE Posts
                             SET
@@ -320,6 +344,8 @@ def update_views(postid):
 
 
 def delete_post_from_db(postid, username):
+    # This method deletes post data from database
+
     cursor, conn = get_cursor()
 
     sql_statement = f"""SELECT COUNT(*) FROM Posts WHERE post_id='{postid}' and Made_by='{username}'"""
