@@ -18,6 +18,15 @@ def get_cursor():
     return cursor, conn
 
 
+def delete_user_from_db(username):
+    # This method deletes user from database
+    cursor, conn = get_cursor()
+    sql_statement = f"""DELETE FROM User WHERE Username='{username}'"""
+    cursor.execute(sql_statement)
+    conn.commit()
+    conn.close()
+    return True
+
 def insert_activity(username, text):
     # This method inserts activity into activity_log table
 

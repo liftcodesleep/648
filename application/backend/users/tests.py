@@ -7,14 +7,15 @@ import random
 class UsersTestCases(TestCase):
     def test_successful_update_user_profile(self):
         view_profile_input_payload = {
-            "username": "ishah_sfsu"
+            "username": "testuser"
         }
 
+        random_email = "testuser{}@gmail.com".format(str(random.randint(0, 1000)))
         update_profile_input_payload = {
             "username": view_profile_input_payload['username'],
             "updates": [
-                {"updatedColumn": "name", "updatedValue": "Ishika Shah"},
-                {"updatedColumn": "email", "updatedValue": "ishikaishu2000@gmail.com"}
+                {"updatedColumn": "name", "updatedValue": "Test User"},
+                {"updatedColumn": "email", "updatedValue": random_email}
             ]
         }
 
@@ -35,7 +36,7 @@ class UsersTestCases(TestCase):
 
     def test_successful_activity_log(self):
         input_payload = {
-            "username": "ishah_sfsu",
+            "username": "testuser",
 
         }
 
@@ -47,7 +48,7 @@ class UsersTestCases(TestCase):
 
     def test_successful_view_user_profile(self):
         input_payload = {
-            "username": "ishah_sfsu",
+            "username": "testuser",
         }
 
         print("Testing view user profile API")

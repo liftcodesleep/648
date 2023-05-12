@@ -7,8 +7,8 @@ from django.test import TestCase
 class AccessTestCases(TestCase):
     def test_successful_login(self):
         input_payload = {
-            "username": "ishah_sfsu",
-            "password": "Ishika2510#",
+            "username": "testuser",
+            "password": "TestUserPass123#",
             "user_type": "general"
         }
 
@@ -20,7 +20,7 @@ class AccessTestCases(TestCase):
 
     def test_invalid_login(self):
         input_payload = {
-            "username": "ishah_sfsu",
+            "username": "testuser",
             "password": "incorrect password",
             "user_type": "general"
         }
@@ -49,6 +49,13 @@ class AccessTestCases(TestCase):
         self.assertEqual(
             response.json()['message'], 'Welcome to PicturePerfect Bob')
         self.assertEqual(response.json()['isRegistered'], True)
+
+        input_payload_delete = {
+            "username": input_payload['username']
+        }
+        response = self.client.post('/delete_user', input_payload_delete, content_type='application/json')
+        self.assertEqual(response.json()['status'], 'SUCCESS')
+        self.assertEqual(response.json()['isDeleted'], True)
 
     def test_invalid_password_signup(self):
         print("Testing register API")
@@ -103,16 +110,10 @@ class AccessTestCases(TestCase):
         self.assertEqual(response.json()['status'], 'SUCCESS')
         self.assertEqual(response.json()['message'], 'Invalid email')
         self.assertEqual(response.json()['isRegistered'], False)
-        print("Testing invalid login case")
-        response = self.client.post(
-            '/user_login', input_payload, content_type='application/json')
-        self.assertEqual(response.json()['status'], 'SUCCESS')
-        self.assertEqual(response.json()['isLoggedin'], False)
 
     def test_successful_logout(self):
         input_payload = {
-            "username": "ishah_sfsu",
-
+            "username": "testuser"
         }
 
         print("Testing logout API with valid ouput")

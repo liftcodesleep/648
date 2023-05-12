@@ -122,6 +122,43 @@ def register(request):
                                  False)
 
 
+def delete_user(request):
+    """
+            Summary: This method is used to delete a user based on their username.
+
+            Request type: POST
+
+            Parameters:
+                request object
+
+            Input JSON data:
+                username
+
+            Returns:
+                dict object containing following information
+                    status
+                    isDeleted
+                    message
+        """
+    try:
+        if request.method == 'POST':
+            collected_data = json.loads(request.body)
+            username = collected_data.get("username")
+
+            is_deleted = delete_user_from_db(username)
+
+            if is_deleted:
+                return delete_user_response('SUCCESS', 'User Deleted successfully', True)
+            else:
+                return delete_user_response('SUCCESS', 'User could not be deleted')
+        else:
+            return delete_user_response('SUCCESS', 'This API has been called incorrectly. Needs to be POST method')
+
+    except Exception as e:
+        print(traceback.print_exc())
+        return delete_user_response('FAILED', f'API failed with error: {e}', False)
+
+
 def email_is_valid(email):
     """
     Summary: This method checks if email (parameter) is a valid email.

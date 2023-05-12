@@ -14,6 +14,7 @@ urlpatterns = [
     re_path(r'^user-profile$', render_index_page, name='user-profile'),
     re_path(r'^edit-profile$', render_index_page, name='edit-profile'),
     re_path(r'^uploadimage$', render_index_page, name='upload_image'),
+    re_path(r'^delete_user$', delete_user, name='delete_user'),
 ]
 
 handler404 = "access.views.handle_404_view"
