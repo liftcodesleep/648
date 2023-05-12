@@ -41,6 +41,25 @@ def insert_activity(username, text):
     return True
 
 
+def delete_by_email(email):
+    cursor, conn = get_cursor()
+    sql_statement = f"""
+    DELETE FROM User WHERE Email='{email}'
+    """
+    cursor.execute(sql_statement)
+
+
+def check_username(username):
+    cursor, conn = get_cursor()
+    sql_statement = f"""SELECT * from User WHERE username='{username}'
+    """
+    cursor.execute(sql_statement)
+    row = cursor.fetchone()
+    if row == None:
+        return True
+    return False
+
+
 def check_login_info(username, password, user_type):
     # This method checks if login information entered, is valid.
 
