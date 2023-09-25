@@ -12,8 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
-      matrix:
+      matrix
         python-version: [3.9]
+
 
     steps:
     - uses: actions/checkout@v3
@@ -31,3 +32,4 @@ jobs:
         python application/backend/manage.py test access --noinput --keepdb
         python application/backend/manage.py test posts --noinput --keepdb
         python application/backend/manage.py test users --noinput --keepdb
+

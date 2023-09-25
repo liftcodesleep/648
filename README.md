@@ -19,7 +19,7 @@
 | Student Name | Student Email | GitHub Username | Student's role |
 | :----------: | :-----------: | :-------------: | :------------: |
 |   Jacob Lawrence   | jlawrence2@sfsu.edu |      liftcodesleep       |  GitHub & Scrum master   |
-|   Nandhi Kanti Vinay Kumar   | fnandhikantivinaykumar@sfsu.edu |      hackerdud3       |  Front End D   |
+|   Nandhi Kanti Vinay Kumar   | fnandhikantivinaykumar@sfsu.edu |      hackerdud3       |  Front End Lead  |
 |   Ishika Shah   | ishah@sfsu.edu |      ishikashah2510       |  Backend Lead   |
 |   Alekya Bairaboina  | abairaboina@sfsu.edu |      Alekhya1311       |  Team Lead & Front End Developer |
 |   Nic   | nburns@mail.sfsu.edu |      nicburns       |  Product Owner   |
