@@ -1,11 +1,6 @@
-body{
-  background: linear-gradient(to bottom, #d1ecff, #ffffff);
-}
-
-
 .about {
   max-width: 800px;
-  margin:0 auto;
+  margin: 0 auto;
   padding: 50px;
 }
 
@@ -23,14 +18,12 @@ body{
 
 #info {
   margin-bottom: 10px;
-
 }
 #icon {
   display: inline;
   height: 18px;
   width: 18px;
   margin-left: 5px;
-  
 }
 
 .member {
@@ -48,19 +41,20 @@ body{
   margin-top: 30px;
 }
 
-#skills{
+#skills {
   margin-bottom: 70px;
 }
 .member h2 {
   align-content: center;
   margin-bottom: -2px;
- }
-
- 
+}
 
 .member p {
   font-size: 18px;
   text-align: center;
-  margin-left: 50px ;
+  margin-left: 50px;
   margin-right: 50px;
-  }
+}
+.App {
+  min-height: 100vh;
+}

@@ -14,12 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
+from .env_details import *
+from .views import *
 
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path(r'about/', include('backend.about_us.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if env == 'local':
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path(r'about/', include('about_us.urls')),
+        path(r'', include('access.urls')),
+        path(r'', include('posts.urls')),
+        path(r'', include('users.urls')),
+        re_path(r'^.*$', render_index_page, name='delete_post'),
+    ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+else:
+    urlpatterns = [
+          path('admin/', admin.site.urls),
+          path(r'about/', include('backend.about_us.urls')),
+          path(r'', include('backend.access.urls')),
+          path(r'', include('backend.posts.urls')),
+          path(r'', include('backend.users.urls')),
+      ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
