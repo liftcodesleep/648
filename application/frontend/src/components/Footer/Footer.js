@@ -4,7 +4,12 @@ import "./Footer.css";
 function Footer() {
   return (
     <footer className="footer">
-      <p>Picture Perfect since 2023</p>
+      <div className="footer-container">
+        <span className="text-muted">
+          © {new Date().getFullYear()} Picture Perfect.{" "}
+          <p style={{ fontSize: "15px" }}>All rights reserved.</p>
+        </span>
+      </div>
     </footer>
   );
 }

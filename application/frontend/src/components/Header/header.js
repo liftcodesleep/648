@@ -1,21 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import { useLocation } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 
-import './header.css';
-import Cookies from 'js-cookie';
+import "./header.css";
+import Cookies from "js-cookie";
 
-import { Link, Navigate} from 'react-router-dom';
+import { Link, Navigate } from "react-router-dom";
 
 function Header() {
-  const location = useLocation();
-  const showSearchBarAndButton = location.pathname !== '/login' && location.pathname !== '/signup';
-
   return (
-    <header className='header'>
+    <header className="header">
       <h1>Picture Perfect</h1>
+
       {/* {showSearchBarAndButton && (
         <div>
           <button  className="new-post-button">
@@ -34,9 +32,12 @@ function Header() {
       )} */}
       <nav>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/about">About</a></li>
-        
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about">About</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -44,7 +45,3 @@ function Header() {
 }
 
 export default Header;
-
-
-
-

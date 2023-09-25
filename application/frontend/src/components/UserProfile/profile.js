@@ -57,6 +57,10 @@ class UserProfile extends Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { limit, offset, searchText, sortby, sortType } = this.state;
+    if (!searchText) {
+      this.setState({ error: "Please enter a query to" });
+      return;
+    }
     try {
       const response = await fetch("http://44.197.240.111/view_public_posts", {
         method: "POST",
@@ -180,7 +184,7 @@ class UserProfile extends Component {
       return <Navigate to="/login" />;
     }
     return (
-      <div>
+      <div style={{ minHeight: "100vh" }}>
         <header className="header">
           <h1>Picture Perfect</h1>
 
@@ -251,8 +255,9 @@ class UserProfile extends Component {
         <div className="categories">
           <h2 className="category-head">All Posts</h2>
         </div>
-        {error && <div>{error}</div>}
+
         <div className="row-cards">
+          <div className="error-box">{error && <h1>{error}</h1>}</div>
           {posts.map((post, index) => (
             <Link
               key={post.post_id}

@@ -40,7 +40,7 @@ export default function Post() {
   };
 
   return (
-    <div>
+    <div style={{ marginBottom: "5rem" }}>
       <Header />
       <FilterContext.Provider value={value}>
         <div className="icon-container">

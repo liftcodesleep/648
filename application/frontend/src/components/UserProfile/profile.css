@@ -83,10 +83,9 @@ button[type="submit"] {
   justify-content: center;
 }
 .publiccard {
-  width: 300px;
+  width: 400px;
   height: max-content;
-  margin: 20px;
-  background-color: #f6f0fb;
+  background-color: #ffffff;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 }

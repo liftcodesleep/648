@@ -19,10 +19,11 @@
   display: flex;
   align-items: center;
 }
-.row-card {
+.row-cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-top: 30px;
 }
 
 .search-form {
@@ -93,8 +94,8 @@ button[type="submit"] {
 .publiccard {
   width: 300px;
   height: max-content;
-  margin: 20px;
-  background-color: #f6f0fb;
+  margin: 0px 20px 20px 20px;
+  /* background-color: #f6f0fb; */
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
 }
@@ -244,4 +245,31 @@ button[type="submit"] {
 .categories {
   margin-left: 50px;
   margin-right: 50px;
+}
+.images-background {
+  background-color: rgb(38, 27, 48);
+  margin-top: 50px;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.profile_initial {
+  background-color: rgb(78, 247, 78);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  height: 40px;
+  width: 40px;
+  margin-left: 15px;
+}
+.post-data {
+  display: flex;
+  justify-content: space-around;
+}
+.error {
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }

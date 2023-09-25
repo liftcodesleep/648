@@ -151,7 +151,7 @@ label {
 
  */
 
- /* Default styles */
+/* Default styles */
 .container {
   min-height: 100vh;
   min-width: 100vw;
@@ -217,17 +217,16 @@ label {
   font-size: 20px;
 }
 
-.edit-box{
+.edit-box {
   display: flex;
 }
 
-.forms-edit{
+.forms-edit {
   display: flex;
   flex-direction: column;
 }
 
-.form-group{
- 
+.form-group {
   flex-direction: column;
 }
 
@@ -258,13 +257,13 @@ label {
   padding: 0.5rem 1rem;
   border-radius: 5px;
   border: none;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: #fff;
   cursor: pointer;
   font-size: 1.2rem;
 }
 @media (max-width: 768px) {
-  .edit-box{
+  .edit-box {
     flex-direction: column;
   }
 }
@@ -274,20 +273,20 @@ label {
     height: 150px;
     margin: 30px;
   }
-  
+
   .activity-log {
     margin: 30px;
   }
-  
+
   .form-group input[type="text"],
   .form-group input[type="email"] {
     font-size: 14px;
   }
-  
+
   .form-group label {
     font-size: 18px;
   }
-  
+
   .button-save {
     font-size: 1rem;
   }
@@ -298,13 +297,17 @@ label {
     height: 100px;
     margin: 20px;
   }
-  
+
   .activity-heading {
     font-size: 24px;
   }
-  
+
   .activity-log {
     margin: 50px;
   }
-  
+}
+.log-container {
+  background-color: black;
+  padding: 30px;
+  border-radius: 10px;
 }

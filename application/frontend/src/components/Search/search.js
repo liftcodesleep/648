@@ -7,6 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { catImages } from "../utils/CategoryImg";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 
 class Search extends Component {
   state = {
@@ -30,6 +33,7 @@ class Search extends Component {
     event.preventDefault();
     const { limit, offset, searchText, sortby, sortType, category } =
       this.state;
+
     try {
       const response = await fetch("http://44.197.240.111/view_public_posts", {
         method: "POST",
@@ -158,23 +162,13 @@ class Search extends Component {
     } = this.state;
     const username = Cookies.get("username");
     const firstInitial = username ? username.charAt(0) : "";
+
     if (isLoggedout) {
       return <Navigate to="/login" />;
     }
     return (
       <div>
         <header className="header">
-          <h1>Picture Perfect</h1>
-
-          <div>
-            <Link to="/uploadimage">
-              <button className="new-post-button">
-                <FontAwesomeIcon icon={faPlus} className="icon" />
-                Post
-              </button>
-            </Link>
-          </div>
-
           <form className="search-form" onSubmit={this.handleSubmit}>
             <div className="header-right">
               <input
@@ -208,48 +202,89 @@ class Search extends Component {
           </nav>
         </header>
 
-        <div className="profile-container">
+        {/* <div className="profile-container">
           <div className="profile-initial">{firstInitial}</div>
-          <div className="profile-username">{username}</div>
+          <div className="profile-username">{username}</div> */}
 
-          <div className="profile-dropdown">
+        {/* <div className="profile-dropdown">
             <button className="profile-dropdown-button">⋮</button>
             <div className="profile-dropdown-content">
               <Link to="/user-profile">View Profile</Link>
               <button onClick={this.handleLogout}>Logout</button>
             </div>
-          </div>
-        </div>
-
+          </div> */}
+        {/* </div> */}
+        {error && <div className="error">{error}</div>}
         {isLoading ? (
           <div className="loading">Loading...</div>
         ) : (
           <>
             {searchResults.length > 0 && (
-              <div className="row-cards">
-                {searchResults.map(
-                  (result, index) =>
-                    !result.isHeading && (
-                      <Link
-                        key={result.post_id}
-                        to={`/post/${result.post_id}`}
-                        onClick={() => this.updateViews(result.post_id)}
-                      >
-                        <div className="publiccard">
-                          <img src={result.image} alt={result.desc} />
-                          <h2>{result.desc}</h2>
-                          <p>Made by: {result.made_by}</p>
-                          <p>No. of views: {result.no_views}</p>
-                          <p>No. of likes: {result.no_likes}</p>
-                          <p>No. of dislikes: {result.no_dislikes}</p>
-                          <p>Posted on: {result.creation_date}</p>
-                          <p>Category: {result.category}</p>
+              <div className="images-background">
+                <div className="row-cards">
+                  {searchResults.map(
+                    (result, index) =>
+                      !result.isHeading && (
+                        <div>
+                          <div style={{ display: "flex", marginTop: "20px" }}>
+                            <div className="profile_initial">
+                              {result.made_by.charAt(0)}
+                            </div>
+                            <h1
+                              style={{
+                                marginLeft: "10px",
+                                fontWeight: "bold",
+                                fontSize: "20px",
+                                color: "white",
+                              }}
+                            >
+                              {result.made_by}
+                            </h1>
+                          </div>
+                          <div className="publiccard">
+                            <Link
+                              key={result.post_id}
+                              to={`/post/${result.post_id}`}
+                              onClick={() => this.updateViews(result.post_id)}
+                            >
+                              <img src={result.image} alt={result.desc} />
+                            </Link>
+                            <h2>{result.desc}</h2>
+
+                            <div className="post-data">
+                              <p>
+                                {result.no_views}{" "}
+                                <RemoveRedEyeIcon
+                                  style={{ fontSize: "medium" }}
+                                />{" "}
+                                Views
+                              </p>
+                              <p>
+                                {result.no_likes}{" "}
+                                <FavoriteIcon style={{ fontSize: "medium" }} />{" "}
+                                Likes
+                              </p>
+
+                              <p>
+                                {result.no_dislikes}
+                                <HeartBrokenIcon
+                                  style={{ fontSize: "medium" }}
+                                />{" "}
+                                Dislikes{" "}
+                              </p>
+                            </div>
+                            <p>Posted on: {result.creation_date}</p>
+                            <p style={{ paddingBottom: "10px" }}>
+                              Category: {result.category}
+                            </p>
+                          </div>
                         </div>
-                      </Link>
-                    )
-                )}
+                      )
+                  )}
+                </div>
               </div>
             )}
+
             {searchResults.length === 0 && categories.length > 0 && (
               <>
                 <div className="categories">
@@ -271,7 +306,6 @@ class Search extends Component {
             )}
           </>
         )}
-        {error && <div>{error}</div>}
       </div>
     );
   }
