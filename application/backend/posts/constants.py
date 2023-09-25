@@ -6,6 +6,7 @@ categories = ['Nature', 'Trip', 'Sports', 'Fashion',
 
 
 def view_post_response(status="SUCCESS", message="", posts=[], count=0):
+    # This method is a constant definition of response expected for view posts API
     view_post_response_obj = {
         'status': status,
         'message': message,
@@ -17,6 +18,7 @@ def view_post_response(status="SUCCESS", message="", posts=[], count=0):
 
 
 def create_post_response(status="SUCCESS", message="", is_post_created=False, post_id=''):
+    # This method is a constant definition of response expected for create post API
     create_post_response_obj = {
         'status': status,
         'message': message,
@@ -28,6 +30,7 @@ def create_post_response(status="SUCCESS", message="", is_post_created=False, po
 
 
 def view_categories_response(status="SUCCESS", message="", categories=[]):
+    # This method is a constant definition of response expected for view categories API
     view_categories_response_obj = {
         'status': status,
         'message': message,
@@ -38,6 +41,7 @@ def view_categories_response(status="SUCCESS", message="", categories=[]):
 
 
 def view_single_post_response(status="SUCCESS", message="", posts={}):
+    # This method is a constant definition of response expected for view post API
     view_single_post_response_obj = {
         'status': status,
         'message': message,
@@ -48,6 +52,7 @@ def view_single_post_response(status="SUCCESS", message="", posts={}):
 
 
 def liked_disliked_response(status="SUCCESS", message="", isupdated=False, no_likes=0, no_dislikes=0):
+    # This method is a constant definition of response expected for like dislike API
     liked_disliked_response_obj = {
         'status': status,
         'message': message,
@@ -60,6 +65,7 @@ def liked_disliked_response(status="SUCCESS", message="", isupdated=False, no_li
 
 
 def add_comment_response(status="SUCCESS", message="", iscommentadded=False, no_comments=0, comments=[]):
+    # This method is a constant definition of response expected for add comment API
     add_comment_response_obj = {
         'status': status,
         'message': message,
@@ -72,6 +78,7 @@ def add_comment_response(status="SUCCESS", message="", iscommentadded=False, no_
 
 
 def delete_comment_response(status="SUCCESS", message="", isdeleted=False):
+    # This method is a constant definition of response expected for delete comment API
     delete_comment_response_obj = {
         'status': status,
         'message': message,
@@ -82,6 +89,7 @@ def delete_comment_response(status="SUCCESS", message="", isdeleted=False):
 
 
 def add_view_response(status="SUCCESS", message="", isviewupdated=False, no_views=0, postid=""):
+    # This method is a constant definition of response expected for add view API
     add_view_response_obj = {
         'status': status,
         'message': message,
@@ -94,6 +102,7 @@ def add_view_response(status="SUCCESS", message="", isviewupdated=False, no_view
 
 
 def delete_post_response(status="SUCCESS", message="", isdeleted=False):
+    # This method is a constant definition of response expected for delete post API
     delete_post_response_obj = {
         'status': status,
         'message': message,

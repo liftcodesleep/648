@@ -12,6 +12,29 @@ from . import s3_details
 
 
 def view_posts(request):
+    """
+        Summary: This method is used to fetch public posts.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            limit
+            offset
+            searchText
+            sortBy
+            sortType
+            category
+
+        Returns:
+            dict object containing following information
+                status
+                noOfPosts
+                message
+                posts
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -40,6 +63,9 @@ def view_posts(request):
 
 
 def format_post_data(post_list):
+    """
+    Summary: This method formats post data to a particular format
+    """
     formatted_list = []
     cols = ['made_by', 'creation_date', 'no_likes', 'no_dislikes', 'points',
             'isReshared', 'post_id',  'no_views', 'no_comments', 'image', 'desc',
@@ -56,6 +82,28 @@ def format_post_data(post_list):
 
 
 def create_post(request):
+    """
+        Summary: This method is used to create a new post for any given user.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+            is_reshared
+            description
+            category
+            image
+
+        Returns:
+            dict object containing following information
+                status
+                isPostCreated
+                message
+                postid
+    """
     try:
         if request.method == 'POST':
             collected_data = request.POST
@@ -63,9 +111,12 @@ def create_post(request):
             is_reshared = collected_data['is_reshared']
             description = collected_data['description']
             category = collected_data['category']
-            image = request.FILES['image']
 
-            s3_url = upload_image_to_s3(image)
+            try:
+                image = request.FILES['image']
+                s3_url = upload_image_to_s3(image)
+            except:
+                s3_url = collected_data['imageLink']
 
             tags = find_tags_from_description(description)
 
@@ -89,6 +140,9 @@ def create_post(request):
 
 
 def upload_image_to_s3(image):
+    """
+    Summary: This method uploads image to s3 bucket
+    """
     fs = FileSystemStorage()
     filename = fs.save(image.name, image)
     random_filename = "image_" + str(random.randint(1, 1000000)) + '.jpeg'
@@ -104,6 +158,9 @@ def upload_image_to_s3(image):
 
 
 def find_tags_from_description(description):
+    """
+    Summary: This method splits tags from entire description
+    """
     tags = []
     textList = description.split()
     for i in textList:
@@ -115,6 +172,23 @@ def find_tags_from_description(description):
 
 
 def view_categories(request):
+    """
+        Summary: This method is used to view categories in which a post can be made
+
+        Request type: GET
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            no input data
+
+        Returns:
+            dict object containing following information
+                status
+                categories
+                message
+    """
     try:
         if request.method == 'GET':
             if categories:
@@ -131,6 +205,29 @@ def view_categories(request):
 
 
 def view_user_posts(request):
+    """
+        Summary: This method is used to view posts made by a particular user.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+            limit
+            offset
+            searchText
+            sortBy
+            sortType
+
+        Returns:
+            dict object containing following information
+                status
+                posts
+                message
+                noOfPosts
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -162,6 +259,23 @@ def view_user_posts(request):
 
 
 def get_post_details(request):
+    """
+        Summary: This method is used to fetch details of a particular post
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            postid
+
+        Returns:
+            dict object containing following information
+                status
+                post
+                message
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -193,6 +307,26 @@ def get_post_details(request):
 
 
 def like_dislike_post(request):
+    """
+        Summary: This method is used to like/dislike a given post.
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            liked
+            postid
+
+        Returns:
+            dict object containing following information
+                status
+                isUpdated
+                message
+                no_likes
+                no_dislikes
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -215,6 +349,27 @@ def like_dislike_post(request):
 
 
 def add_comment(request):
+    """
+        Summary: This method is used to add a new comment to a given post
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+            postid
+            comment
+
+        Returns:
+            dict object containing following information
+                status
+                isCommentAdded
+                message
+                no_comments
+                comments
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -240,6 +395,9 @@ def add_comment(request):
 
 
 def format_comment_data(data):
+    """
+    Summary: This method formats comment data to a particular format
+    """
     formatted_list = []
     cols = ["comment_id", "username", "comment_time", "comment", "no_of_likes"]
 
@@ -254,6 +412,25 @@ def format_comment_data(data):
 
 
 def delete_comment(request):
+    """
+        Summary: This method is used to delete a given comment
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+            postid
+            commentid
+
+        Returns:
+            dict object containing following information
+                status
+                isCommentDeleted
+                message
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -277,6 +454,25 @@ def delete_comment(request):
 
 
 def add_view(request):
+    """
+        Summary: This method is used to update views for a given post
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            postid
+
+        Returns:
+            dict object containing following information
+                status
+                isViewUpdated
+                message
+                postid
+                noOfViews
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -298,6 +494,24 @@ def add_view(request):
 
 
 def delete_post(request):
+    """
+        Summary: This method is used to delete a given post
+
+        Request type: POST
+
+        Parameters:
+            request object
+
+        Input JSON data:
+            username
+            postid
+
+        Returns:
+            dict object containing following information
+                status
+                isPostDeleted
+                message
+    """
     try:
         if request.method == 'POST':
             collected_data = json.loads(request.body)
@@ -324,6 +538,9 @@ def delete_post(request):
 
 
 def delete_image_from_s3(image_path):
+    """
+    Summary: This method deletes image from the s3 bucket
+    """
     s3 = boto3.client('s3', aws_access_key_id=s3_details.aws_access_key,
                       aws_secret_access_key=s3_details.aws_secret_key)
     response = s3.delete_object(Bucket=s3_details.bucket_name,
