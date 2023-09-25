@@ -169,17 +169,6 @@ class Search extends Component {
     return (
       <div>
         <header className="header">
-          <h1>Picture Perfect</h1>
-
-          <div>
-            <Link to="/uploadimage">
-              <button className="new-post-button">
-                <FontAwesomeIcon icon={faPlus} className="icon" />
-                Post
-              </button>
-            </Link>
-          </div>
-
           <form className="search-form" onSubmit={this.handleSubmit}>
             <div className="header-right">
               <input
@@ -213,18 +202,18 @@ class Search extends Component {
           </nav>
         </header>
 
-        <div className="profile-container">
+        {/* <div className="profile-container">
           <div className="profile-initial">{firstInitial}</div>
-          <div className="profile-username">{username}</div>
+          <div className="profile-username">{username}</div> */}
 
-          <div className="profile-dropdown">
+        {/* <div className="profile-dropdown">
             <button className="profile-dropdown-button">⋮</button>
             <div className="profile-dropdown-content">
               <Link to="/user-profile">View Profile</Link>
               <button onClick={this.handleLogout}>Logout</button>
             </div>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
         {error && <div className="error">{error}</div>}
         {isLoading ? (
           <div className="loading">Loading...</div>
