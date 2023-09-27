@@ -147,20 +147,37 @@ class SignupForm extends Component {
                 onChange={this.handleInputChange}
               />
             </div>
-            <div className="buttons">
-              <button onClick={this.handleSubmit}>Create Account</button>
-            </div>
+            <Button
+              sx={{
+                width: "100%",
+                backgroundColor: "#0077FF",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "#0055CC",
+                },
+              }}
+              onClick={this.handleSubmit}
+            >
+              Create Account
+            </Button>
+
             <div className="already-member">
               <div className="account">
                 <h4>Already a member?</h4>
               </div>
-              <button
-                style={{ fontSize: "14px", width: "80px" }}
-                className="login-button"
+              <Button
+                sx={{
+                  backgroundColor: "#0077FF",
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#0055CC",
+                  },
+                }}
                 onClick={this.handleLogin}
               >
                 Login
-              </button>
+              </Button>
+
               <div></div>
             </div>
             {error && <div className="error">{error}</div>}

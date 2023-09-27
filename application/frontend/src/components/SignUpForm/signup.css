@@ -131,7 +131,7 @@
   }
 } */
 /* signup.css */
-.signup-container{
+.signup-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,15 +140,12 @@
   flex: 1;
 }
 
-
-
 .signup-form {
   width: 400px;
   background-color: #fff;
   border-radius: 5px;
   padding: 2rem;
   box-shadow: 0 2px 10;
-
 }
 
 .signup-form h2 {
@@ -178,34 +175,14 @@
 
 .signup-form-group input:focus {
   outline: none;
-  border-bottom: 1px solid #0077FF;
-}
-
-.signup-form button {
-  display: block;
-  width: 100%;
-  margin-top: 1.5rem;
-  padding: 0.5rem;
-  background-color: #0077FF;
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.signup-form button:hover {
-  background-color: #0053BA;
+  border-bottom: 1px solid #0077ff;
 }
 
 .signup-form .already-member {
   margin-top: 2rem;
 }
 
-.button-container{
- 
+.button-container {
   border: none;
   color: white;
   padding: 8px 16px;
@@ -216,34 +193,28 @@
   border-radius: 4px;
 }
 @media screen and (max-width: 768px) {
-  .button-container{
-  margin-left: 0px;
-  margin-right: 0px;
+  .button-container {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
-.account{
+.account {
   font-family: Arial, sans-serif;
   font-size: 14px;
   margin-bottom: -20px;
-
-  
 }
 .login-button {
   border-radius: 4px;
 }
-.dob{
+.dob {
   grid-column: 5/10;
   grid-row: 2/4;
-  background:#f2f2f2;
+  background: #f2f2f2;
   font-size: 16px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
   box-shadow: none;
   outline: none;
-  font-family: 'Open Sans', sans-serif;
-  
-    
-  
+  font-family: "Open Sans", sans-serif;
 }
-

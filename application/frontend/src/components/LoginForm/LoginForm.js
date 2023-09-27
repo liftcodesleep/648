@@ -56,11 +56,13 @@ class LoginForm extends Component {
           <p>Your creativity has found a home</p>
         </div>
         <div className="login-container">
-          <form className="login-form" onSubmit={this.handleSubmit}>
-            <h2>Login Form</h2>
+          <form className="login-form " onSubmit={this.handleSubmit}>
+            <h2 className="text-black">Login Form</h2>
 
             <div className="login-form-group">
-              <label htmlFor="username">Username</label>
+              <label className="text-black" htmlFor="username">
+                Username
+              </label>
               <input
                 type="text"
                 id="username"
@@ -70,7 +72,9 @@ class LoginForm extends Component {
               />
             </div>
             <div className="login-form-group">
-              <label htmlFor="password">Password</label>
+              <label className="text-black" htmlFor="password">
+                Password
+              </label>
               <input
                 type="password"
                 id="password"
@@ -79,21 +83,39 @@ class LoginForm extends Component {
                 onChange={this.handleInputChange}
               />
             </div>
-            <div className="buttons">
-              <button onClick={this.handleSubmit}>Login</button>
-            </div>
-            <div className="singup-account">
-              <div className="account">
-                <h4>Don't have an account?</h4>
-              </div>
 
-              <button
-                style={{ fontSize: "14px", width: "80px" }}
-                className="sign-button"
+            <Button
+              sx={{
+                width: "100%",
+                backgroundColor: "#0077FF",
+                color: "white",
+                "&:hover": {
+                  backgroundColor: "#0055CC",
+                },
+              }}
+              onClick={this.handleSubmit}
+            >
+              Login
+            </Button>
+
+            <div className="singup-account flex justify-between mt-4 ">
+              <div className="account">
+                <h4 className="text-black">Don't have an account?</h4>
+              </div>
+              <Button
+                size="small"
+                sx={{
+                  backgroundColor: "#0077FF",
+
+                  color: "white",
+                  "&:hover": {
+                    backgroundColor: "#0055CC",
+                  },
+                }}
                 onClick={this.handleSignup}
               >
-                Signup
-              </button>
+                Singup
+              </Button>
             </div>
             {error && (
               <div className="error" data-testid="login-error">

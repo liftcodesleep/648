@@ -21,10 +21,7 @@ const AppRouter = () => {
   const HeaderOnlyRoutes = ({ children }) => {
     const { pathname } = useLocation();
     return pathname === "/login" || pathname === "/signup" ? (
-      <>
-        <Header />
-        {children}
-      </>
+      <>{children}</>
     ) : (
       children
     );
