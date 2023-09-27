@@ -41,25 +41,21 @@ export default function Post() {
 
   return (
     <div style={{ marginBottom: "5rem" }}>
-      <Header />
       <FilterContext.Provider value={value}>
-        <div className="icon-container">
-          <img
-            src={require("../../Images/picturePerfect.jpg")}
-            className="icon-logo"
-          ></img>
-        </div>
-        <div>
-          <div className="grid-container">
-            <div className="image-field">
-              <ImageField />
-            </div>
+        <div className="grid-container flex flex-row w-full item-start p-8 mt-4 flex-grow-0">
+          <div className="image-field">
+            <ImageField />
+          </div>
+          <div className="flex justify-center items-start flex-grow">
             <div className="filter-field">
               <Filters />
               {tabFilter === "filter" ? <FilterEffect /> : <Edit />}
             </div>
           </div>
         </div>
+        {/* <div className="grid-container item-start p-8 mt-4">
+          
+        </div> */}
       </FilterContext.Provider>
     </div>
   );

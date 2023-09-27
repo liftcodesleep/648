@@ -4,12 +4,14 @@
 }
 
 .container-cropper {
-  height: 60%;
-
+  height: 100%;
+  width: 100%;
   padding: 40px;
+  justify-content: center;
+  align-items: center;
 }
 .upload-img {
-  height: 50vh;
+  height: 100%;
   width: 100%;
   cursor: pointer;
   display: flex;
@@ -26,8 +28,6 @@
   }
 }
 .container-cropper > img {
-  height: 50vh;
-  width: 50vw;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -64,8 +64,8 @@
   margin-top: 10px;
 }
 .text-area {
-  width: 30vw;
   height: 10vh;
+  resize: none;
   border-radius: 5px;
   margin-bottom: 10px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -73,6 +73,7 @@
     sans-serif;
   vertical-align: top;
   padding: 10px;
+  color: black;
 }
 @media screen and (max-width: 768px) {
   .text-area {
@@ -112,10 +113,13 @@
 }
 .select-filter-container {
   display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 .select-filters {
   border-radius: 5px;
-
+  padding: 10px;
   flex: 1;
   text-align: center;
   margin-left: 50px;
@@ -124,38 +128,37 @@
   background-color: white;
   border-radius: 5px;
   flex: "1";
-  background-color: rgb(55, 0, 84);
+  background-color: #e66fb9;
   color: aliceblue;
   font-size: medium;
-
+  width: 40%;
   padding: 10px;
 }
 
-.cropper-container {
+/* .cropper-container {
   background-color: rgb(230, 227, 227);
-  margin-bottom: 1rem;
   border-radius: 3px;
   align-items: center;
   justify-content: center;
-
-  margin: 20px;
-  position: relative;
-  display: block;
-}
+  max-height: 70vh;
+  width: auto;
+} */
 @media screen and (min-width: 768px) {
   .cropper-container {
     margin: 20px;
-    height: 52vh;
-    padding: 20px;
-    width: 50vw;
+    height: 100%;
+  }
+}
+@media screen and (min-width: 450px) {
+  .cropper-container {
+    margin: 20px;
   }
 }
 #image-box {
   position: relative;
   display: flex;
   align-items: center;
-  height: 50vh;
-  width: 100%;
+  height: 70vh;
 }
 @media screen and (max-width: 768px) {
   #image-box {

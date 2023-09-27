@@ -282,7 +282,7 @@ export default function Navbar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginBottom: "2rem" }}>
       <Box position="static" sx={{ color: "white" }}>
         <Toolbar>
           <Box>

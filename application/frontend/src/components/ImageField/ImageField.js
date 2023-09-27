@@ -19,6 +19,8 @@ import {
   Select,
   FormControl,
   InputLabel,
+  IconButton,
+  ButtonGroup,
 } from "@mui/material";
 import "./ImageField.css";
 import Cropper from "react-easy-crop";
@@ -224,12 +226,18 @@ function ImageField() {
   };
 
   const StyledImage = styled("img")((props) => ({
-    height: "50vh",
-    width: "50vw",
+    maxHeight: "70vh",
+
     objectFit: "contain",
     filter: `contrast(${props.customFilter.contrast}%) brightness(${props.customFilter.brightness}%) saturate(${props.customFilter.saturate}%) sepia(${props.customFilter.sepia}%) grayScale(${props.customFilter.gray}%)`,
     "@media screen and (max-width: 768px)": {
-      height: "25vh",
+      height: "auto",
+      display: "block",
+      margin: "0 auto",
+      width: "100%",
+    },
+    "@media screen and (max-width: 450px)": {
+      height: "auto",
       display: "block",
       margin: "0 auto",
       width: "100%",
@@ -237,12 +245,15 @@ function ImageField() {
   }));
 
   return (
-    <div style={{ alignItems: "center", justifyContent: "center" }}>
-      <Box className="cropper-container">
+    <div className="w-full justify-center items-center flex flex-col gap-4">
+      <Box
+        className="cropper-container w-full"
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         {image ? (
           <>
             {isCropClicked ? (
-              <div>
+              <div className="w-full">
                 <div
                   id="image-box"
                   className={filterClass}
@@ -267,7 +278,18 @@ function ImageField() {
                     onChange={(e, zoom) => setZoom(zoom)}
                   />
                 </div>
-                <div className="done"></div>
+
+                {isCropClicked && (
+                  <div className="flex justify-center items-center">
+                    <Button
+                      onClick={completeCrop}
+                      startIcon={<DoneIcon />}
+                      sx={{ textTransform: "none", color: "white" }}
+                    >
+                      Done
+                    </Button>
+                  </div>
+                )}
               </div>
             ) : (
               <StyledImage
@@ -297,13 +319,13 @@ function ImageField() {
         onChange={onSelectFile}
       />
 
-      <div className="container-form">
+      <div className="container-form w-full px-16">
         {image ? (
           <>
-            <form className="image-form">
+            <form className="image-form w-full">
               {/* <input type="text" id="username" name="username" value={formData.username} onChange={handleFormChange}></input> */}
               <textarea
-                className="text-area"
+                className="text-area w-full"
                 name="description"
                 placeholder="Description"
                 value={formData.description}
@@ -312,11 +334,9 @@ function ImageField() {
               {/* <input type='text' name='category' placeholder='Category' value={formData.category} onChange={handleFormChange} /> */}
 
               <div className="select-filter-container">
-                <label className="label" htmlFor="categories">
-                  Select a category
-                </label>
+                <span className="label">Select a Category</span>
                 <select
-                  className="select-filters"
+                  className="select-filters "
                   id="categories"
                   value={selectedCategory}
                   onChange={handleCategoryChange}
@@ -350,11 +370,6 @@ function ImageField() {
                 >
                   <CropIcon />
                 </Button>
-                {isCropClicked && (
-                  <Button onClick={completeCrop}>
-                    <DoneIcon className="DoneIcon" />{" "}
-                  </Button>
-                )}
 
                 <Button
                   variant="contained"

@@ -167,50 +167,6 @@ class Search extends Component {
     }
     return (
       <div>
-        {/* <header className="header">
-          <form className="search-form" onSubmit={this.handleSubmit}>
-            <div className="header-right">
-              <input
-                className="search-bar"
-                type="text"
-                value={searchText}
-                onChange={this.handleInputChange}
-                placeholder="Images, #tags, @users"
-              />
-              <button
-                className="search-button"
-                onClick={this.handleSubmit}
-                data-testid="search-button"
-              >
-                <FontAwesomeIcon icon={faSearch} className="icon" />
-              </button>
-            </div>
-          </form>
-
-          <nav>
-            <ul>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/about">About</a>
-              </li>
-            </ul>
-          </nav>
-        </header> */}
-
-        <div>
-          <div className="profile-initial">{firstInitial}</div>
-          <div className="profile-username">{username}</div>
-
-          <div className="profile-dropdown">
-            <button className="profile-dropdown-button">⋮</button>
-            <div className="profile-dropdown-content">
-              <Link to="/user-profile">View Profile</Link>
-              <button onClick={this.handleLogout}>Logout</button>
-            </div>
-          </div>
-        </div>
         {error && <div className="error">{error}</div>}
         {isLoading ? (
           <div className="loading">Loading...</div>
