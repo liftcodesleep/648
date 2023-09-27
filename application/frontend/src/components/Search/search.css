@@ -240,7 +240,6 @@ button[type="submit"] {
   padding-left: 35px;
   padding-right: 20px;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-  border-bottom: 0.1px solid #b1a6ff;
 }
 .categories {
   margin-left: 50px;

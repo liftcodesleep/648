@@ -361,11 +361,8 @@ function ImageField() {
                   style={{ color: "white" }}
                   onClick={triggerFileSelect}
                 >
-
                   <FileUploadIcon />
-
                   Upload Image
-
                 </Button>
                 <Button
                   variant="contained"

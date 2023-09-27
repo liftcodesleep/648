@@ -15,9 +15,16 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Button, Icon } from "@mui/material";
+import {
+  Button,
+  Icon,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -64,25 +71,94 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Navbar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const [limit, setLimit] = React.useState(5);
-  const [offset, setOffset] = React.useState(0);
-  const [searchtext, setSearchtext] = React.useState("");
-  const [category, setCategory] = React.useState("");
-  const [sortby, setSortby] = React.useState("");
-  const [sortType, setSortType] = React.useState("DESC");
-  const [categories, setCategories] = React.useState([]);
-  const [searchResults, setSearchResults] = React.useState([]);
+  // const [limit, setLimit] = React.useState(5);
+  // const [offset, setOffset] = React.useState(0);
+  const [search, setSearch] = React.useState("");
+  // const [category, setCategory] = React.useState("");
+  // const [sortby, setSortby] = React.useState("");
+  // const [sortType, setSortType] = React.useState("DESC");
+  // const [searchResults, setSearchResults] = React.useState([]);
+  const [logout, setLoggout] = React.useState(false);
+  const [currState, setState] = React.useState({
+    limit: 5,
+    offset: 0,
+    searchText: "",
+    category: "",
+    sortby: "",
+    sortType: "DESC",
+    categories: [],
+    searchResults: [],
+    error: null,
+  });
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
-    setSearchtext(event.target.value);
-    console.log(searchtext);
+    setSearch(event.target.value);
+    setState((prevData) => ({
+      ...prevData,
+      searchText: search,
+    }));
+    console.log(search);
+  };
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+
+    const { limit, offset, searchText, sortby, sortType } = currState;
+    try {
+      const response = await fetch("http://44.197.240.111/view_public_posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: JSON.stringify({
+          limit,
+          offset,
+          searchText,
+          sortby,
+          sortType,
+        }),
+      });
+      const data = await response.json();
+      if (data.status === "SUCCESS") {
+        if (data.posts.length > 0) {
+          setState((prevData) => ({
+            ...prevData,
+            searchResults: data.posts,
+            error: null,
+          }));
+        } else {
+          setState((prevData) => ({
+            ...prevData,
+            searchResults: [],
+            error: data.message,
+          }));
+        }
+      } else {
+        setState((prevData) => ({
+          ...prevData,
+          searchResults: [],
+          error: data.message,
+        }));
+      }
+    } catch (error) {
+      setState((prevData) => ({
+        ...prevData,
+        error: "Failed to fetch search results",
+      }));
+    }
   };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleProfileClick = () => {
+    navigate("/user-profile");
   };
 
   const handleMobileMenuClose = () => {
@@ -96,6 +172,39 @@ export default function Navbar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+  const handleLogout = async () => {
+    const username = Cookies.get("username");
+    const payload = {
+      username: username,
+    };
+    try {
+      const response = await fetch("http://44.197.240.111/logout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (data.status === "SUCCESS" && data.isLoggedout) {
+          Cookies.remove("token");
+          Cookies.remove("username");
+          setLoggout(data.isLoggedout);
+        } else {
+          setState((prev) => ({ ...prev, error: data.message }));
+        }
+      } else {
+        setState((prev) => ({
+          ...prev,
+          error: "Something went wrong. Please try again",
+        }));
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const menuId = "primary-search-account-menu";
@@ -115,8 +224,8 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+      <MenuItem onClick={handleLogout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -176,6 +285,13 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <Box position="static" sx={{ color: "white" }}>
         <Toolbar>
+          <Box>
+            <img
+              src={require("../../Images/picturePerfect.jpg")}
+              alt="Logo"
+              className="h-10 w-15"
+            />
+          </Box>
           <Typography
             variant="h6"
             noWrap
@@ -193,7 +309,6 @@ export default function Navbar() {
           >
             Picture Perfect
           </Typography>
-
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
@@ -201,8 +316,9 @@ export default function Navbar() {
             <StyledInputBase
               placeholder="Search…images, #tags, @users"
               inputProps={{ "aria-label": "search" }}
-              value={searchtext}
+              value={search}
               onChange={handleInputChange}
+              onSubmit={handleSearch}
             />
           </Search>
 
@@ -215,9 +331,6 @@ export default function Navbar() {
                 color: "white",
                 paddingLeft: "20px",
                 paddingRight: "20px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
                 fontWeight: "500",
                 letterSpacing: "2px",
                 margin: "0px 32px",
@@ -227,24 +340,14 @@ export default function Navbar() {
             </Button>
           </Link>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton
-              size="large"
-              aria-label="show 4 new mails"
-              color="inherit"
-            >
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <ListItemButton component={Link} to="/">
+              <ListItemText primary="Home" />
+            </ListItemButton>
+
+            <ListItemButton component={Link} to="/about">
+              <ListItemText primary="About" />
+            </ListItemButton>
+
             <IconButton
               size="large"
               edge="end"

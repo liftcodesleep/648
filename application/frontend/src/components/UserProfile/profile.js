@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "js-cookie";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./profile.css";
@@ -10,6 +10,9 @@ import Footer from "../Footer/Footer";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
+import { Avatar, Button, Divider, ListItemText, alpha } from "@mui/material";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import { deepOrange } from "@mui/material/colors";
 
 class UserProfile extends Component {
   state = {
@@ -76,40 +79,7 @@ class UserProfile extends Component {
       this.setState({ error: "Failed to fetch search results" });
     }
   };
-  handleLogout = async () => {
-    const username = Cookies.get("username");
-    const payload = {
-      username: username,
-    };
-    try {
-      const response = await fetch("http://44.197.240.111/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-        body: JSON.stringify(payload),
-      });
-      if (response.ok) {
-        const data = await response.json();
-        console.log({ data });
-        console.log(data.status);
-        console.log(data.isLoggedout);
-        console.log(data.status === "SUCCESS" && data.isLoggedout);
-        if (data.status === "SUCCESS" && data.isLoggedout) {
-          Cookies.remove("token");
-          Cookies.remove("username");
-          this.setState({ isLoggedout: data.isLoggedout });
-        } else {
-          console.log(data.message);
-        }
-      } else {
-        console.log("Something went wrong. Please try again later.");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   updateViews = async (postId) => {
     try {
       const response = await fetch("http://44.197.240.111/add_view", {
@@ -185,76 +155,49 @@ class UserProfile extends Component {
     }
     return (
       <div style={{ minHeight: "100vh" }}>
-        <header className="header">
-          <h1>Picture Perfect</h1>
-
-          <div>
-            <Link to="/uploadimage">
-              <button className="new-post-button">
-                <FontAwesomeIcon icon={faPlus} className="icon" />
-                Post
-              </button>
-            </Link>
-          </div>
-
-          <form className="search-form" onSubmit={this.handleSubmit}>
-            <div className="header-right">
-              <input
-                className="search-bar"
-                type="text"
-                value={searchText}
-                onChange={this.handleInputChange}
-                placeholder="Images, #tags, @users"
-              />
-              <button
-                className="search-button"
-                onClick={this.handleSubmit}
-                data-testid="search-button"
-              >
-                <FontAwesomeIcon icon={faSearch} className="icon" />
-              </button>
-            </div>
-          </form>
-
-          <nav>
-            <ul>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/about">About</a>
-              </li>
-            </ul>
-          </nav>
-        </header>
         <div className="search-container"></div>
-        <div className="profile-container">
-          <div className="profile-initial">{firstInitial}</div>
-          <div className="profile-username">{username}</div>
-
-          <div className="profile-dropdown">
-            <button className="profile-dropdown-button">⋮</button>
-            <div className="profile-dropdown-content">
-              <Link to="/user-profile">View Profile</Link>
-              <button onClick={this.handleLogout}>Logout</button>
-            </div>
-          </div>
-        </div>
 
         <div class="profile-edit-container">
-          <div className="profile-edit-initial">{firstInitial}</div>
-          <div className="profile-edit-username">{username}</div>
-          <button
-            className="edit-button"
-            onClick={() => (window.location.href = "/edit-profile")}
+          <Avatar
+            sx={{ bgcolor: deepOrange[500], height: "50px", width: "50px" }}
           >
-            <FontAwesomeIcon icon={faEdit} />
-          </button>
+            {firstInitial}
+          </Avatar>
+
+          <div className="profile-edit-username">{username}</div>
+          <Button
+            disablePadding
+            startIcon={
+              <ManageAccountsIcon
+                sx={{ color: "white" }}
+                fontSize="large"
+                color="action"
+              />
+            }
+            component={Link}
+            to={"/edit-profile"}
+            sx={{
+              color: "white",
+              backgroundColor: "#e66fb9",
+              paddingLeft: "16px",
+              paddingRight: "16px",
+            }}
+          >
+            Edit Profile
+          </Button>
         </div>
 
         <div className="categories">
           <h2 className="category-head">All Posts</h2>
         </div>
+        <Divider
+          sx={{
+            marginLeft: "32px",
+            marginRight: "32px",
+            backgroundColor: "whitesmoke",
+            opacity: "0.50",
+          }}
+        ></Divider>
 
         <div className="row-cards">
           <div className="error-box">{error && <h1>{error}</h1>}</div>

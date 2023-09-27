@@ -29,41 +29,41 @@ class Search extends Component {
     this.setState({ searchText: event.target.value });
   };
 
-  handleSubmit = async (event) => {
-    event.preventDefault();
-    const { limit, offset, searchText, sortby, sortType, category } =
-      this.state;
+  // handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   const { limit, offset, searchText, sortby, sortType, category } =
+  //     this.state;
 
-    try {
-      const response = await fetch("http://44.197.240.111/view_public_posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("token")}`,
-        },
-        body: JSON.stringify({
-          limit,
-          offset,
-          searchText,
-          sortby,
-          sortType,
-          category,
-        }),
-      });
-      const data = await response.json();
-      if (data.status === "SUCCESS") {
-        if (data.posts.length > 0) {
-          this.setState({ searchResults: data.posts, error: null });
-        } else {
-          this.setState({ searchResults: [], error: data.message });
-        }
-      } else {
-        this.setState({ searchResults: [], error: data.message });
-      }
-    } catch (error) {
-      this.setState({ error: "Failed to fetch search results" });
-    }
-  };
+  //   try {
+  //     const response = await fetch("http://44.197.240.111/view_public_posts", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${Cookies.get("token")}`,
+  //       },
+  //       body: JSON.stringify({
+  //         limit,
+  //         offset,
+  //         searchText,
+  //         sortby,
+  //         sortType,
+  //         category,
+  //       }),
+  //     });
+  //     const data = await response.json();
+  //     if (data.status === "SUCCESS") {
+  //       if (data.posts.length > 0) {
+  //         this.setState({ searchResults: data.posts, error: null });
+  //       } else {
+  //         this.setState({ searchResults: [], error: data.message });
+  //       }
+  //     } else {
+  //       this.setState({ searchResults: [], error: data.message });
+  //     }
+  //   } catch (error) {
+  //     this.setState({ error: "Failed to fetch search results" });
+  //   }
+  // };
 
   handleCategoryClick = (category) => {
     this.setState({ category: category }, () => {
@@ -107,7 +107,6 @@ class Search extends Component {
   };
 
   componentDidMount = async () => {
-    console.log("inside component did");
     try {
       const response = await fetch("http://44.197.240.111/fetch_categories", {
         method: "GET",
@@ -168,7 +167,7 @@ class Search extends Component {
     }
     return (
       <div>
-        <header className="header">
+        {/* <header className="header">
           <form className="search-form" onSubmit={this.handleSubmit}>
             <div className="header-right">
               <input
@@ -188,8 +187,6 @@ class Search extends Component {
             </div>
           </form>
 
-          {/* </div> */}
-
           <nav>
             <ul>
               <li>
@@ -200,20 +197,20 @@ class Search extends Component {
               </li>
             </ul>
           </nav>
-        </header>
+        </header> */}
 
-        {/* <div className="profile-container">
+        <div>
           <div className="profile-initial">{firstInitial}</div>
-          <div className="profile-username">{username}</div> */}
+          <div className="profile-username">{username}</div>
 
-        {/* <div className="profile-dropdown">
+          <div className="profile-dropdown">
             <button className="profile-dropdown-button">⋮</button>
             <div className="profile-dropdown-content">
               <Link to="/user-profile">View Profile</Link>
               <button onClick={this.handleLogout}>Logout</button>
             </div>
-          </div> */}
-        {/* </div> */}
+          </div>
+        </div>
         {error && <div className="error">{error}</div>}
         {isLoading ? (
           <div className="loading">Loading...</div>

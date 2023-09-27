@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Cookies from "js-cookie";
 import "./editProfile.css";
 import Header from "../Header/header";
+import { TextField } from "@mui/material";
 
 class EditProfile extends Component {
   state = {
@@ -105,17 +106,8 @@ class EditProfile extends Component {
 
     return (
       <div style={{ marginBottom: "5rem" }}>
-        <Header />
-        <div className="edit-box">
-          <div className="edit-container">
-            <div className="logo-container">
-              <img
-                src={require("../../Images/picturePerfect.jpg")}
-                alt="Logo"
-                className="img-logo"
-              />
-            </div>
-
+        <div className="edit-box gap-4">
+          <div className="edit-container mt-8">
             <form>
               <div className="form-group">
                 <label htmlFor="name">Name:</label>
